@@ -75,7 +75,7 @@ body {
     font-weight: 700;
     outline: 2px solid none;
     width: 120px;  
-    margin-top: 10px;
+    margin-top: 9px;
 
 }
 
@@ -767,11 +767,22 @@ body {
   background-color: rgba(255,255,255,0.6);
   font-size: 12px;
   border-radius: 20px;
-  flex-shrink: 2;
-  padding: 6px 16px;
+  flex-shrink: 0.4;
+  padding: 6px 0px;
   font-weight: 700;
+  outline: 2px solid none;
+  text-align: center;
+  margin:1px;
 }
 
+.days-left.editar,.days-left.ver{
+  position: absolute;
+  width: 100px;
+  margin-top: 71px;
+}
+.days-left.ver{
+  margin-left: 120px;
+}
 .mode-switch.active .moon {
   fill: var(--main-color);
 }
@@ -1014,17 +1025,21 @@ body {
 } */
 
 .btn-14 {
-  background: rgb(255,151,0);
+  
+  background: rgba(255, 153, 0, 0.37);
   border: none;
   z-index: 1;
   position: relative;
   font-size: 700;
-  color: #1f1c2e;
+  color: #4A4A4A;
   font-size: 20px;
   font-family: 'DM Sans', sans-serif;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
-.btn-14:after {
+/* .btn-14:after {
   position: absolute;
   content: "";
   width: 100%;
@@ -1032,16 +1047,18 @@ body {
   top: 0;
   left: 0;
   z-index: -1;
-  background-color: #eaf818;
+  background-color: rgba(255, 153, 0, 0.37);
   transition: all 0.3s ease;
-  border-color: #eaf818;
-}
+  border-color: rgba(255, 153, 0, 0.37);
+  border-radius: 12px;
+} */
 
 .btn-14:hover {
   color: #000;
+  background-color: rgba(255, 153, 0, 0.733);
 }
 
-.btn-14:hover:after {
+/* .btn-14:hover:after {
   top: auto;
   bottom: 0;
   height: 100%;
@@ -1049,4 +1066,4 @@ body {
 
 .btn-14:active {
   top: 2px;
-}
+} */

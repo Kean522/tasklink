@@ -1,2 +1,1 @@
-@include('layouts.app')
-
+@include('layouts.index')
