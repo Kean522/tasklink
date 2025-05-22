@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Bootstrap 5 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap 5 JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>   
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
     @vite(['resources/css/index.css', 'resources/js/index.js'])
     <title>Document</title>
+
+    
 </head>
 <body>
-   <div class="app-container">
+   {{-- <div class="app-container">
     <br>
     <div class="app-header">
         <span class="app-icon"></span>
@@ -42,11 +38,8 @@
         <div class="projects-section-header">
             <p>Projects</p>
             {{-- <button class="button-create">Create Project</button> --}}
-      <button class="custom-btn btn-14" id="crear_proyecto"  data-toggle="modal" data-target="#exampleModal">Crear Proyecto</button>
+      {{-- <button class="custom-btn btn-14">Crear Proyecto</button>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;margin-left:480px;margin-top:300px;">
-            @include('modals.form_project')
-            </div>
 
             <p class="time">December, 12</p>
         </div>
@@ -136,15 +129,8 @@
             <div class="box-progress-bar">
                 <span class="box-progress" style="width: 50%; background-color: #4f3ff0"></span>
             </div>
-            <div class="days-left editar" style="color: #4f3ff0;">
-                Editar
-            </div>
-            <div class="days-left ver" style="color: #4f3ff0;">
-                Ver
-            </div>
             <p class="box-progress-percentage">50%</p>
             </div>
-            
             <div class="project-box-footer">
             <div class="participants">
                 <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="participant">
@@ -321,8 +307,8 @@
             </div>
         </div>
         </div>
-    </div>
-    </div>
+    </div> --}}
+    {{-- </div> --}}
     {{-- <div class="messages-section">
     <button class="messages-close">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
@@ -422,5 +408,11 @@
     </div> --}}
     </div>
     </div>
+       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
+            @include('modals.form_project')
+            </div>
 </body>
 </html>
+<style>
+    
+</style>

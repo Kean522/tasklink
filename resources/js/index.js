@@ -35,4 +35,69 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("click", function () {
       document.querySelector(".messages-section").classList.remove("show");
     });
+
+
+
+    //modal 
+
+
+    const tituloInput = document.getElementById('email');
+    const descripcionInput = document.getElementById('descripcion');
+    const colorInput = document.getElementById('color');
+    const usuariosInput = document.getElementById('usuarios');
+    const fechaInput = document.getElementById('fecha');
+    const imagenInput = document.getElementById('imagen'); 
+
+
+    const tituloDisplay = document.getElementById('titulo');
+    const descripcionDisplay = document.getElementById('descripcion');
+    const fechaDisplay = document.querySelector('.fecha');
+    const projectBox = document.querySelector('.project-box');
+    const imagenDisplay = document.querySelector('.participants img'); // asume que es la primera imagen
+    const usuariosTexto = document.getElementById('usuarios-texto');
+
+  tituloInput.addEventListener('input', () => {
+        tituloDisplay.textContent = tituloInput.value;
+    });
+
+
+    descripcionInput.addEventListener('input', () => {
+        descripcionDisplay.textContent = descripcionInput.value;
+    });
+
+
+colorInput.addEventListener('input', () => {
+        projectBox.style.backgroundColor = colorInput.value;
+        const elementosColor = projectBox.querySelectorAll('.days-left, .box-progress span');
+        elementosColor.forEach(el => el.style.color = colorInput.value);
+        const barra = projectBox.querySelector('.box-progress span');
+        barra.style.backgroundColor = colorInput.value;
+    });
+
+
+
+fechaInput.addEventListener('input', () => {
+        fechaDisplay.textContent = fechaInput.value;
+    });
+
+    imagenInput.addEventListener('input', () => {
+        imagenDisplay.src = imagenInput.value;
+    });
+
+    usuariosInput.addEventListener('input', () => {
+        if (usuariosTexto) {
+            usuariosTexto.textContent = usuariosInput.value;
+        }
+    });
+
+
+
+
+
+
+
+
+
 });
+
+

@@ -1067,3 +1067,119 @@ body {
 .btn-14:active {
   top: 2px;
 } */
+
+
+#exampleModal{
+  margin-left: -800px;
+  margin-top: 100px;
+}
+#exampleModal .project-box{
+  width: 350px;
+  height: 400px;
+  position: absolute;
+  margin-left: -300px;
+  margin-top: 100px;
+}
+#exampleModal .project-box .fecha{
+  outline: 2px solid none;
+  width: 290px;
+}
+#exampleModal .project-box .box-progress-bar{
+  outline: 2px solid none;  
+  height: 9px;
+}
+#exampleModal .project-box .box-progress{
+  height: 9px;
+}
+#exampleModal .project-box .days-left.editar,#exampleModal .project-box .days-left.ver{
+  margin-top: 88px;
+}
+#exampleModal .project-box .box-content-header{
+  font-size: 35px;
+}
+#exampleModal .project-box .box-content-subheader{
+  font-size: 25px;
+}
+/* https://codepen.io/kristen17/pen/NPKrxBd */
+
+
+
+
+
+
+#exampleModal .titulo {
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: #4A4A4A;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    width: 120000px;
+}
+
+#exampleModal .contenido {
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 390px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-left: 400px;
+    margin-top:100px;
+    
+}
+
+#exampleModal form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#exampleModal label {
+    margin-top: 10px;
+    color: rgba(128, 128, 128, 0.8);
+}
+
+#exampleModal input {
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    width: 100%;
+    margin-left: -2px;
+}
+#exampleModal input:focus{
+    outline: none;
+}
+#exampleModal .button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#exampleModal .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 7px;
+    background-color: #1f1c2e;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+#exampleModal .btn.secondary {
+    background-color: #4A4A4A;
+}
+
+#exampleModal .btn:hover {
+    background-color: #3a3650;
+}
+#exampleModal form{
+    margin-left: -20px;
+}

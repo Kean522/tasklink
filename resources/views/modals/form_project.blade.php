@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <div class="project-box" style="background-color: #e9e7fd;">
+
+<div class="project-box" style="background-color: #e9e7fd;">
             <div class="project-box-header">
-            <span>December 10, 2020</span>
+            <span class="fecha">December 10, 2020</span>
             <div class="more-wrapper">
                 <button class="project-btn-more">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
@@ -20,8 +12,8 @@
             </div>
             </div>
             <div class="project-box-content-header">
-            <p class="box-content-header">Testing</p>
-            <p class="box-content-subheader">Prototyping</p>
+            <p class="box-content-header" id="titulo">Testing</p>
+            <p class="box-content-subheader" id="descripcion">Prototyping</p>
             </div>
             <div class="box-progress-wrapper">
             <p class="box-progress-header">Progress</p>
@@ -52,6 +44,33 @@
             </div>
             </div>
         </div>
-      
-</body>
-</html>
+
+
+
+        <div class="contenido">
+            <form method="POST" action="#">
+                @csrf
+                <label for="email">Titulo</label>
+                <input type="text" id="email" name="email"  required autofocus>
+
+                <label for="descripcion">Descripcion</label>
+                <input type="text" id="descripcion" name="descripcion" required>
+
+                <label for="color">Color</label>
+                <input type="color" id="color" name="color" required>
+
+                <label for="usuarios">Usuarios</label>
+                <input type="text" id="usuarios" name="usuarios" required>
+
+                <label for="fecha">Fecha de finalizacion</label>
+                <input type="text" id="fecha" name="fecha" required>
+
+                <label for="imagen">Imagen</label>
+                <input type="text" id="imagen" name="imagen" required>
+
+                <div class="button-group">
+                    <button type="submit" class="btn">LOG IN</button>
+                    <a href="#" class="btn secondary">REGISTER</a>
+                </div>
+            </form>
+        </div>
