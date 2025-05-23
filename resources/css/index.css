@@ -1183,3 +1183,109 @@ body {
 #exampleModal form{
     margin-left: -20px;
 }
+
+option{
+  background-color: blueviolet;
+}
+
+
+.select2-container--bootstrap4 .select2-dropdown {
+  background-color: rgb(255, 255, 255); /* Fondo gris claro */
+  border: 1px solid #ccc;    /* Borde gris */
+  border-radius: 5px;        /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+
+/* Estilo de las opciones cuando están en la lista desplegada */
+.select2-container--bootstrap4 .select2-results__option {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #333; /* Color del texto */
+  cursor: pointer;
+}
+
+/* Estilo cuando se pasa el ratón sobre una opción */
+.select2-container--bootstrap4 .select2-results__option:hover {
+  background-color: green;
+  color: #4f3ff0;
+}
+
+
+
+
+
+
+
+
+.select2-container--bootstrap4 .select2-selection__choice {
+  background-color: red;
+  border-color: #3a2ccc;
+  color: white;
+  padding: 0 8px;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+.select2-container--bootstrap4 .select2-selection__choice__remove {
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.select2-container--bootstrap4 .select2-selection__choice__remove:hover {
+  color: white;
+}
+
+.select2-container--bootstrap4 .select2-results__option--highlighted[aria-selected] {
+  background-color: #d6d0ff;
+  color: #4f3ff0;
+}
+.select2-container--bootstrap4 .select2-results__option[aria-selected='true'] {
+  background-color: #a1c4fd;
+  color: #2b60ff;
+}
+
+
+.select2-results__option--highlighted{
+  background-color: #1f1c2e;
+}
+
+
+.select2 .select2-container .select2-container--default .select2-container--below .select2-container--focus:hover{
+  background-color: red;
+}
+
+
+
+.select2-container--focus .select2-selection--multiple {
+  background-color: red !important;  /* Red de fondo */
+  border-color: #3a2ccc !important; /* Color de borde si lo deseas */
+}
+
+/* Cambiar el color de fondo de las opciones cuando el select está abierto */
+.select2-container--open .select2-results__option {
+  background-color: #f0f0f0 !important; /* Fondo gris claro */
+}
+
+/* Cambiar el fondo cuando se pasa el ratón sobre una opción */
+.select2-container--open .select2-results__option:hover {
+  background-color: red !important;
+  color: white !important; /* Cambiar el texto a blanco cuando pasas el ratón */
+}
+
+/* Cambiar el color de fondo cuando se selecciona una opción */
+.select2-container--open .select2-results__option[aria-selected='true'] {
+  background-color: #a1c4fd !important; /* Fondo azul cuando se selecciona */
+  color: white !important; /* Cambiar el color del texto a blanco */
+}
+
+
+
+
+/* Hover sobre opciones seleccionadas */
+.select2-container--bootstrap4 .select2-results__option--highlighted[aria-selected="true"] {
+  background-color: red !important; /* otro color para el hover en opciones ya seleccionadas */
+  color: white !important;
+}
