@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var modeSwitch = document.querySelector(".mode-switch");
+  // var modeSwitch = document.querySelector(".mode-switch");
 
-  modeSwitch.addEventListener("click", function () {
-    document.documentElement.classList.toggle("dark");
-    modeSwitch.classList.toggle("active");
-  });
+  // modeSwitch.addEventListener("click", function () {
+  //   document.documentElement.classList.toggle("dark");
+  //   modeSwitch.classList.toggle("active");
+  // });
 
   var listView = document.querySelector(".list-view");
   var gridView = document.querySelector(".grid-view");
@@ -41,11 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
     //modal 
 
 
-    const tituloInput = document.getElementById('email');
-    const descripcionInput = document.getElementById('descripcion');
-    const colorInput = document.getElementById('color');
-    const usuariosInput = document.getElementById('usuarios');
-    const fechaInput = document.getElementById('fecha');
+    const tituloInput = document.getElementById('inputTitulo');
+    const descripcionInput = document.getElementById('inputDescripcion');
+    const colorInput = document.getElementById('inputColor');
+    const usuariosInput = document.getElementById('inputUsuarios');
+    const fechaInput = document.getElementById('inputFecha');
     const imagenInput = document.getElementById('imagen'); 
 
 
@@ -53,45 +53,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const descripcionDisplay = document.getElementById('descripcion');
     const fechaDisplay = document.querySelector('.fecha');
     const projectBox = document.querySelector('.project-box');
-    const imagenDisplay = document.querySelector('.participants img'); // asume que es la primera imagen
-    const usuariosTexto = document.getElementById('usuarios-texto');
-
-  tituloInput.addEventListener('input', () => {
-        tituloDisplay.textContent = tituloInput.value;
-    });
+    const usuarios = document.getElementById('usuarios');
+    const fechaFinalizacion=document.querySelector('.days_left');
 
 
-    descripcionInput.addEventListener('input', () => {
-        descripcionDisplay.textContent = descripcionInput.value;
-    });
-
-
-colorInput.addEventListener('input', () => {
-        projectBox.style.backgroundColor = colorInput.value;
-        const elementosColor = projectBox.querySelectorAll('.days-left, .box-progress span');
-        elementosColor.forEach(el => el.style.color = colorInput.value);
-        const barra = projectBox.querySelector('.box-progress span');
-        barra.style.backgroundColor = colorInput.value;
-    });
-
-
-
-fechaInput.addEventListener('input', () => {
-        fechaDisplay.textContent = fechaInput.value;
-    });
-
-    imagenInput.addEventListener('input', () => {
-        imagenDisplay.src = imagenInput.value;
-    });
-
-    usuariosInput.addEventListener('input', () => {
-        if (usuariosTexto) {
-            usuariosTexto.textContent = usuariosInput.value;
-        }
-    });
-
-
-
+    
 
 
 
@@ -101,3 +67,7 @@ fechaInput.addEventListener('input', () => {
 });
 
 
+
+   
+
+  
