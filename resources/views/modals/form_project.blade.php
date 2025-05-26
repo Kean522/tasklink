@@ -39,8 +39,8 @@
                 </svg>
                 </button>
             </div>
-            <div class="days-left lbl" id="days_left" style="color: #4f3ff0;">
-                2 Days Left
+            <div class="days-left lbl" id="days_left" style="color: #4f3ff0;" >
+                <p style="width: 100%;height:0px;margin-top:6px;"> 2 Days Left</p>
             </div>
             </div>
         </div>
@@ -54,10 +54,11 @@
                 <input type="text" id="inputTitulo" onkeyup="displayInputValue(this)" name="inputTitulo">
 
                 <label for="descripcion">Descripcion</label>
-                <input type="text" id="inputDescripcion" onkeyup="displayInputValue(this)" name="inputDescripcion" required>
+                <input type="text" id="inputDescripcion" onkeyup="displayInputValue(this)" name="inputDescripcion" >
 
-                <label for="color">Color</label>
-                <input type="color" id="inputColor"  name="inputColor" required>
+                <label for="">Color</label>
+               <label for="inputColor" class="color-label"></label>
+                <input type="color" id="inputColor" name="inputColor" class="color-hidden">
 
                 <label for="inputUsuarios">Usuarios</label>
                 <select id="inputUsuarios" name="inputUsuarios[]" class="form-control select2bs4" multiple="multiple" data-placeholder="Selecciona usuarios" style="width: 100%;">
@@ -68,11 +69,11 @@
                 </select>
 
                 <label for="fecha">Fecha de finalizacion</label>
-                <input type="date" id="inputFechaFinalizacion"  name="inputFechaFinalizacion" required>
+                <input type="date" id="inputFechaFinalizacion"  name="inputFechaFinalizacion" >
 
                 <label for="imagen">Imagen</label>
                 <input type="file" id="imagen" name="imagen" style="position: absolute;opacity:0;">
-                <button type="submit" class="btn" style="margin-top: 3px;">Seleccionar Archivo</button>
+                <button type="button" class="btn" style="margin-top: 3px;">Seleccionar Archivo</button>
                 <p style="margin-top:4px;" id="archivo_seleccionado">Ningún archivo seleccionado</p>
 
 
@@ -124,6 +125,14 @@
 
 
 
+                });
+
+
+                const input = document.getElementById("inputColor");
+                const label = document.querySelector(".color-label");
+
+                input.addEventListener("input", function () {
+                label.style.backgroundColor = this.value;
                 });
     
 </script>

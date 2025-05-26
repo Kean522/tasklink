@@ -19,7 +19,7 @@
     
 </head>
 <body>
-   {{-- <div class="app-container">
+    <div class="app-container">
     <br>
     <div class="app-header">
         <span class="app-icon"></span>
@@ -44,8 +44,7 @@
         <div class="projects-section">
         <div class="projects-section-header">
             <p>Projects</p>
-            {{-- <button class="button-create">Create Project</button> --}}
-      {{-- <button class="custom-btn btn-14">Crear Proyecto</button>
+       {{-- <button class="custom-btn btn-14">Crear Proyecto</button> --}}
 
 
             <p class="time">December, 12</p>
@@ -314,9 +313,9 @@
             </div>
         </div>
         </div>
-    </div> --}}
-    {{-- </div> --}}
-    {{-- <div class="messages-section">
+    </div> 
+     </div> 
+     {{-- <div class="messages-section">
     <button class="messages-close">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
         <circle cx="12" cy="12" r="10" />
@@ -412,11 +411,16 @@
         </div>
         </div>
     </div>
-    </div> --}}
+    </div>  --}}
     </div>
     </div>
-       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
+       {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
             @include('modals.form_project')
-            </div>
+            </div> --}}
+
+    {{-- <div class="modal fade" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
+        @include('modals.form_task')
+    </div>  --}}
+
 </body>
 </html>

@@ -23,6 +23,9 @@ Route::get('/prueba', function () {
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/task', function () {
+    return view('task');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

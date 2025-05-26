@@ -1069,35 +1069,35 @@ body {
 } */
 
 
-#exampleModal{
+#exampleModal ,#exampleModal_task{
   margin-left: -800px;
   margin-top: 100px;
 }
-#exampleModal .project-box{
+#exampleModal .project-box,#exampleModal_task .project-box{
   width: 350px;
   height: 400px;
   position: absolute;
   margin-left: -300px;
   margin-top: 100px;
 }
-#exampleModal .project-box .fecha{
+#exampleModal .project-box .fecha,#exampleModal_task .project-box .fecha{
   outline: 2px solid none;
   width: 290px;
 }
-#exampleModal .project-box .box-progress-bar{
+#exampleModal .project-box .box-progress-bar,#exampleModal_task .project-box .box-progress-bar{
   outline: 2px solid none;  
   height: 9px;
 }
-#exampleModal .project-box .box-progress{
+#exampleModal .project-box .box-progress,#exampleModal_task .project-box .box-progress{
   height: 9px;
 }
 #exampleModal .project-box .days-left.editar,#exampleModal .project-box .days-left.ver{
   margin-top: 88px;
 }
-#exampleModal .project-box .box-content-header{
+#exampleModal .project-box .box-content-header,#exampleModal_task .project-box .box-content-header{
   font-size: 35px;
 }
-#exampleModal .project-box .box-content-subheader{
+#exampleModal .project-box .box-content-subheader,#exampleModal_task .project-box .box-content-subheader{
   font-size: 25px;
 }
 /* https://codepen.io/kristen17/pen/NPKrxBd */
@@ -1107,7 +1107,7 @@ body {
 
 
 
-#exampleModal .titulo {
+#exampleModal .titulo ,#exampleModal_task .titulo {
     margin-bottom: 20px;
     font-size: 30px;
     color: #4A4A4A;
@@ -1117,7 +1117,7 @@ body {
     width: 120000px;
 }
 
-#exampleModal .contenido {
+#exampleModal .contenido ,#exampleModal_task .contenido {
     position:absolute;
     display: flex;
     flex-direction: column;
@@ -1133,18 +1133,18 @@ body {
     
 }
 
-#exampleModal form {
+#exampleModal form ,#exampleModal_task form {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-#exampleModal label {
+#exampleModal label ,#exampleModal_task label {
     margin-top: 10px;
     color: rgba(128, 128, 128, 0.8);
 }
 
-#exampleModal input {
+#exampleModal input ,#exampleModal_task input {
     margin-top: 5px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -1152,16 +1152,16 @@ body {
     width: 100%;
     margin-left: -2px;
 }
-#exampleModal input:focus{
+#exampleModal input:focus, #exampleModal_task input:focus {
     outline: none;
 }
-#exampleModal .button-group {
+#exampleModal .button-group, #exampleModal_task .button-group {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-#exampleModal .btn {
+#exampleModal .btn ,#exampleModal_task .btn {
     padding: 10px 20px;
     border: none;
     border-radius: 7px;
@@ -1173,16 +1173,20 @@ body {
     text-align: center;
 }
 
-#exampleModal .btn.secondary {
+#exampleModal .btn.secondary ,#exampleModal_task .btn.secondary {
     background-color: #4A4A4A;
 }
 
-#exampleModal .btn:hover {
+#exampleModal .btn:hover ,#exampleModal_task .btn:hover {
     background-color: #3a3650;
 }
-#exampleModal form{
+#exampleModal form, #exampleModal_task form {
     margin-left: -20px;
 }
+
+
+
+
 
 option{
   background-color: blueviolet;
@@ -1190,25 +1194,26 @@ option{
 
 
 .select2-container--bootstrap4 .select2-dropdown {
-  background-color: rgb(255, 255, 255); /* Fondo gris claro */
-  border: 1px solid #ccc;    /* Borde gris */
-  border-radius: 5px;        /* Bordes redondeados */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  background-color: rgb(255, 255, 255); 
+  border: 1px solid #ccc; 
+  border-radius: 5px;        
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 
-/* Estilo de las opciones cuando están en la lista desplegada */
 .select2-container--bootstrap4 .select2-results__option {
   padding: 10px 15px;
   font-size: 14px;
-  color: #333; /* Color del texto */
+  color: #333; 
   cursor: pointer;
+  
+  
 }
 
-/* Estilo cuando se pasa el ratón sobre una opción */
 .select2-container--bootstrap4 .select2-results__option:hover {
   background-color: green;
   color: #4f3ff0;
+  
 }
 
 
@@ -1216,22 +1221,31 @@ option{
 
 
 
-
-
+/*El cuadradito que sale despues de elegir una opción*/
 .select2-container--bootstrap4 .select2-selection__choice {
-  background-color: red;
+  background-color: #3a3650;
   border-color: #3a2ccc;
   color: white;
   padding: 0 8px;
   font-weight: 600;
   border-radius: 4px;
   margin-right: 4px;
+  background-color: #3a3650 !important;
+  color: white !important;
+  padding: 5px 8px !important; 
+  font-size: 14px !important;
+  margin-top: 3px !important;
+  margin-left: 2px !important;
+  
 }
 
+
+/*La x de la seleccion*/
 .select2-container--bootstrap4 .select2-selection__choice__remove {
   color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   margin-left: 6px;
+ 
 }
 
 .select2-container--bootstrap4 .select2-selection__choice__remove:hover {
@@ -1241,51 +1255,137 @@ option{
 .select2-container--bootstrap4 .select2-results__option--highlighted[aria-selected] {
   background-color: #d6d0ff;
   color: #4f3ff0;
+  
 }
 .select2-container--bootstrap4 .select2-results__option[aria-selected='true'] {
   background-color: #a1c4fd;
   color: #2b60ff;
+  
 }
 
 
 .select2-results__option--highlighted{
   background-color: #1f1c2e;
+  
 }
 
 
-.select2 .select2-container .select2-container--default .select2-container--below .select2-container--focus:hover{
-  background-color: red;
-}
+/* .select2 .select2-container .select2-container--default .select2-container--below .select2-container--focus:hover{
+  background-color: orange;
+} */
 
 
 
 .select2-container--focus .select2-selection--multiple {
-  background-color: red !important;  /* Red de fondo */
-  border-color: #3a2ccc !important; /* Color de borde si lo deseas */
+  background-color: white !important; 
+  border-color: #3a2ccc !important; 
+ 
+  
 }
 
-/* Cambiar el color de fondo de las opciones cuando el select está abierto */
+
+/*Fonde de la tabla de las opciones*/
 .select2-container--open .select2-results__option {
-  background-color: #f0f0f0 !important; /* Fondo gris claro */
+  background-color: white !important; /* Fondo gris claro */
+  
 }
 
 /* Cambiar el fondo cuando se pasa el ratón sobre una opción */
 .select2-container--open .select2-results__option:hover {
   background-color: red !important;
   color: white !important; /* Cambiar el texto a blanco cuando pasas el ratón */
+  
 }
 
 /* Cambiar el color de fondo cuando se selecciona una opción */
 .select2-container--open .select2-results__option[aria-selected='true'] {
-  background-color: #a1c4fd !important; /* Fondo azul cuando se selecciona */
+  /*background-color: #a1c4fd !important;*/  /* Fondo azul cuando se selecciona */
   color: white !important; /* Cambiar el color del texto a blanco */
+  
 }
 
 
 
 
-/* Hover sobre opciones seleccionadas */
+/* Hover cuando eliges la opcion */
 .select2-container--bootstrap4 .select2-results__option--highlighted[aria-selected="true"] {
-  background-color: red !important; /* otro color para el hover en opciones ya seleccionadas */
+  background-color: #3a3650 !important; /* otro color para el hover en opciones ya seleccionadas */
   color: white !important;
+  
+}
+
+
+.select2-container--bootstrap4 .select2-selection__choice__remove {
+  color: #ffcccc; /* Cambia el color de la "x" */
+  font-size: 16px; /* Ajusta el tamaño */
+  font-weight: bold;
+  background-color: transparent; /* Evita un fondo extraño */
+  border: none; /* Quita borde si tiene */
+  margin-left: 6px; /* Ya lo tienes */
+  transition: color 0.3s ease;
+  
+}
+
+.select2-container--bootstrap4 .select2-selection__choice__remove:hover {
+  color: #ff6666; /* Color más fuerte al pasar el mouse */
+  cursor: pointer;
+  
+}
+
+.select2-container--bootstrap4 .select2-selection--multiple {
+  min-height: auto !important;
+  height: auto !important;
+  overflow-y: auto !important;
+  flex-wrap: wrap !important;
+  padding-bottom: 5px !important;
+  height: 38px;
+  overflow: hidden !important;
+}
+
+
+.color-hidden {
+  visibility: hidden;
+  position: absolute;
+}
+
+.color-label {
+  display: inline-block;
+  width: 307px;
+  height: 40px;
+  background-color: #ccc;
+  border: 2px solid none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
+
+#exampleModal_task .contenido{
+  width:500px;
+  margin-left: 0px;
+  margin-top:-50px;
+}
+
+#exampleModal_task .color-label{
+    width:420px;
+}
+
+#exampleModal_task #inputPrioridad{
+  height: 40px;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+#exampleModal_task #inputPrioridad option {
+  background-color: #fff;
+  color: #000;
+}
+#inputPrioridad .select2-container--bootstrap4 .select2-results__option:hover {
+  background-color: red !important;
+  color: white !important;
+}
+.select2-search__field{
+  display: none;
 }
