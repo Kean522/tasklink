@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     @vite(['resources/css/task.css'])
     @vite(['resources/css/index.css'])
+    @vite(['resources/js/task.js'])
     <title>Document</title>
 
     
@@ -45,7 +46,61 @@
     <div class="app-content-header">
         <h1 class="app-content-title">Tasks</h1>
         <div class="projects-section">
-            <h2 style="outline:2px solid none;color: #1f1c2e;text-align:center;">Añadir Tarea</h2>
+            <div class="container">
+            <div class="tabular-data module">
+                <div class="data-group">
+                <div class="row">
+                    <div class="data-expands">
+                    <div class="col-lg-1 col-md-1">
+                        1245346
+                    </div>
+                    <div class="col-lg-8 col-md-7">
+                        <span class="title">Cromulent waste removal may behoove us.</span>
+                    </div>
+                    <div class="col-lg-3 col-md-4">
+                        <div class="red uppercase"><strong><i class="fa fa-exclamation-circle"></i> Awaiting Approval</strong>
+                        <span class="row-toggle">
+                            <span class="horizontal"></span>
+                            <span class="vertical"></span>
+                        </span>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="expandable">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1">
+                        <p>Just once I'd like to eat dinner with a celebrity who isn't bound and gagged. But, like most politicians, he promised more than he could deliver. If rubbin' frozen dirt in your crotch is wrong, hey I don't wanna be right.</p>
+                        <p>Tell her you just want to talk. It has nothing to do with mating. Well I'da done better, but it's plum hard pleading a case while awaiting trial for that there incompetence. Is that a cooking show? Bender! Ship! Stop bickering or I'm going to come back there and change your opinions manually!</p>
+                        </div>
+                        <div class="col-lg-3 col-md-4">
+                        <div class="row">
+                            <div class="col-xs-12 visible-sm visible-xs"><hr></div>
+                            <div class="col-xs-6">Technician Labor</div>
+                            <div class="col-xs-6 text-right">2,400.00</div>
+                            <div class="col-xs-6">Parts</div>
+                            <div class="col-xs-6 text-right">4,500.00</div>
+                            <div class="col-xs-6">Inspection</div>
+                            <div class="col-xs-6 text-right">400.00</div>
+                            <div class="col-xs-12"><hr></div>
+                            <div class="col-xs-6">Total</div>
+                            <div class="col-xs-6 text-right">$7,300.00</div>
+                            <div class="col-xs-12"><hr></div>
+                            <div class="col-xs-6"><a href="#" class="btn btn-black"><i class="fa fa-phone"></i> Contact</a></div>
+                            <div class="col-xs-6 text-right"><a href="#" class="btn btn-green"><i class="fa fa-check-circle-o"></i> Approve</a></div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+               
+                <!-- Table Row -->
+            </div>
+            <!-- Table -->
+            </div>
+            <!-- Container -->
+        </div>
+            {{-- <h2 style="outline:2px solid none;color: #1f1c2e;text-align:center;">Añadir Tarea</h2>
             <a href="" class="app-sidebar-link active">
                 <svg xmlns="http://www.w3.org/2000/svg" 
                     width="24" height="24" viewBox="0 0 24 24" 
@@ -111,7 +166,7 @@
         
   
    
-    </div>
+    </div> --}}
     </div>
        
 
