@@ -11,8 +11,16 @@
 <!-- jQuery y Select2 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
     @vite(['resources/css/task.css'])
     @vite(['resources/css/index.css'])
     @vite(['resources/js/task.js'])
@@ -45,8 +53,9 @@
     <div class="app-content">
     <div class="app-content-header">
         <h1 class="app-content-title">Tasks</h1>
+
         <div class="projects-section">
-            <div class="container">
+            {{-- <div class="container">
             <div class="tabular-data module">
                 <div class="data-group">
                 <div class="row">
@@ -59,14 +68,16 @@
                     </div>
                     <div class="col-lg-3 col-md-4">
                         <div class="red uppercase"><strong><i class="fa fa-exclamation-circle"></i> Awaiting Approval</strong>
+                        
+
                         <span class="row-toggle">
                             <span class="horizontal"></span>
                             <span class="vertical"></span>
                         </span>
                         </div>
                     </div>
-                    </div>
-                    <div class="expandable">
+                    </div> --}}
+                    {{-- <div class="expandable">
                     <div class="row">
                         <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1">
                         <p>Just once I'd like to eat dinner with a celebrity who isn't bound and gagged. But, like most politicians, he promised more than he could deliver. If rubbin' frozen dirt in your crotch is wrong, hey I don't wanna be right.</p>
@@ -90,17 +101,19 @@
                         </div>
                         </div>
                     </div>
-                    </div>
-                </div>
-                </div>
+                    </div> --}}
+                {{-- </div>
+                </div> --}}
                
                 <!-- Table Row -->
-            </div>
+            {{-- </div> --}}
             <!-- Table -->
-            </div>
+            {{-- </div> --}}
             <!-- Container -->
-        </div>
-            {{-- <h2 style="outline:2px solid none;color: #1f1c2e;text-align:center;">Añadir Tarea</h2>
+        {{-- </div> --}}
+
+        
+            <h2 style="outline:2px solid none;color: #1f1c2e;text-align:center;">Añadir Tarea</h2>
             <a href="" class="app-sidebar-link active">
                 <svg xmlns="http://www.w3.org/2000/svg" 
                     width="24" height="24" viewBox="0 0 24 24" 
@@ -119,22 +132,36 @@
                     <thead>
                     <tr>
                         <th>Tarea</th>
-                        <th>Descripcion</th>
+                        <th>Fecha de Finalización</th>
                         <th>Progreso</th>
-                        <th>Usuarios</th>
-                        <th>Prioridad</th>
-                        <th>Acciones</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Bitcoin</td>
-                        <td>$58,432</td>
-                        <td>+2.3%</td>
-                        <td>$1.12T</td>
-                        <td>Alto</td>
+                        <td>Diseñar Base de Datos</td>
+                        <td>2025/04/10</td>
+                        <td>
+                            <p>60%</p>
+                            <div class="box-progress-bar" style="width:280px;margin-left:10px;height:8px;">
+                                <span class="box-progress" style="width: 60%; background-color: #ff942e;margin-left:-11px;height:8px;"></span>
+                            </div>
+                        </td>
                         <td></td>
+                        <td></td>
+                        <td>
+                            <span class="row-toggle" style="z-index: 1;">
+                                <span class="horizontal"></span>
+                                <span class="vertical"></span>
+                            </span>
+                        </td>
+                        
                     </tr>
+                    
+                    {{--
                     <tr>
                         <td>Ethereum</td>
                         <td>$3,245</td>
@@ -158,17 +185,139 @@
                         <td>$18.7B</td>
                         <td>Alto</td>
                         <td></td>
-                    </tr>
+                    </tr> --}}
                     </tbody>
+                    
                 </table>
+                
+                <div class="expandable" style="background-color: #fee4cb;">
+                    <div class="row">
+                        <div style="margin-left:25px;font-size:12px;">
+                            DESCRIPCION: 
+                        </div>
+
+                        <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 ms-4 mt-2	">
+                            <p>Just once I'd like to eat dinner with a celebrity who isn't bound and gagged. But, like most politicians, he promised more than he could deliver. If rubbin' frozen dirt in your crotch is wrong, hey I don't wanna be right.</p>
+                            <p>Tell her you just want to talk. It has nothing to do with mating. Well I'da done better, but it's plum hard pleading a case while awaiting trial for that there incompetence. Is that a cooking show? Bender! Ship! Stop bickering or I'm going to come back there and change your opinions manually!</p>
+                        </div>
+                        <div class="col-lg-3 col-md-4">
+                        <div class="row">
+                            <div class="tarea">
+                                <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: none;">
+                                    <p class="w-50 fw-bold">Tarea 1</p> 
+                                    <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
+                                </div>
+                                <div class="mini-tarea d-flex">
+                                    <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear tablas</div>
+                                    <div class="icons">
+                                        <i class="fa fa-check" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
+                                        <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                        <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="mini-tarea d-flex">
+                                    <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear modelo</div>
+                                    <div class="icons">
+                                        <i class="fa fa-check " title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
+                                        <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                        <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12"><hr></div>
+                            </div>
+                            <div class="tarea">
+                                <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: none;">
+                                    <p class="w-50 fw-bold">Tarea 2</p> 
+                                    <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
+                                </div>
+                                <div class="mini-tarea d-flex">
+                                    <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear relaciones</div>
+                                    <div class="icons">
+                                        <i class="fa fa-check" title="Marcar como hecho" style="color:grey;" onclick="alert('Marcado como hecho')"></i>
+                                        <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                        <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                    </div>
+                                </div>
+                                <div class="mini-tarea d-flex">
+                                    <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear restricciones</div>
+                                    <div class="icons">
+                                        <i class="fa fa-check" title="Marcar como hecho" style="color:grey;" onclick="alert('Marcado como hecho')"></i>
+                                        <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                        <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12"><hr></div>
+                            </div>
+                            
+                            
+                            
+                            <div class="col-xs-6 d-flex" style="font-size: 14px;">
+                                <p style="width:50px;">Total: </p>
+                                <p style="width:100px;">60%</p>
+
+                                    <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
+                                </i>
+                            </div>
+                       
+                            <br>
+                            <br>
+                     
+                            <div class="box-progress-bar" style="width:280px;margin-left:10px;height:8px;">
+                                <span class="box-progress" style="width: 60%; background-color: #ff942e;margin-left:-11px;height:8px;"></span>
+                            </div>
+                            <div class="col-xs-12"><hr></div>
+                            {{-- <div class="col-xs-6"><a href="#" class="btn btn-black"><i class="fa fa-phone"></i> Contact</a></div> --}}
+                            <div class="col-xs-0 text-right"><a href="#" class="btn"><i class="fa fa-check-circle-o"></i> Approve</a></div>
+                        </div>
+                        </div>
+                    </div>
+                    </div> 
+                 </div>
+                </div>
                 </div>
         </div>
         
   
    
-    </div> --}}
+    </div>
+    
     </div>
        
 
 </body>
 </html>
+
+
+{{-- <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: #f79c48;">
+                                <p class="w-50">Tarea 3</p> 
+                                <div class=" red uppercase"><strong><i class="fa fa-exclamation-circle"></i> AWAITING APPROVAL</strong></div>
+                            
+                            {{-- <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: #f79c48;">
+                                <p class="w-50">Tarea 4</p> 
+                                <div class=" red uppercase"><strong><i class="fa fa-exclamation-circle"></i> AWAITING APPROVAL</strong></div>
+                            </div>
+                            <div class="col-xs-6 text-right fw-normal">4,500.00</div>   
+                             --}}
+
+
+                              {{-- <div class="col-xs-12 visible-sm visible-xs"><hr></div>
+                            <div class="col-xs-6 d-flex " style="outline:2px solid NONE;">
+                                <p class="w-50">Tarea 1</p> 
+                                <div class="green uppercase ">
+                                    <strong>
+                                        <i class="fa fa-check-circle"></i> Approved
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 text-right fw-normal">2,400.00</div>
+                            <div class="col-xs-6 d-flex " style="outline:2px solid none;">
+                                <p class="w-50">Tarea 2</p> 
+                                <div class="uppercase ">
+                                    <strong>
+                                       <i class="fa fa-wrench"></i> IN PROGRESS
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 text-right fw-normal">- Crear informes</div>
+                            <div class="col-xs-6 text-right fw-normal">- Filtrar los datos</div> --}}
