@@ -112,6 +112,8 @@
             <!-- Container -->
         {{-- </div> --}}
 
+
+        
         
             <h2 style="outline:2px solid none;color: #1f1c2e;text-align:center;">Añadir Tarea</h2>
             <a href="" class="app-sidebar-link active">
@@ -160,36 +162,17 @@
                         </td>
                         
                     </tr>
+                
                     
-                    {{--
-                    <tr>
-                        <td>Ethereum</td>
-                        <td>$3,245</td>
-                        <td>-0.8%</td>
-                        <td>$389B</td>
-                        <td>Alto</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Solana</td>
-                        <td>$142</td>
-                        <td>+5.7%</td>
-                        <td>$61B</td>
-                        <td>Alto</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Cardano</td>
-                        <td>$0.53</td>
-                        <td>+1.2%</td>
-                        <td>$18.7B</td>
-                        <td>Alto</td>
-                        <td></td>
-                    </tr> --}}
+                    
+                    
+                    
+                  
+                   
                     </tbody>
                     
                 </table>
-                
+               
                 <div class="expandable" style="background-color: #fee4cb;">
                     <div class="row">
                         <div style="margin-left:25px;font-size:12px;">
@@ -267,12 +250,12 @@
                                 <span class="box-progress" style="width: 60%; background-color: #ff942e;margin-left:-11px;height:8px;"></span>
                             </div>
                             <div class="col-xs-12"><hr></div>
-                            {{-- <div class="col-xs-6"><a href="#" class="btn btn-black"><i class="fa fa-phone"></i> Contact</a></div> --}}
+                        
                             <div class="col-xs-0 text-right"><a href="#" class="btn"><i class="fa fa-check-circle-o"></i> Approve</a></div>
                         </div>
                         </div>
                     </div>
-                    </div> 
+                    </div>  
                  </div>
                 </div>
                 </div>
@@ -321,3 +304,5 @@
                             </div>
                             <div class="col-xs-6 text-right fw-normal">- Crear informes</div>
                             <div class="col-xs-6 text-right fw-normal">- Filtrar los datos</div> --}}
+
+                                {{-- <div class="col-xs-6"><a href="#" class="btn btn-black"><i class="fa fa-phone"></i> Contact</a></div> --}}
