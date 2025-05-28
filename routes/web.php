@@ -16,11 +16,11 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 |
 */
 
-Route::get('/prueba', function () {
-    return view('prueba');
+Route::get('/', function () {
+    return view('login');
 });
 
-Route::get('/', function () {
+Route::get('/index', function () {
     return view('index');
 });
 Route::get('/task', function () {

@@ -21,9 +21,17 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   />
+  <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jQuery, Popper.js, and Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
     @vite(['resources/css/task.css'])
     @vite(['resources/css/index.css'])
     @vite(['resources/js/task.js'])
+   
     <title>Document</title>
 
     
@@ -115,8 +123,8 @@
 
         
         
-            <h2 style="outline:2px solid none;color: #1f1c2e;text-align:center;">Añadir Tarea</h2>
-            <a href="" class="app-sidebar-link active">
+            <h2 style="outline:2px solid none;color: #1f1c2e;text-align:center;" >Añadir Tarea</h2>
+            <a href="" class="app-sidebar-link active" data-toggle="modal" data-target="#exampleModal_task" >
                 <svg xmlns="http://www.w3.org/2000/svg" 
                     width="24" height="24" viewBox="0 0 24 24" 
                     fill="none" stroke="currentColor" stroke-width="2" 
@@ -126,6 +134,14 @@
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
             </a>
+                      
+            <div class="modal fade" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="outline:4px solid none;margin-left:300px;">
+                    @include('modals.form_task')
+                </div> 
+           
+            {{-- <div class="modal fade" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
+               @include('modals.form_task')
+            </div>  --}}
             <div class="grid-container">
             <div class="box box-1">
                 <h2 style="color: #1f1c2e">Tareas</h2>
@@ -162,100 +178,202 @@
                         </td>
                         
                     </tr>
-                
-                    
-                    
-                    
-                    
-                  
+                 
+                    <tr class="expandable">
+                        <td>
+                         <div style="background-color: #fee4cb;width:1200px;">
+                                <div class="row">
+                                    <div style="margin-left:10px;font-size:12px;">
+                                        DESCRIPCION: 
+                                    </div>
+
+                                    <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 mt-2" style="margin-left: 8px;">
+                                        <p>Just once I'd like to eat dinner with a celebrity who isn't bound and gagged. But, like most politicians, he promised more than he could deliver. If rubbin' frozen dirt in your crotch is wrong, hey I don't wanna be right.</p>
+                                        <p>Tell her you just want to talk. It has nothing to do with mating. Well I'da done better, but it's plum hard pleading a case while awaiting trial for that there incompetence. Is that a cooking show? Bender! Ship! Stop bickering or I'm going to come back there and change your opinions manually!</p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                    <div class="row">
+                                        <div class="tarea">
+                                            <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: none;">
+                                                <p class="w-50 fw-bold">Tarea 1</p> 
+                                                <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
+                                            </div>
+                                            <div class="mini-tarea d-flex">
+                                                <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear tablas</div>
+                                                <div class="icons">
+                                                    <i class="fa fa-check" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mini-tarea d-flex">
+                                                <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear modelo</div>
+                                                <div class="icons">
+                                                    <i class="fa fa-check " title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12"><hr></div>
+                                        </div>
+                                        <div class="tarea">
+                                            <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: none;">
+                                                <p class="w-50 fw-bold">Tarea 2</p> 
+                                                <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
+                                            </div>
+                                            <div class="mini-tarea d-flex">
+                                                <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear relaciones</div>
+                                                <div class="icons">
+                                                    <i class="fa fa-check" title="Marcar como hecho" style="color:grey;" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                                </div>
+                                            </div>
+                                            <div class="mini-tarea d-flex">
+                                                <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear restricciones</div>
+                                                <div class="icons">
+                                                    <i class="fa fa-check" title="Marcar como hecho" style="color:grey;" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12"><hr></div>
+                                        </div>
+                                        
+                                        
+                                        
+                                        <div class="col-xs-6 d-flex" style="font-size: 14px;">
+                                            <p style="width:50px;">Total: </p>
+                                            <p style="width:100px;">60%</p>
+
+                                                <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
+                                            </i>
+                                        </div>
+                                
+                                        <br>
+                                        <br>
+                                
+                                        <div class="box-progress-bar" style="width:280px;margin-left:10px;height:8px;">
+                                            <span class="box-progress" style="width: 60%; background-color: #ff942e;margin-left:-11px;height:8px;"></span>
+                                        </div>
+                                        <div class="col-xs-12"><hr></div>
+                                    
+                                        <div class="col-xs-0 text-right"><a href="#" class="btn"><i class="fa fa-check-circle-o"></i> Approve</a></div>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>  
+                            </td>
+                        <td>fdsafdasfdsaf</td>
+                        <td>fdasfdsafdsafd</td>
+                        <td>fdasfdasfdas</td>
+                        <td>fdsafdsafvdas</td>
+                        <td>fdsafdasfsafsa</td>
+                        
+                    </tr>
                    
+                    {{-- <tr class="expandable">
+                     
+                        <td>
+                                
+                            <div style="background-color: #fee4cb;width:1200px;">
+                                <div class="row">
+                                    <div style="margin-left:10px;font-size:12px;">
+                                        DESCRIPCION: 
+                                    </div>
+
+                                    <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 mt-2" style="margin-left: 8px;">
+                                        <p>Just once I'd like to eat dinner with a celebrity who isn't bound and gagged. But, like most politicians, he promised more than he could deliver. If rubbin' frozen dirt in your crotch is wrong, hey I don't wanna be right.</p>
+                                        <p>Tell her you just want to talk. It has nothing to do with mating. Well I'da done better, but it's plum hard pleading a case while awaiting trial for that there incompetence. Is that a cooking show? Bender! Ship! Stop bickering or I'm going to come back there and change your opinions manually!</p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                    <div class="row">
+                                        <div class="tarea">
+                                            <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: none;">
+                                                <p class="w-50 fw-bold">Tarea 1</p> 
+                                                <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
+                                            </div>
+                                            <div class="mini-tarea d-flex">
+                                                <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear tablas</div>
+                                                <div class="icons">
+                                                    <i class="fa fa-check" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mini-tarea d-flex">
+                                                <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear modelo</div>
+                                                <div class="icons">
+                                                    <i class="fa fa-check " title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12"><hr></div>
+                                        </div>
+                                        <div class="tarea">
+                                            <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: none;">
+                                                <p class="w-50 fw-bold">Tarea 2</p> 
+                                                <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
+                                            </div>
+                                            <div class="mini-tarea d-flex">
+                                                <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear relaciones</div>
+                                                <div class="icons">
+                                                    <i class="fa fa-check" title="Marcar como hecho" style="color:grey;" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                                </div>
+                                            </div>
+                                            <div class="mini-tarea d-flex">
+                                                <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear restricciones</div>
+                                                <div class="icons">
+                                                    <i class="fa fa-check" title="Marcar como hecho" style="color:grey;" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12"><hr></div>
+                                        </div>
+                                        
+                                        
+                                        
+                                        <div class="col-xs-6 d-flex" style="font-size: 14px;">
+                                            <p style="width:50px;">Total: </p>
+                                            <p style="width:100px;">60%</p>
+
+                                                <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
+                                            </i>
+                                        </div>
+                                
+                                        <br>
+                                        <br>
+                                
+                                        <div class="box-progress-bar" style="width:280px;margin-left:10px;height:8px;">
+                                            <span class="box-progress" style="width: 60%; background-color: #ff942e;margin-left:-11px;height:8px;"></span>
+                                        </div>
+                                        <div class="col-xs-12"><hr></div>
+                                    
+                                        <div class="col-xs-0 text-right"><a href="#" class="btn"><i class="fa fa-check-circle-o"></i> Approve</a></div>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>  
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr> --}}
+
+
+               
                     </tbody>
                     
                 </table>
-               
-                <div class="expandable" style="background-color: #fee4cb;">
-                    <div class="row">
-                        <div style="margin-left:25px;font-size:12px;">
-                            DESCRIPCION: 
-                        </div>
-
-                        <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 ms-4 mt-2	">
-                            <p>Just once I'd like to eat dinner with a celebrity who isn't bound and gagged. But, like most politicians, he promised more than he could deliver. If rubbin' frozen dirt in your crotch is wrong, hey I don't wanna be right.</p>
-                            <p>Tell her you just want to talk. It has nothing to do with mating. Well I'da done better, but it's plum hard pleading a case while awaiting trial for that there incompetence. Is that a cooking show? Bender! Ship! Stop bickering or I'm going to come back there and change your opinions manually!</p>
-                        </div>
-                        <div class="col-lg-3 col-md-4">
-                        <div class="row">
-                            <div class="tarea">
-                                <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: none;">
-                                    <p class="w-50 fw-bold">Tarea 1</p> 
-                                    <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
-                                </div>
-                                <div class="mini-tarea d-flex">
-                                    <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear tablas</div>
-                                    <div class="icons">
-                                        <i class="fa fa-check" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
-                                        <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                        <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                    </div>
-                                </div>
-                                
-                                <div class="mini-tarea d-flex">
-                                    <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear modelo</div>
-                                    <div class="icons">
-                                        <i class="fa fa-check " title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
-                                        <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                        <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12"><hr></div>
-                            </div>
-                            <div class="tarea">
-                                <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: none;">
-                                    <p class="w-50 fw-bold">Tarea 2</p> 
-                                    <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
-                                </div>
-                                <div class="mini-tarea d-flex">
-                                    <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear relaciones</div>
-                                    <div class="icons">
-                                        <i class="fa fa-check" title="Marcar como hecho" style="color:grey;" onclick="alert('Marcado como hecho')"></i>
-                                        <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                        <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                    </div>
-                                </div>
-                                <div class="mini-tarea d-flex">
-                                    <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear restricciones</div>
-                                    <div class="icons">
-                                        <i class="fa fa-check" title="Marcar como hecho" style="color:grey;" onclick="alert('Marcado como hecho')"></i>
-                                        <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                        <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12"><hr></div>
-                            </div>
-                            
-                            
-                            
-                            <div class="col-xs-6 d-flex" style="font-size: 14px;">
-                                <p style="width:50px;">Total: </p>
-                                <p style="width:100px;">60%</p>
-
-                                    <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
-                                </i>
-                            </div>
-                       
-                            <br>
-                            <br>
-                     
-                            <div class="box-progress-bar" style="width:280px;margin-left:10px;height:8px;">
-                                <span class="box-progress" style="width: 60%; background-color: #ff942e;margin-left:-11px;height:8px;"></span>
-                            </div>
-                            <div class="col-xs-12"><hr></div>
-                        
-                            <div class="col-xs-0 text-right"><a href="#" class="btn"><i class="fa fa-check-circle-o"></i> Approve</a></div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>  
+           
                  </div>
                 </div>
                 </div>

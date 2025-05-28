@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     @vite(['resources/css/index.css', 'resources/js/index.js'])
+    
     <title>Document</title>
 
     
@@ -418,9 +419,9 @@
             @include('modals.form_project')
             </div> --}}
 
-    {{-- <div class="modal fade" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
+    <div class="modal fade" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
         @include('modals.form_task')
-    </div>  --}}
+    </div> 
 
 </body>
 </html>

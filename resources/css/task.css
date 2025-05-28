@@ -134,7 +134,7 @@ tbody tr{
   }
 
 .table-container{
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 /* 
@@ -226,7 +226,6 @@ body {
   font-size: 12px;
   padding: 10vh 0 0 0;
 }
-
 
 
 
@@ -422,4 +421,11 @@ body {
 
 
 
-   
+ .expandable:hover{
+  background-color: #fee4cb;
+ }
+
+/* .expandable-content {
+  max-width: 100%;
+  overflow-x: auto;
+} */

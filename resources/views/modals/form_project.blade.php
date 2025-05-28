@@ -132,7 +132,7 @@
                 const label = document.querySelector(".color-label");
 
                 input.addEventListener("input", function () {
-                label.style.backgroundColor = this.value;
+                    label.style.backgroundColor = this.value;
                 });
     
 </script>
