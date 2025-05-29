@@ -5,6 +5,8 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
     <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+ 
+
      @vite(['resources/css/modal_form_task.css'])
     
 </head>
@@ -18,7 +20,7 @@
                 <input type="text" id="inputDescripcion" onkeyup="displayInputValue(this)" name="inputDescripcion" >
 
                 <label for="">Color</label>
-               <label for="inputColor" class="color-label"></label>
+                <label for="inputColor" class="color-label"></label>
                 <input type="color" id="inputColor" name="inputColor" class="color-hidden">
 
                 <label for="inputUsuarios">Usuarios</label>
@@ -55,14 +57,86 @@
 
 
                 <div class="button-group">
-                    <button type="submit" class="btn" data-dismiss="modal">CREAR</button>
-                    <a href="#" class="btn secondary" >CERRAR</a>
+                    <button type="submit" class="btn">CREAR</button>
+                    <a class="btn secondary" data-dismiss="modal">CERRAR</a>
                 </div>
             </form>
         </div>
 
+
+        <div class="table-container modal-table">
+                <table class="table-cryptic">
+                    <thead>
+                    <tr>
+                        <th>Tarea</th>
+                        <th>Fecha de Finalización</th>
+                        <th>Progreso</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td id="titulo-tarea">Diseñar Base de Datos</td>
+                        <td id="fecha-tarea">2025/04/10</td>
+                        <td>
+                            <p>0%</p>
+                            <div class="box-progress-bar" style="width:280px;margin-left:10px;height:8px;">
+                                <span class="box-progress" style="width: 60%; background-color: #ff942e;margin-left:-11px;height:8px;"></span>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <span class="row-toggle" style="z-index: 1;">
+                                <span class="horizontal"></span>
+                                <span class="vertical"></span>
+                            </span>
+                        </td>
+                        
+                    </tr>
+                 
+                    <tr class="expandable" style="display: none;">
+                        <td>
+                         <div style="width:1200px;">
+                                <div class="row">
+                                    <div style="margin-left:10px;font-size:12px;">
+                                        DESCRIPCION: 
+                                    </div>
+
+                                    <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 mt-2" style="margin-left: 8px;" id="descripcion-tarea">
+                                        <p>Just once I'd like to eat dinner with a celebrity who isn't bound and gagged. But, like most politicians, he promised more than he could deliver. If rubbin' frozen dirt in your crotch is wrong, hey I don't wanna be right.</p>
+                                        <p>Tell her you just want to talk. It has nothing to do with mating. Well I'da done better, but it's plum hard pleading a case while awaiting trial for that there incompetence. Is that a cooking show? Bender! Ship! Stop bickering or I'm going to come back there and change your opinions manually!</p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                   
+                                    </div>
+                                </div>
+                                </div>  
+                            </td>
+                        <td>fdsafdasfdsaf</td>
+                        <td>fdasfdsafdsafd</td>
+                        <td>fdasfdasfdas</td>
+                        <td>fdsafdsafvdas</td>
+                        <td>fdsafdasfsafsa</td>
+                        
+                    </tr>
+                   
+                    
+
+
+               
+                    </tbody>
+                    
+                </table>
+           
+                 </div>
+
         <script>
             $(function () {
+
                     //Initialize Select2 Elements
                     $('.select2bs4').select2({
                         theme: 'bootstrap4'
@@ -77,7 +151,17 @@
 
                 input.addEventListener("input", function () {
                     label.style.backgroundColor = this.value;
+                    $(".table-container.modal-table tbody tr").css("background-color",this.value);
+                    $(".table-container.modal-table tbody tr").css("outline","2px solid "+this.value);
+                    $(".expandable").css("outline","2px solid "+this.value);
                 });
 
                 });
+
+
+
+
+
+
+
         </script>

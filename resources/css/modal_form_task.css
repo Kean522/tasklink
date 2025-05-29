@@ -35,7 +35,6 @@
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     top:50px;
-    
     height: 800px;
 }
 
@@ -224,3 +223,11 @@ form {
     margin-top: 20px;
 }
 
+
+
+.table-container.modal-table{
+    width: 1000px;
+    height: 400px;
+    margin-left: 550px;
+    margin-top: 280px;
+}

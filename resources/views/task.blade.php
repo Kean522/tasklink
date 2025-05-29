@@ -11,10 +11,10 @@
 <!-- jQuery y Select2 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+ {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
 <link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> --}}
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link
@@ -135,9 +135,12 @@
                 </svg>
             </a>
                       
-            <div class="modal fade" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="outline:4px solid none;margin-left:300px;">
+            <div class="modal" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="outline:4px solid none;margin-left:150px;">
                     @include('modals.form_task')
-                </div> 
+            </div> 
+            <div class="modal" id="modal-subtask" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+                    @include('modals.form_subtask')
+            </div> 
            
             {{-- <div class="modal fade" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
                @include('modals.form_task')
@@ -183,23 +186,23 @@
                         <td>
                          <div style="background-color: #fee4cb;width:1200px;">
                                 <div class="row">
-                                    <div style="margin-left:10px;font-size:12px;">
+                                    <div style="margin-top:-14px;font-size:12px;outline:2px solid red;height:20px;margin-left:15px;font-weight: bold;">
                                         DESCRIPCION: 
                                     </div>
 
-                                    <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 mt-2" style="margin-left: 8px;">
+                                    <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 mt-2" style="margin-left: -95px;">
                                         <p>Just once I'd like to eat dinner with a celebrity who isn't bound and gagged. But, like most politicians, he promised more than he could deliver. If rubbin' frozen dirt in your crotch is wrong, hey I don't wanna be right.</p>
                                         <p>Tell her you just want to talk. It has nothing to do with mating. Well I'da done better, but it's plum hard pleading a case while awaiting trial for that there incompetence. Is that a cooking show? Bender! Ship! Stop bickering or I'm going to come back there and change your opinions manually!</p>
                                     </div>
                                     <div class="col-lg-3 col-md-4">
-                                    <div class="row">
+                                    <div class="row" style="margin-left:50px;">
                                         <div class="tarea">
                                             <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: none;">
                                                 <p class="w-50 fw-bold">Tarea 1</p> 
                                                 <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
                                             </div>
                                             <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear tablas</div>
+                                                <div class="col-xs-10 text-left fw-normal" style="outline: 2px solid red;width:145px;margin-top:-3px;">- Crear tablas</div>
                                                 <div class="icons">
                                                     <i class="fa fa-check" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
                                                     <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
@@ -208,7 +211,7 @@
                                             </div>
                                             
                                             <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear modelo</div>
+                                                <div class="col-xs-6 text-left fw-normal" style="outline: 2px solid none;width:145px;margin-top:-3px;">- Crear modelo</div>
                                                 <div class="icons">
                                                     <i class="fa fa-check " title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
                                                     <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
@@ -223,7 +226,7 @@
                                                 <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
                                             </div>
                                             <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear relaciones</div>
+                                                <div class="col-xs-6 text-left" style="outline: 2px solid none;width:145px;margin-top:-3px;font-weigth:none;">- Crear relaciones</div>
                                                 <div class="icons">
                                                     <i class="fa fa-check" title="Marcar como hecho" style="color:grey;" onclick="alert('Marcado como hecho')"></i>
                                                     <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
@@ -231,7 +234,7 @@
                                                 </div>
                                             </div>
                                             <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-right fw-normal" style="outline: 2px solid none;width:145px;">- Crear restricciones</div>
+                                                <div class="col-xs-6 text-left" style="outline: 2px solid none;width:145px;margin-top:-3px;">- Crear restricciones</div>
                                                 <div class="icons">
                                                     <i class="fa fa-check" title="Marcar como hecho" style="color:grey;" onclick="alert('Marcado como hecho')"></i>
                                                     <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
@@ -259,7 +262,7 @@
                                         </div>
                                         <div class="col-xs-12"><hr></div>
                                     
-                                        <div class="col-xs-0 text-right"><a href="#" class="btn"><i class="fa fa-check-circle-o"></i> Approve</a></div>
+                                        <div class="col-xs-0 text-center" data-toggle="modal" data-target="#modal-subtask"><a href="#" class="btn"><i class="fa fa-check-circle-o"></i> Añadir tareas</a></div>
                                     </div>
                                     </div>
                                 </div>
@@ -384,7 +387,7 @@
     </div>
     
     </div>
-       
+   
 
 </body>
 </html>
