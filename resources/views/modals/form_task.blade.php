@@ -10,8 +10,8 @@
      @vite(['resources/css/modal_form_task.css'])
     
 </head>
-        <div class="contenido">
-            <form method="POST" action="#">
+        <div class="contenido-task">
+            <form method="POST" action="#" >
                 @csrf
                 <label for="tarea">Nombre Tarea</label>
                 <input type="text" id="inputTitulo" onkeyup="displayInputValue(this)" name="inputTitulo">
@@ -165,3 +165,4 @@
 
 
         </script>
+        

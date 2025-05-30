@@ -419,9 +419,9 @@
             @include('modals.form_project')
             </div> --}}
 
-    <div class="modal fade" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
+    {{-- <div class="modal fade" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
         @include('modals.form_task')
-    </div> 
+    </div>  --}}
 
 </body>
 </html>

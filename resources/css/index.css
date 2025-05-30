@@ -1069,35 +1069,35 @@ body {
 } */
 
 
-#exampleModal ,#exampleModal_task{
+#exampleModal{
   margin-left: -800px;
   margin-top: 100px;
 }
-#exampleModal .project-box,#exampleModal_task .project-box{
+#exampleModal .project-box{
   width: 350px;
   height: 400px;
   position: absolute;
   margin-left: -300px;
   margin-top: 100px;
 }
-#exampleModal .project-box .fecha,#exampleModal_task .project-box .fecha{
+#exampleModal .project-box .fecha{
   outline: 2px solid none;
   width: 290px;
 }
-#exampleModal .project-box .box-progress-bar,#exampleModal_task .project-box .box-progress-bar{
+#exampleModal .project-box .box-progress-bar{
   outline: 2px solid none;  
   height: 9px;
 }
-#exampleModal .project-box .box-progress,#exampleModal_task .project-box .box-progress{
+#exampleModal .project-box .box-progress{
   height: 9px;
 }
 #exampleModal .project-box .days-left.editar,#exampleModal .project-box .days-left.ver{
   margin-top: 88px;
 }
-#exampleModal .project-box .box-content-header,#exampleModal_task .project-box .box-content-header{
+#exampleModal .project-box .box-content-header{
   font-size: 35px;
 }
-#exampleModal .project-box .box-content-subheader,#exampleModal_task .project-box .box-content-subheader{
+#exampleModal .project-box .box-content-subheader{
   font-size: 25px;
 }
 /* https://codepen.io/kristen17/pen/NPKrxBd */
@@ -1107,7 +1107,7 @@ body {
 
 
 
-#exampleModal .titulo ,#exampleModal_task .titulo {
+#exampleModal .titulo  {
     margin-bottom: 20px;
     font-size: 30px;
     color: #4A4A4A;
@@ -1117,12 +1117,7 @@ body {
     width: 120000px;
 }
 
-#exampleModal .contenido ,#exampleModal_task .contenido {
-    position:absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+#exampleModal .contenido  {
     width: 390px;
     padding: 40px;
     background-color: #fff;
@@ -1133,18 +1128,18 @@ body {
     
 }
 
-#exampleModal form ,#exampleModal_task form {
+#exampleModal form  {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-#exampleModal label ,#exampleModal_task label {
+#exampleModal label  {
     margin-top: 10px;
     color: rgba(128, 128, 128, 0.8);
 }
 
-#exampleModal input ,#exampleModal_task input {
+#exampleModal input{
     margin-top: 5px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -1152,16 +1147,16 @@ body {
     width: 100%;
     margin-left: -2px;
 }
-#exampleModal input:focus, #exampleModal_task input:focus {
+#exampleModal input:focus {
     outline: none;
 }
-#exampleModal .button-group, #exampleModal_task .button-group {
+#exampleModal .button-group {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-#exampleModal .btn ,#exampleModal_task .btn {
+#exampleModal .btn  {
     padding: 10px 20px;
     border: none;
     border-radius: 7px;
@@ -1173,14 +1168,14 @@ body {
     text-align: center;
 }
 
-#exampleModal .btn.secondary ,#exampleModal_task .btn.secondary {
+#exampleModal .btn.secondary  {
     background-color: #4A4A4A;
 }
 
-#exampleModal .btn:hover ,#exampleModal_task .btn:hover {
+#exampleModal .btn:hover  {
     background-color: #3a3650;
 }
-#exampleModal form, #exampleModal_task form {
+#exampleModal form{
     margin-left: -20px;
 }
 
@@ -1360,28 +1355,9 @@ option{
 
 
 
-#exampleModal_task .contenido{
-  width:500px;
-  margin-left: 0px;
-  margin-top:-50px;
-}
 
-#exampleModal_task .color-label{
-    width:420px;
-}
 
-#exampleModal_task #inputPrioridad{
-  height: 40px;
-  background-color: #fff;
-  border: 1px solid #ced4da;
-  border-radius: .25rem;
-  font-family: 'DM Sans', sans-serif;
-}
 
-#exampleModal_task #inputPrioridad option {
-  background-color: #fff;
-  color: #000;
-}
 #inputPrioridad .select2-container--bootstrap4 .select2-results__option:hover {
   background-color: red !important;
   color: white !important;
@@ -1389,3 +1365,4 @@ option{
 .select2-search__field{
   display: none;
 }
+
