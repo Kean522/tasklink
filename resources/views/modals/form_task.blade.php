@@ -24,7 +24,7 @@
                 <input type="color" id="inputColor" name="inputColor" class="color-hidden">
 
                 <label for="inputUsuarios">Usuarios</label>
-                <select id="inputUsuarios" name="inputUsuarios[]" class="form-control select2bs4" multiple="multiple" data-placeholder="Selecciona usuarios" style="width: 100%;">
+                <select id="inputUsuarios" name="inputUsuarios[]" class="form-control select2bs4" multiple="multiple" data-placeholder="Selecciona usuarios" ">
                     <option value="usuario1">Usuario 1</option>
                     <option value="usuario2">Usuario 2</option>
                     <option value="usuario3">Usuario 3</option>
@@ -32,7 +32,7 @@
                 </select>
 
                 <label for="inputDepartamentos">Departamentos</label>
-                <select id="inputDepartamentos" name="inputUsuarios[]" class="form-control select2bs4" multiple="multiple" data-placeholder="Selecciona usuarios" style="width: 100%;">
+                <select id="inputDepartamentos" name="inputUsuarios[]" class="form-control select2bs4" multiple="multiple" data-placeholder="Selecciona usuarios" >
                     <option value="departamento1">Departamento 1</option>
                     <option value="usuario2">Departamento 2</option>
                     <option value="usuario3">Departamento 3</option>
@@ -165,4 +165,55 @@
 
 
         </script>
-        
+        <style>
+            .contenido-task{
+                width: 390px;
+                padding: 40px;
+                background-color: #fff;
+                border-radius: 20px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                margin-left: 400px;
+                margin-top:100px;
+            }
+            .contenido-task form{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+            .contenido-task form label{
+                margin-top: 10px;
+                color: rgba(128, 128, 128, 0.8);
+            }
+            .contenido-task input{
+                margin-top: 5px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 7px;
+                width: 100%;
+                margin-left: -2px;
+            }
+            .contenido-task input:focus{
+                outline: none;
+            }
+            .contenido-task .button-group{
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+            }
+            .contenido-task .btn{
+                padding: 10px 20px;
+                border: none;
+                border-radius: 7px;
+                background-color: #1f1c2e;
+                color: white;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                text-decoration: none;
+                text-align: center;
+            }
+            .contenido-task form #inputUsuarios{
+                
+            }
+
+
+        </style>
