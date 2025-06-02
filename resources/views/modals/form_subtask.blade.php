@@ -248,12 +248,6 @@
             </form>
         </div>
               
-
-
-
-
-
-
 <style>
     .tarea{
         font-weight: normal;
@@ -291,7 +285,10 @@
     }
 
     #input-subtarea{
-        background-color:transparent;border:none;outline:none;color:grey;
+        background-color:transparent;
+        border:none;
+        outline:none;
+        color:grey;
        
     }
 

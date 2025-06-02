@@ -10,7 +10,7 @@
      @vite(['resources/css/modal_form_task.css'])
     
 </head>
-        <div class="contenido-task">
+        <div class="contenido">
             <form method="POST" action="#" >
                 @csrf
                 <label for="tarea">Nombre Tarea</label>
@@ -24,7 +24,7 @@
                 <input type="color" id="inputColor" name="inputColor" class="color-hidden">
 
                 <label for="inputUsuarios">Usuarios</label>
-                <select id="inputUsuarios" name="inputUsuarios[]" class="form-control select2bs4" multiple="multiple" data-placeholder="Selecciona usuarios" ">
+                <select id="inputUsuarios" name="inputUsuarios[]" class="form-control select2bs4" multiple="multiple" data-placeholder="Selecciona usuarios" >
                     <option value="usuario1">Usuario 1</option>
                     <option value="usuario2">Usuario 2</option>
                     <option value="usuario3">Usuario 3</option>
@@ -40,7 +40,7 @@
                 </select>
 
                 <label for="inputDepartamentos">Nivel de prioridad</label>
-                <select id="inputPrioridad" style="width: 100%;">
+                <select id="inputPrioridad" >
                     <option value="departamento1">Departamento 1</option>
                     <option value="usuario2">Departamento 2</option>
                     <option value="usuario3">Departamento 3</option>
@@ -48,12 +48,12 @@
                 </select>
                 
                 <label for="fecha">Fecha de finalizacion</label>
-                <input type="date" id="inputFechaFinalizacion"  name="inputFechaFinalizacion" >
+                <input type="date" id="inputFechaFinalizacion" onchange="displayInputValue(this)" name="inputFechaFinalizacion" >
 
-                <label for="imagen">Imagen</label>
+                <label for="imagen" style="position:absolute;">Imagen</label>
                 <input type="file" id="imagen" name="imagen" style="position: absolute;opacity:0;">
-                <button type="button" class="btn" style="margin-top: 3px;">Seleccionar Archivo</button>
-                <p style="margin-top:4px;" id="archivo_seleccionado">Ningún archivo seleccionado</p>
+                <button type="button" class="btn" style="margin-left: 0px;margin-top:35px;outline:2px solid none;">Seleccionar Archivo</button>
+                <p id="archivo_seleccionado">Ningún archivo seleccionado</p>
 
 
                 <div class="button-group">
@@ -102,11 +102,11 @@
                         <td>
                          <div style="width:1200px;">
                                 <div class="row">
-                                    <div style="margin-left:10px;font-size:12px;">
+                                    <div style="margin-left:10px;font-size:12px;font-weight:bold;margin-top:-10px;outline:2px solid red;height:2px;">
                                         DESCRIPCION: 
                                     </div>
 
-                                    <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 mt-2" style="margin-left: 8px;" id="descripcion-tarea">
+                                    <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 " style="margin-left:-99px;margin-top:8px;" id="descripcion-tarea">
                                         <p>Just once I'd like to eat dinner with a celebrity who isn't bound and gagged. But, like most politicians, he promised more than he could deliver. If rubbin' frozen dirt in your crotch is wrong, hey I don't wanna be right.</p>
                                         <p>Tell her you just want to talk. It has nothing to do with mating. Well I'da done better, but it's plum hard pleading a case while awaiting trial for that there incompetence. Is that a cooking show? Bender! Ship! Stop bickering or I'm going to come back there and change your opinions manually!</p>
                                     </div>
@@ -135,7 +135,21 @@
                  </div>
 
         <script>
+            
+            function displayInputValue(input) {
+
+                if(input.id=="inputTitulo") document.getElementById("titulo-tarea").innerText = input.value;
+                if(input.id=="inputDescripcion") document.getElementById("descripcion-tarea").innerText = input.value;
+                if(input.id=="inputFechaFinalizacion") {
+                    const fecha=new Date(input.value);
+                    const formateada=new Intl.DateTimeFormat('es-Es').format(fecha);
+                    document.getElementById("fecha-tarea").innerText = formateada;
+                }
+            }
+
             $(function () {
+
+                
 
                     //Initialize Select2 Elements
                     $('.select2bs4').select2({
@@ -145,9 +159,15 @@
                     $('#inputPrioridad').select2({
                         theme: 'bootstrap4'
                     });
+                     $('#inputUsuarios').select2({
+                        theme: 'bootstrap4'
+                    });
 
                 const input = document.getElementById("inputColor");
                 const label = document.querySelector(".color-label");
+                const tituloTarea=document.getElementById("titulo-tarea");
+                const fechaTarea=document.getElementById("fecha-tarea");
+                const descripcionTarea=document.getElementById("descripcion-tarea");
 
                 input.addEventListener("input", function () {
                     label.style.backgroundColor = this.value;
@@ -166,54 +186,61 @@
 
         </script>
         <style>
-            .contenido-task{
-                width: 390px;
-                padding: 40px;
-                background-color: #fff;
-                border-radius: 20px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                margin-left: 400px;
-                margin-top:100px;
+            .tarea{
+                font-weight: normal;
             }
-            .contenido-task form{
+        
+            tr:hover{
+                background-color:#fee4cb;
+            }
+            #form_subtask{
+                margin-top: 290px;
+                margin-left: 1000px;
+                width: 350px;
+                overflow-y: hidden;
+                overflow-x: hidden;
+            
+            }
+            #form_subtask .row{
                 display: flex;
-                flex-direction: column;
-                width: 100%;
+                flex-wrap: wrap;
+                justify-content: center;
+                outline: 2px solid none;
+                margin-left: -20px;
+            
             }
-            .contenido-task form label{
-                margin-top: 10px;
-                color: rgba(128, 128, 128, 0.8);
+            .contenido{
+                margin-left: 350px;
+                height: 320px;
+                margin-top: 180px;
             }
-            .contenido-task input{
-                margin-top: 5px;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 7px;
-                width: 100%;
-                margin-left: -2px;
+            #form_subtask .icons>i:first-child{
+                color:grey;
             }
-            .contenido-task input:focus{
-                outline: none;
-            }
-            .contenido-task .button-group{
-                display: flex;
-                justify-content: space-between;
-                margin-top: 20px;
-            }
-            .contenido-task .btn{
-                padding: 10px 20px;
-                border: none;
-                border-radius: 7px;
-                background-color: #1f1c2e;
-                color: white;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-                text-decoration: none;
-                text-align: center;
-            }
-            .contenido-task form #inputUsuarios{
-                
+            #form_subtask .icons>i:first-child:hover{
+                color: #007bff;
             }
 
+            #input-subtarea{
+                background-color:transparent;
+                border:none;
+                outline:none;
+                color:grey;
+            
+            }
+
+            #plus:hover{
+                background-color:rgba(0, 0, 0, 0.233);
+                border-radius:20px;    
+            }
+
+            #cabezado:hover{
+                background-color: #ff942e;
+            }
+            #exampleModal_task .contenido {
+                height: 800px;
+                margin-left: 0px;
+                margin-top: -10px;
+            }
 
         </style>

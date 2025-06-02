@@ -155,9 +155,9 @@
                         <th>Tarea</th>
                         <th>Fecha de Finalización</th>
                         <th>Progreso</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>Usuarios asignados</th>
+                        <th>Prioridad</th>
+                        <th>Acciones</th>
                         
                     </tr>
                     </thead>
@@ -171,13 +171,31 @@
                                 <span class="box-progress" style="width: 60%; background-color: #ff942e;margin-left:-11px;height:8px;"></span>
                             </div>
                         </td>
-                        <td></td>
-                        <td></td>
+                        <td style="outline:2px solid none;">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt="profile image">
+                            <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt="profile image">
+                            <button class="add-participant" style="color: #ff942e;outline:2px solid none;border-radius: 50%;
+                                        width:40px;height:40px;margin-left:90px;margin-top:-40px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus" style="width:20px;height:20px;">
+                                    <path d="M12 5v14M5 12h14"></path>
+                                </svg>
+                            </button>
+                   
+                        </td>
+                        <td>ALTA</td>
+                        
                         <td>
-                            <span class="row-toggle" style="z-index: 1;">
+                            <button class="btn btn-primary" style="outline:2px solid red;height:28px;width:5px;display:flex;justify-content: center;margin-top:2px;">
+                                <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                
+                            </button>
+                            <button class="btn btn-danger" style="outline:2px solid none;height:28px;width:5px;display:flex;justify-content: center;margin-top:-10px;margin-left:36px;">
+                                <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                            </button>
+                            {{-- <span class="row-toggle" style="z-index: 1;">
                                 <span class="horizontal"></span>
                                 <span class="vertical"></span>
-                            </span>
+                            </span> --}}
                         </td>
                         
                     </tr>
@@ -263,6 +281,7 @@
                                         <div class="col-xs-12"><hr></div>
                                     
                                         <div class="col-xs-0 text-center" style="margin-top: 20px;" data-toggle="modal" data-target="#modal-subtask"><a href="#" class="btn"><i class="fa fa-check-circle-o"></i> Añadir tareas</a></div>
+                                        
                                     </div>
                                     </div>
                                 </div>
@@ -427,3 +446,17 @@
                             <div class="col-xs-6 text-right fw-normal">- Filtrar los datos</div> --}}
 
                                 {{-- <div class="col-xs-6"><a href="#" class="btn btn-black"><i class="fa fa-phone"></i> Contact</a></div> --}}
+
+                                <style>
+                                    img{
+                                        border-radius: 50%;
+                                        object-fit: cover;
+                                        width: 40px;
+                                        height: 40px;
+                                        border-style: none;
+                                        
+                                    }
+                                    /* .add-participant{
+                                        outline:2px solid red;
+                                    } */
+                                </style>
