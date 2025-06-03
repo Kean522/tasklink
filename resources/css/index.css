@@ -950,18 +950,21 @@ body {
 
 
 .project-boxes.jsGridView {
+  outline:2px solid none;
   margin-top: 20px;
   outline: 2px solid none;
   display: flex;
   flex-wrap: wrap;
   height: 700px;
   justify-content: space-between;
+  align-items: center;
 }
 .project-box{
   width: 350px;
   height: 320px;
   display: flex;
   flex-wrap: wrap;
+  margin-left:10px;
 }
 .project-box div{
   outline: 2px solid none;
@@ -1184,7 +1187,7 @@ body {
 
 
 option{
-  background-color: blueviolet;
+  background-color: white;
 }
 
 
@@ -1354,10 +1357,6 @@ option{
 }
 
 
-
-
-
-
 #inputPrioridad .select2-container--bootstrap4 .select2-results__option:hover {
   background-color: red !important;
   color: white !important;
@@ -1366,3 +1365,27 @@ option{
   display: none;
 }
 
+.project-box:hover{
+  cursor: pointer;
+  outline:2px solid none;
+  
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+} 
+
+.project-box .days-left.editar:hover,.project-box .days-left.ver:hover{
+  transform: scale(1.03);
+  
+  /* transition: transform 0.1s ease-in-out; */
+}
+.project-box .days-left.editar,.project-box .days-left.ver{
+  z-index: 1;
+  /* transition: transform 0.1s ease-in-out; */
+}
+.add-participant{
+  z-index:1;
+}
+.add-participant:hover{
+  cursor: pointer;
+  transform: scale(1.23);
+}

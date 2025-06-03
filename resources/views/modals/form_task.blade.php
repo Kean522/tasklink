@@ -243,4 +243,8 @@
                 margin-top: -10px;
             }
 
+            .toggle-expandable:hover{
+                background-color:#fee4cb9f; 
+            }
+
         </style>

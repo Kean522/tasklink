@@ -125,7 +125,7 @@ tbody tr{
 }
 
  tr:hover .row-toggle {
-    transform: rotate(135deg);
+    /* transform: rotate(90deg); */
     transition: transform 0.3s ease;
   }
   tr:hover{
@@ -356,8 +356,9 @@ body {
   transform-origin: center;
   line-height: 1;
   font-weight: bold;
+  outline:2px solid none;
+  transform-origin: center center;
 }
-.row-toggle .horizontal,
 .row-toggle .vertical {
   position: absolute;
   top: 50%;
@@ -368,14 +369,30 @@ body {
   height: 2px;
   background: rgba(120,120,120,1);
   transition: ease transform .5s;
-  transform-origin: center;
+   transform:rotate(90deg);
+   
+  /* transform-origin: center; */
 }
-.row-toggle .vertical {
+.row-toggle .horizontal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  content:" ";
+  width: 16px;
+  height: 2px;
+  background: rgba(120,120,120,1);
+  transition: ease transform .5s;
+}
+
+
+.row-toggle:hover {
+  outline: 2px solid none;
   transform: rotate(90deg);
 }
-.row-toggle-twist,
-.row-toggle-twist .vertical {
-  transform: rotate(180deg);
+
+.row-toggle-twist{
+
 }
 @media screen and (max-width: 992px) {
   .data-group .title {display:inline-block;padding-bottom: 1em;}
@@ -421,9 +438,9 @@ body {
 
 
 
- .expandable:hover{
-  background-color: #fee4cb;
- }
+    .expandable:hover{
+      background-color: #fee4cb;
+    }
 
 /* .expandable-content {
   max-width: 100%;

@@ -137,6 +137,12 @@
                 <span class="box-progress" style="width: 50%; background-color: #4f3ff0"></span>
             </div>
             <p class="box-progress-percentage">50%</p>
+            <div class="days-left editar" style="color: #4f3ff0;">
+                Editar
+            </div>
+            <div class="days-left ver" style="color: #4f3ff0;">
+                Ver
+            </div>
             </div>
             <div class="project-box-footer">
             <div class="participants">
@@ -177,6 +183,12 @@
                 <span class="box-progress" style="width: 80%; background-color: #096c86"></span>
             </div>
             <p class="box-progress-percentage">80%</p>
+            <div class="days-left editar" style="color: #4f3ff0;">
+                Editar
+            </div>
+            <div class="days-left ver" style="color: #4f3ff0;">
+                Ver
+            </div>
             </div>
             <div class="project-box-footer">
             <div class="participants">
@@ -217,6 +229,12 @@
                 <span class="box-progress" style="width: 20%; background-color: #df3670"></span>
             </div>
             <p class="box-progress-percentage">20%</p>
+            <div class="days-left editar" style="color: #4f3ff0;">
+                Editar
+            </div>
+            <div class="days-left ver" style="color: #4f3ff0;">
+                Ver
+            </div>
             </div>
             <div class="project-box-footer">
             <div class="participants">
@@ -257,6 +275,12 @@
                 <span class="box-progress" style="width: 60%; background-color: #34c471"></span>
             </div>
             <p class="box-progress-percentage">60%</p>
+            <div class="days-left editar" style="color: #4f3ff0;">
+                Editar
+            </div>
+            <div class="days-left ver" style="color: #4f3ff0;">
+                Ver
+            </div>
             </div>
             <div class="project-box-footer">
             <div class="participants">
@@ -297,6 +321,12 @@
                 <span class="box-progress" style="width: 40%; background-color: #4067f9"></span>
             </div>
             <p class="box-progress-percentage">40%</p>
+            <div class="days-left editar" style="color: #4f3ff0;">
+                Editar
+            </div>
+            <div class="days-left ver" style="color: #4f3ff0;">
+                Ver
+            </div>
             </div>
             <div class="project-box-footer">
             <div class="participants">

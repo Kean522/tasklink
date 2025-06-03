@@ -162,7 +162,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr class="toggle-expandable" data-target="#row-1">
                         <td>Diseñar Base de Datos</td>
                         <td>2025/04/10</td>
                         <td>
@@ -184,37 +184,38 @@
                         </td>
                         <td>ALTA</td>
                         
-                        <td>
-                            <button class="btn btn-primary" style="outline:2px solid red;height:28px;width:5px;display:flex;justify-content: center;margin-top:2px;">
-                                <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                
+                        <td style="outline:2px solid none;display:flex;" id="botones-td">
+                            <button class="btn btn-primary" style="outline:2px solid none;border-radius: 50%;" id="edit-task-btn">
+                                <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i> 
                             </button>
-                            <button class="btn btn-danger" style="outline:2px solid none;height:28px;width:5px;display:flex;justify-content: center;margin-top:-10px;margin-left:36px;">
-                                <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                            <button class="btn btn-primary" style="outline:2px solid none;border-radius: 50%;" id="edit-task-btn">
+                                <i class="fa fa-trash" title="Editar" onclick="alert('Editar esta tarea')"></i> 
                             </button>
-                            {{-- <span class="row-toggle" style="z-index: 1;">
-                                <span class="horizontal"></span>
-                                <span class="vertical"></span>
-                            </span> --}}
+                            <span class="row-toggle" style="z-index: 1;margin-left:55px;margin-top:-3px;">
+                                <span class="vertical" style="width:20px;"></span>
+                                <span class="horizontal" style="width:20px;"></span>
+                            </span>
                         </td>
                         
                     </tr>
                  
-                    <tr class="expandable">
-                        <td>
-                         <div style="background-color: #fee4cb;width:1200px;">
+                    <tr id="row-1" class="expandable">
+                        <td colspan="6">
+                                
+                            {{-- <div class="expandable-content"> --}}
+                            <div style="background-color: #fee4cb;margin-top:10px;" class="div-expandable">
                                 <div class="row">
                                     <div style="margin-top:-14px;font-size:12px;outline:2px solid none;height:20px;margin-left:15px;font-weight: bold;">
                                         DESCRIPCION: 
                                     </div>
 
-                                    <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 mt-2" style="margin-left: -98px;">
+                                    <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 mt-2" style="margin-left:-198px;">
                                         <p>Just once I'd like to eat dinner with a celebrity who isn't bound and gagged. But, like most politicians, he promised more than he could deliver. If rubbin' frozen dirt in your crotch is wrong, hey I don't wanna be right.</p>
                                         <p>Tell her you just want to talk. It has nothing to do with mating. Well I'da done better, but it's plum hard pleading a case while awaiting trial for that there incompetence. Is that a cooking show? Bender! Ship! Stop bickering or I'm going to come back there and change your opinions manually!</p>
                                     </div>
                                     <div class="col-lg-3 col-md-4">
-                                    <div class="row" style="margin-left:50px;">
-                                        <div class="tarea">
+                                    <div class="row" style="display:flex;flex-wrap:wrap;justify-content:center;outline:2px solid none;">
+                                        <div class="tarea" style="outline:2px solid none;">
                                             <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: none;">
                                                 <p class="w-50 fw-bold">Tarea 1</p> 
                                                 <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
@@ -264,34 +265,29 @@
                                         
                                         
                                         
-                                        <div class="col-xs-6 d-flex" style="font-size: 14px;">
-                                            <p style="width:50px;">Total: </p>
-                                            <p style="width:100px;">60%</p>
+                                        <div class="col-xs-6 d-flex" style="font-size: 14px;outline:2px solid none;width:83%;">
+                                            <p style="outline:2px solid none;width:60px;margin-left:16px;">Total: </p>
+                                            <p style="outline:2px solid none;width:60px;">60%</p>
 
                                                 <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
-                                            </i>
+                                            
                                         </div>
                                 
                                         <br>
                                         <br>
                                 
-                                        <div class="box-progress-bar" style="width:280px;margin-left:10px;height:8px;">
+                                        <div class="box-progress-bar" style="width:200px;margin-left:10px;height:8px;">
                                             <span class="box-progress" style="width: 60%; background-color: #ff942e;margin-left:-11px;height:8px;"></span>
                                         </div>
                                         <div class="col-xs-12"><hr></div>
                                     
-                                        <div class="col-xs-0 text-center" style="margin-top: 20px;" data-toggle="modal" data-target="#modal-subtask"><a href="#" class="btn"><i class="fa fa-check-circle-o"></i> Añadir tareas</a></div>
+                                        <div class="col-xs-0 text-center" style="margin-top: 0px;" data-toggle="modal" data-target="#modal-subtask"><a href="#" class="btn"><i class="fa fa-check-circle-o"></i> Añadir subtareas</a></div>
                                         
                                     </div>
                                     </div>
                                 </div>
-                                </div>  
-                            </td>
-                        <td>fdsafdasfdsaf</td>
-                        <td>fdasfdsafdsafd</td>
-                        <td>fdasfdasfdas</td>
-                        <td>fdsafdsafvdas</td>
-                        <td>fdsafdasfsafsa</td>
+                            </div>  
+                        </td>
                         
                     </tr>
                    
@@ -456,7 +452,33 @@
                                         border-style: none;
                                         
                                     }
+                                    #edit-task-btn{
+                                        border-radius: 50%;
+                                        object-fit: cover;
+                                        width: 40px;
+                                        height: 40px;
+                                        display: flex;
+                                        flex-wrap: wrap;
+                                        justify-content: center;
+                                        outline:2px solid none;
+                                        align-items: center;
+                                    }
+                                    #edit-task-btn i{
+                                        margin-top: -2px;
+                                    }
+                                    #botones-td{
+                                        margin-left: -10px;
+                                    }
+                                    .div-expandable .row{
+                                        outline:2px solid none;
+                                        display: flex;
+                                        justify-content: space-between;
+                                    }
                                     /* .add-participant{
                                         outline:2px solid red;
                                     } */
+
+                                    .toggle-expandable:hover .row-toggle{
+                                        transform:rotate(90deg);
+                                    }
                                 </style>

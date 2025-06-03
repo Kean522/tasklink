@@ -202,11 +202,8 @@
                         <td></td>
                         
                     </tr>
-                   
+
                     
-
-
-               
                     </tbody>
                     
                 </table>
@@ -217,16 +214,39 @@
  <div class="contenido">
             <form method="POST" action="#">
                 @csrf
+                
                 <label for="tarea">Tareas</label>
-                <select id="inputUsuarios" name="inputUsuarios[]" class="form-control select2bs4" data-placeholder="Selecciona usuarios" style="width: 100%;">
-                    <option value="tarea1">Tarea 1</option>
-                    <option value="tarea2">Tarea 2</option>
-                    <option value="tarea3">Tarea 3</option>
-                    <option value="tarea4">Tarea 4</option>
+                <select id="tareasSelect" class="form-control" onchange="verificarSeleccion()">
+                    <option value="Tarea 1">Tarea 1</option>
+                    <option value="Tarea 2">Tarea 2</option>
+                    <option value="nueva">+ Nueva tarea...</option>
                 </select>
 
+
+                {{-- <button type="button"
+                    class="btn btn-outline-primary"
+                    style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1.2rem;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    position: absolute;
+                    margin-left: 378px;
+                    margin-top: -37px;
+                    padding: 0;
+                    "
+                    onclick="mostrarInputTarea()">
+            +
+            </button> --}}
+                <div id="nuevoInputTarea" style="margin-top: 10px; display: block;">
+                    <input type="text" class="form-control" placeholder="Nueva tarea" id="inputNuevaTarea">
+                    <button class="btn btn-sm btn-success mt-2" style="margin-left:-2px;">Guardar tarea</button>
+                    </div>
                 <label for="descripcion">Subtarea</label>
-                <input type="text" id="inputDescripcion"  name="inputDescripcion" >
+                <input type="text" id="inputDescripcion"  name="inputDescripcion" placeholder="Nueva subtarea" style="margin-left:2px;">
 
 
                 {{-- <label for="tarea">Nombre Tarea</label>
@@ -242,11 +262,31 @@
                 <p style="margin-top:4px;" id="archivo_seleccionado">Ningún archivo seleccionado</p> --}}
 
 
-                <div class="button-group" style="margin-left:100px;">
-                    <button type="submit" class="btn">AÑADIR SUBTAREA</button>
+                <div class="button-group" style="margin-left:-4px;margin-top:6px;">
+                    <button type="submit" class="btn">Añadir subtarea</button>
                 </div>
             </form>
         </div>
+
+
+        <script>
+
+           
+            $( "#tareasSelect" ).on( "change", function() {
+                $(this).val();
+            } );
+
+             $('#inputUsuarios').select2({
+                        theme: 'bootstrap4'
+                    });
+
+                //   function mostrarInputTarea() {
+                //         if(document.getElementById('nuevoInputTarea').style.display == 'block')document.getElementById('nuevoInputTarea').style.display = 'none';
+                //         else document.getElementById('nuevoInputTarea').style.display = 'block';
+                //     }
+
+                
+        </script>
               
 <style>
     .tarea{
@@ -300,6 +340,7 @@
     #cabezado:hover{
         background-color: #ff942e;
     }
+   
 
 
     
