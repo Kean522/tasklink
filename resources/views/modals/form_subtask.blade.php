@@ -270,15 +270,16 @@
 
 
         <script>
-
+            $('#nuevoInputTarea').hide();
            
             $( "#tareasSelect" ).on( "change", function() {
-                $(this).val();
-            } );
+                if( $(this).val()=="nueva")$('#nuevoInputTarea').show();
+                else $('#nuevoInputTarea').hide();
+            });
 
              $('#inputUsuarios').select2({
-                        theme: 'bootstrap4'
-                    });
+                theme: 'bootstrap4'
+            });
 
                 //   function mostrarInputTarea() {
                 //         if(document.getElementById('nuevoInputTarea').style.display == 'block')document.getElementById('nuevoInputTarea').style.display = 'none';
