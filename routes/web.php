@@ -19,6 +19,13 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 Route::get('/', function () {
     return view('login');
 });
+Route::get('/logeado', function () {
+    return view('login');
+})->name('logeado');
+
+Route::get('/registrar', function () {
+    return view('register');
+})->name('registrar');
 
 Route::get('/index', function () {
     return view('index');
@@ -42,13 +49,13 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-            ->middleware('guest');
+// Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+//             ->middleware('guest');
 
 
-Route::get('/register', [RegisteredUserController::class, 'create'])
-            ->middleware('guest')
-            ->name('register');
+// Route::get('/register', [RegisteredUserController::class, 'create'])
+//             ->middleware('guest')
+//             ->name('register');
 
 
 

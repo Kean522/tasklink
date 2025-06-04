@@ -13,16 +13,23 @@
     <div class="contenido">
         <form method="POST" action="#">
             @csrf
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre"  required autofocus>
+
             <label for="email">Email</label>
             <input type="text" id="email" name="email"  required autofocus>
 
             <label for="password">Contraseña</label>
             <input type="password" id="password" name="password" required>
 
+            <label for="confirmPassword">Confirmar contraseña</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+
             <div class="button-group">
-                <button type="button" class="btn" href="{{route('logeado')}}">LOG IN</button>
-                <a href="{{ route('registrar') }}" class="btn secondary">REGISTER</a>
+                <a class="btn" href="{{route('logeado')}}" >Already Registerd?</a>
+                <a href="{{route('registrar')}}" class="btn secondary">REGISTER</a>
             </div>
+           
         </form>
     </div>
 </body>
