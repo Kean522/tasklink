@@ -46,8 +46,13 @@
         <div class="projects-section-header">
             <p>Projects</p>
        {{-- <button class="custom-btn btn-14">Crear Proyecto</button> --}}
-
-
+            <h2 style="outline:2px solid none;color: #1f1c2e;text-align:center;" >Añadir Tarea</h2>
+            <a href="" class="app-sidebar-link active" data-toggle="modal" data-target="#exampleModal_task" style="position: absolute;margin-top:60px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </a>
             <p class="time">December, 12</p>
         </div>
         <div class="projects-section-line">
@@ -445,13 +450,37 @@
     </div>  --}}
     </div>
     </div>
-       {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
+        {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
             @include('modals.form_project')
-            </div> --}}
+            </div>  --}}
 
-    {{-- <div class="modal fade" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
-        @include('modals.form_task')
-    </div>  --}}
+     
 
 </body>
 </html>
+
+
+<style>
+         .app-sidebar-link.active {
+    background-color: #1f1c2e;
+    color: #fff;
+}
+
+.app-sidebar-link {
+    color: #1f1c2e;
+    color: #1f1c2e;
+    margin: 16px 0;
+    transition: 0.2s;
+    border-radius: 50%;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    margin-left: 595px;
+    outline: 2px solid grey;
+    
+}
+</style>

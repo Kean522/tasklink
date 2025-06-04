@@ -13,14 +13,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                   
-                 
                     <tr>
                         <td>
-
-
-                            <div class="row d-flex" style="flex-wrap:wrap;justify-content:center;" id="fila">
-                                        <div class="tarea" style="outline:2px solid none;width:250px;margin-left:55px;">
+                            <div class="row d-flex" style="flex-wrap:wrap;justify-content:center;" id="tareas">
+                                        <div class="tarea" style="outline:2px solid none;width:250px;margin-left:55px;" id="tarea-1">
                                             <div class="col-xs-6" style="display: flex;">
                                                 <p class="w-50 fw-bold">Tarea 1</p> 
                                                 <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
@@ -28,8 +24,8 @@
                                             <div class="mini-tarea" style="display:flex;outline:2px solid none;">
                                                 <div class="col-xs-10 text-left fw-normal" style="width:130px;">- Crear tablas</div>
                                                 <div class="icons">
-                                                    <i class="fa fa-check" style="color:green;" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                                    <i class="fa fa-check" style="" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-edit" title="Editar" id="ejemplo" onclick="alert('Editar esta tarea')"></i>
                                                     <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
                                                 </div>
                                             </div>
@@ -37,163 +33,44 @@
                                             <div class="mini-tarea" style="display:flex;outline:2px solid none;">
                                                 <div class="col-xs-6 text-left fw-normal" style="width:130px;">- Crear modelo</div>
                                                 <div class="icons">
-                                                    <i class="fa fa-check " style="color:green;" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-check " style="" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
                                                     <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
                                                     <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
                                                 </div>
                                             </div>
                                           
                                         </div>
-                                        <p style="outline: 2px solid none;width:250px;margin-top:18px;text-align:center;margin-left:20px;">60%</p>
+                                        <div class="tarea" style="outline:2px solid none;width:250px;margin-left:55px;" id="tarea-2">
+                                            <div class="col-xs-6" style="display: flex;">
+                                                <p class="w-50 fw-bold">Tarea 2</p> 
+                                                <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
+                                            </div>
+                                            <div class="mini-tarea" style="display:flex;outline:2px solid none;">
+                                                <div class="col-xs-10 text-left fw-normal" style="width:130px;">- Crear rodrigo</div>
+                                                <div class="icons">
+                                                    <i class="fa fa-check" style="" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mini-tarea" style="display:flex;outline:2px solid none;">
+                                                <div class="col-xs-6 text-left fw-normal" style="width:130px;">- Crear carlos</div>
+                                                <div class="icons">
+                                                    <i class="fa fa-check " style="" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                                </div>
+                                            </div>
+                                            
+                                          
+                                        </div>
+                                        <p style="outline: 2px solid none;width:250px;margin-top:18px;text-align:center;margin-left:20px;">30%</p>
                                         <div class="box-progress-bar" style="width:250px;height:7px;margin-left:40px;margin-top:-7px;"> 
                                             <span class="box-progress" style="width: 60%; background-color: #ff942e;"></span>
                                         </div>
                                     </div>
-
-
-
-
-                         {{-- <div style="background-color: #fee4cb;" id="contenido-subtarea">
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-4">
-                                    <div class="row"> --}}
-                                        
-                                        {{-- <div id="area" style="outline:2px solid none;margin-left:-94px;height:40px;width:195px;display:flex;align-items:center;justify-content:space-between;margin-top:-15px;">
-                                            <input type="text" name="" id="input-subtarea" value="- Añadir una subtarea">
-                                            <i class="fa-solid fa-plus" style="" id="plus"></i>
-                                        </div> --}}
-                                        {{-- <hr style="width:1000px;position: absolute;margin-top:26px;">
-                                        <hr> --}}
-                                        {{-- <div class="tarea" style="margin-left:70px;font-weight: bold;">
-                                            <div class="col-xs-0 d-flex " style="outline:2px solid none;background-color: none;width:140px;">
-                                                <p class="w-50 fw-bold">Tarea 1</p> 
-                                             <div class="icons" style="margin-top:3px;">
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                                </div>
-                                            </div>
-                                            <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-left fw-normal mr-4" style="outline: 2px solid none;width:120px;">- Crear tablas</div>
-                                                <div class="icons">
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-left fw-normal" style="outline: 2px solid none;width:145px;">- Crear modelo</div>
-                                                <div class="icons">
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                                </div>
-                                            </div> --}}
-                                            {{-- <div class="mini-tarea d-flex" style="margin-left:-2px;margin-top:6px;">
-                                                <input type="text" name="" id="input-subtarea" value="- Añadir una subtarea">
-                                                <i class="fa-solid fa-plus" style="margin-top:5px;margin-left:0px;"></i>
-                                            </div>
-                                             --}}
-                                            {{-- <div style="outline:2px solid none;margin-left:-120px;height:40px;width:195px;display:flex;align-items:center;justify-content:space-between;margin-top:-10px;">
-                                            <input type="text" name="" id="input-subtarea" value="- Añadir una subtarea">
-                                            <i class="fa-solid fa-plus" style=""></i>
-                                        </div> --}}
-                                            {{-- <div class="mini-tarea d-flex">
-                                                <div class="icons">
-                                                   <i class="fa-solid fa-plus fa-lg" title="anadir" style="margin-top: 12px;margin-left:-14px;"></i>
-                                                   <input type="text" name="" id="" style="background-color:transparent;border:none;outline:none;margin-left:-13px;">
-                                                </div>
-                                                <div class="col-xs-6 text-left fw-normal" style="outline: 2px solid none;width:145px;margin-left:4px;margin-top:2px;color:grey"> Añadir tarea</div>
-                                            </div> --}}
-                                                
-
-{{--                                            
-                                            <div class="col-xs-12" style="outline:2px solid none;margin-left:-200px;width:600px;"><hr></div>
-                                        </div>
-                                        <div style="outline:2px solid none;margin-left:-94px;height:40px;width:195px;display:flex;align-items:center;justify-content:space-between;margin-top:-13px;">
-                                            <input type="text" name="" id="input-subtarea" value="- Añadir una subtarea">
-                                            <i class="fa-solid fa-plus" style="" id="plus"></i>
-                                        </div> --}}
-                                        {{-- <hr style="width:1000px;position: absolute;margin-top:175px;outline:2px solid none;">
-                                        <hr>
-                                        <div class="tarea" style="margin-left:70px;font-weight: bold;">
-                                            <div class="col-xs-0 d-flex " style="outline:2px solid none;background-color: none;width:140px;">
-                                                <p class="w-50 fw-bold">Tarea 2</p> 
-                                             <div class="icons" style="margin-top:3px;">
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                                </div>
-                                            </div>
-                                            <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-left fw-normal mr-4" style="outline: 2px solid none;width:120px;">- Crear tablas</div>
-                                                <div class="icons">
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-left fw-normal" style="outline: 2px solid none;width:145px;">- Crear modelo</div>
-                                                <div class="icons">
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                                </div>
-                                            </div> --}}
-                                            {{-- <div class="mini-tarea d-flex" style="margin-left:-2px;margin-top:6px;">
-                                                <input type="text" name="" id="input-subtarea" value="- Añadir una subtarea">
-                                                <i class="fa-solid fa-plus" style="margin-top:5px;margin-left:0px;"></i>
-                                            </div>
-                                             --}}
-                                            {{-- <div style="outline:2px solid none;margin-left:-120px;height:40px;width:195px;display:flex;align-items:center;justify-content:space-between;margin-top:-10px;">
-                                            <input type="text" name="" id="input-subtarea" value="- Añadir una subtarea">
-                                            <i class="fa-solid fa-plus" style=""></i>
-                                        </div> --}}
-                                            {{-- <div class="mini-tarea d-flex">
-                                                <div class="icons">
-                                                   <i class="fa-solid fa-plus fa-lg" title="anadir" style="margin-top: 12px;margin-left:-14px;"></i>
-                                                   <input type="text" name="" id="" style="background-color:transparent;border:none;outline:none;margin-left:-13px;">
-                                                </div>
-                                                <div class="col-xs-6 text-left fw-normal" style="outline: 2px solid none;width:145px;margin-left:4px;margin-top:2px;color:grey"> Añadir tarea</div>
-                                            </div> --}}
-                                                
-
-                                           
-                                            {{-- <div class="col-xs-12" style="outline:2px solid none;margin-left:-200px;width:600px;"><hr></div> --}}
-                                        {{-- </div>
-                                       <p style="outline:2px solid none;margin-left:-160px;color:grey;position: absolute;margin-top:296px;font-size:15px;">Añadir tarea</p>
-                                        <i class="fa-solid fa-plus" style="margin-left:10px;margin-top:5px;position: absolute;margin-top:300px;" id="plus"></i> --}}
-                                        {{-- <div class="tarea" style="margin-left:70px;">
-                                            <div class="col-xs-0 d-flex " style="outline:2px solid none;background-color: none;">
-                                                <p class="w-50 fw-bold">Tarea 2</p> 
-                                             
-                                            </div>
-                                            <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-left fw-normal mr-4" style="outline: 2px solid none;width:120px;">- Crear foreigns</div>
-                                                <div class="icons">
-                                                    <i class="fa fa-check" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-left fw-normal" style="outline: 2px solid none;width:145px;">- Crear relaciones</div>
-                                                <div class="icons">
-                                                    <i class="fa fa-check " title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12" style="outline:2px solid none;margin-left:-200px;width:600px;"><hr></div>
-                                        </div> --}}
-                                        {{-- <br>
-                                        <br>
-                                
-                                       
-                                    
-                                        
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>   --}}
+                      
                             </td>
                         <td></td>
                         <td></td>
@@ -212,7 +89,7 @@
 
 
  <div class="contenido">
-            <form method="POST" action="#">
+            <form action="#">
                 @csrf
                 
                 <label for="tarea">Tareas</label>
@@ -246,7 +123,7 @@
                     <button class="btn btn-sm btn-success mt-2" style="margin-left:-2px;">Guardar tarea</button>
                     </div>
                 <label for="descripcion">Subtarea</label>
-                <input type="text" id="inputDescripcion"  name="inputDescripcion" placeholder="Nueva subtarea" style="margin-left:2px;">
+                <input type="text" id="inputSubtarea"  name="inputDescripcion" placeholder="Nueva subtarea" style="margin-left:2px;">
 
 
                 {{-- <label for="tarea">Nombre Tarea</label>
@@ -263,7 +140,7 @@
 
 
                 <div class="button-group" style="margin-left:-4px;margin-top:6px;">
-                    <button type="submit" class="btn">Añadir subtarea</button>
+                    <button type="button" class="btn" id="botonAnadirSubtarea">Añadir subtarea</button>
                 </div>
             </form>
         </div>
@@ -275,16 +152,40 @@
             $( "#tareasSelect" ).on( "change", function() {
                 if( $(this).val()=="nueva")$('#nuevoInputTarea').show();
                 else $('#nuevoInputTarea').hide();
+                if($(this).val()=="Tarea 1") {
+                    $('#tarea-1').show();
+                    $('#tarea-2').hide();
+                } else if ($(this).val()=="Tarea 2") {
+                    $('#tarea-2').show();
+                    $('#tarea-1').hide();
+                } 
             });
 
              $('#inputUsuarios').select2({
                 theme: 'bootstrap4'
             });
 
-                //   function mostrarInputTarea() {
-                //         if(document.getElementById('nuevoInputTarea').style.display == 'block')document.getElementById('nuevoInputTarea').style.display = 'none';
-                //         else document.getElementById('nuevoInputTarea').style.display = 'block';
-                //     }
+
+            
+             $('#botonAnadirSubtarea').click(function() {
+                const subtarea=$('#inputSubtarea').val();
+                $('#tarea-2').append(`<div class="mini-tarea" style="display:flex;outline:2px solid none;">
+                                                <div class="col-xs-6 text-left fw-normal" style="width:130px;">- ${subtarea}</div>
+                                                <div class="icons">
+                                                    <i class="fa fa-check " style="" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
+                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
+                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                                </div>
+                                            </div>`);
+             });
+
+
+
+
+            //   function mostrarInputTarea() {
+            //         if(document.getElementById('nuevoInputTarea').style.display == 'block')document.getElementById('nuevoInputTarea').style.display = 'none';
+            //         else document.getElementById('nuevoInputTarea').style.display = 'block';
+            //     }
 
                 
         </script>

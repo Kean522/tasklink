@@ -141,7 +141,6 @@
             <div class="modal" id="modal-subtask" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" >
                     @include('modals.form_subtask')
             </div> 
-           
             {{-- <div class="modal fade" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
                @include('modals.form_task')
             </div>  --}}
@@ -175,11 +174,28 @@
                             <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt="profile image">
                             <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt="profile image">
                             <button class="add-participant" style="color: #ff942e;outline:2px solid none;border-radius: 50%;
-                                        width:40px;height:40px;margin-left:90px;margin-top:-40px;">
+                                        width:40px;height:40px;margin-left:90px;margin-top:-40px;" data-target="anadir_usuarios">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus" style="width:20px;height:20px;">
                                     <path d="M12 5v14M5 12h14"></path>
                                 </svg>
                             </button>
+                            {{-- <div style="position: absolute;margin-top:0px;margin-left:-10px;">
+                        <!-- El modal con triángulo -->
+                        <div class="tooltip-modal" style="background-color:#fee4cb;">
+                            <div class="tooltip-arrow"></div>
+                            <div class="tooltip-box">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt="profile image">
+                            <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt="profile image">
+                            </div>
+                            <select id="inputUsuarios" name="inputUsuarios[]" class="form-control select2bs4" multiple="multiple" data-placeholder="Selecciona usuarios" 
+                            style="background-color: #fee4cb">
+                                <option value="usuario1" style="background-color:#fee4cb;">Usuario 1</option>
+                                <option value="usuario2" style="background-color:#fee4cb;">Usuario 2</option>
+                                <option value="usuario3" style="background-color:#fee4cb;">Usuario 3</option>
+                                <option value="usuario4" style="background-color: #fee4cb;">Usuario 4</option>
+                            </select>
+                        </div>
+                        </div> --}}
                    
                         </td>
                         <td>ALTA</td>
@@ -221,11 +237,10 @@
                                                 <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
                                             </div>
                                             <div class="mini-tarea d-flex">
-                                                <div class="col-xs-10 text-left fw-normal" style="outline: 2px solid none;width:145px;margin-top:-3px;">- Crear tablas</div>
+                                                <input class="col-xs-10 text-left fw-normal" value="- Crear tablas" style="width:145px;margin-top:-3px;background-color:transparent;border:none;" id="ejemplo_subtarea"></input>
                                                 <div class="icons">
-                                                    <i class="fa fa-check" title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
+                                                    <i class="fa fa-check" title="Guardar cambios" style="color:green; cursor:pointer;" onclick="guardarEdicion()"></i>
+                                                    <i class="fa fa-times" title="Cancelar edición" style="color:red; cursor:pointer;" onclick="cancelarEdicion()"></i>
                                                 </div>
                                             </div>
                                             
@@ -481,4 +496,40 @@
                                     .toggle-expandable:hover .row-toggle{
                                         transform:rotate(90deg);
                                     }
+                                    #ejemplo_subtarea:focus{
+                                        outline:none;
+                                    }
+
+
+                                    .tooltip-box {
+                                    background-color: #fff8f0;
+                                    border: 2px solid #f79c48;
+                                    padding: 10px;
+                                    border-radius: 6px;
+                                    width: 140px;
+                                    text-align: center;
+                                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+                                    font-family: sans-serif;
+                                    font-size: 14px;
+                                    
+                                    }
+
+                                    .tooltip-arrow {
+                                        width: 0;
+                                        height: 0;
+                                        border-left: 8px solid transparent;
+                                        border-right: 8px solid transparent;
+                                        border-top: 8px solid #f79c48;
+                                        rotate: 178deg;
+                                        margin-left: 60px;                                        
+                                    }
+                               
+                                
                                 </style>
+
+                                <script>
+                                    $('#ejemplo').click(function(){
+                                        
+                                    });
+                                    $('#ejemplo_subtarea')
+                                </script>
