@@ -44,6 +44,14 @@
             @endphp
             <img src="{{asset('storage/'.$rutaImagen)}}" alt="Foto de perfil">
             <span>{{$nombreUsuarioLogueado}}</span>
+            <form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <h2>LOG OUT </h2>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <button class="btn btn-primary" id="edit-task-btn" style="outline:2px solid none;background-color:#1f1c2e;" type="submit">
+        <i class="fa-solid fa-right-from-bracket" style="color:white;"></i>
+    </button>
+</form>
         </button>
         {{-- <h2>LOG OUT </h2>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -53,10 +61,7 @@
 
         
     </div>
-    {{-- <form method="POST" action="{{ route('logout') }}">
-    @csrf
-    <button type="submit">Logout</button>
-</form> --}}
+    
     <div class="app-content">
         <div class="projects-section">
         <div class="projects-section-header">

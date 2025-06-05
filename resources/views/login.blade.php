@@ -11,7 +11,7 @@
     <p class="titulo">TaskLink</p>
 
     <div class="contenido">
-        <form method="POST" action="#">
+        <form method="POST" action="{{ route('login') }}" enctype="multipart/form-data">
             @csrf
             <label for="email">Email</label>
             <input type="text" id="email" name="email"  required autofocus>
@@ -20,7 +20,7 @@
             <input type="password" id="password" name="password" required>
 
             <div class="button-group">
-                <button type="submit" class="btn" href="{{route('logeado')}}">LOG IN</button>
+                <button type="submit" class="btn" >LOG IN</button>
                 <a href="{{ route('registrar') }}" class="btn secondary">REGISTER</a>
             </div>
         </form>
