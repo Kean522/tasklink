@@ -37,10 +37,26 @@
             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
         </button>
         <button class="profile-btn">
-            <img src="https://assets.codepen.io/3306515/IMG_2025.jpg">
-            <span>Aybüke C.</span>
+            @php
+                $user=auth()->user();
+                $nombreUsuarioLogueado=$user->name;   
+                $rutaImagen=$user->profile_photo;
+            @endphp
+            <img src="{{asset('storage/'.$rutaImagen)}}" alt="Foto de perfil">
+            <span>{{$nombreUsuarioLogueado}}</span>
         </button>
+        {{-- <h2>LOG OUT </h2>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <button class="btn btn-primary" id="edit-task-btn" style="outline:2px solid none;background-color:#1f1c2e;">
+                <i class="fa-solid fa-right-from-bracket" style="color:white;"></i>
+        </button> --}}
+
+        
     </div>
+    {{-- <form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit">Logout</button>
+</form> --}}
     <div class="app-content">
         <div class="projects-section">
         <div class="projects-section-header">
@@ -482,5 +498,62 @@
     margin-left: 595px;
     outline: 2px solid grey;
     
+}
+
+#edit-task-btn {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+    display: flex
+;
+    flex-wrap: wrap;
+    justify-content: center;
+    outline: 2px solid none;
+    align-items: center;
+}
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
+.btn {
+    display: inline-block;
+    padding: .43em 1em;
+    line-height: 1.5;
+    background: rgba(18, 119, 189, 1);
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    border-radius: 0;
+    margin: .2em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    letter-spacing: .05em;
+    transition: .5s ease all;
+    max-width: 100%;
+    border-radius: .25em;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 </style>

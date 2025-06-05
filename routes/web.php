@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,14 +38,18 @@ Route::get('/task', function () {
     return view('task');
 });
 
+Route::get('/registrar_usuario', function () {
+    Route::get('/profile', [ProfileController::class, 'edit']);
+})->name('registrar_usuario');
+
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
 });
 
 // Route::post('/login', [LoginController::class, 'login'])->name('login');
@@ -56,8 +64,6 @@ Route::middleware('auth')->group(function () {
 // Route::get('/register', [RegisteredUserController::class, 'create'])
 //             ->middleware('guest')
 //             ->name('register');
-
-
 
 
 

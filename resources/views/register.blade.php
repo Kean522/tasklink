@@ -11,23 +11,26 @@
     <p class="titulo">TaskLink</p>
 
     <div class="contenido">
-        <form method="POST" action="#">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
             @csrf
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre"  required autofocus>
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="name"  required>
 
             <label for="email">Email</label>
-            <input type="text" id="email" name="email"  required autofocus>
+            <input type="text" id="email" name="email"  required>
 
             <label for="password">Contraseña</label>
             <input type="password" id="password" name="password" required>
 
             <label for="confirmPassword">Confirmar contraseña</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <input type="password" id="password_confirmation" name="password_confirmation" required>
+
+            <label for="perfil">Foto de perfil</label>
+            <input type="file" name="archivo" accept="image/*" style="outline:2px solid none;">
 
             <div class="button-group">
                 <a class="btn" href="{{route('logeado')}}" >Already Registerd?</a>
-                <a href="{{route('registrar')}}" class="btn secondary">REGISTER</a>
+                <button type="submit" class="btn secondary">REGISTER</a>
             </div>
            
         </form>

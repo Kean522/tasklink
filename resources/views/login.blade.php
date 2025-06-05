@@ -20,7 +20,7 @@
             <input type="password" id="password" name="password" required>
 
             <div class="button-group">
-                <button type="button" class="btn" href="{{route('logeado')}}">LOG IN</button>
+                <button type="submit" class="btn" href="{{route('logeado')}}">LOG IN</button>
                 <a href="{{ route('registrar') }}" class="btn secondary">REGISTER</a>
             </div>
         </form>

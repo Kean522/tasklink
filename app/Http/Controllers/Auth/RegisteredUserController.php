@@ -30,18 +30,42 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+
+         $user = User::where('email', $request->input('email'))->first();
+
+          $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+       
 
+        if ($request->hasFile('archivo')) {
+                $fotoPerfil = $request->file('archivo');
+                $rutaImagen = $fotoPerfil->store('profiles', 'public');
+                // $fotoPerfil->move(public_path('profiles'), $fotoPerfil->getClientOriginalName());
+            } else {
+                $rutaImagen = null; // Por si no se sube imagen
+            }
+
+        if ($user) {
+                $user->name = $request->input('name'); // corregido
+                $user->password = Hash::make($request->input('password'));
+                if ($rutaImagen) {
+                    $user->profile_photo = $rutaImagen;
+                }
+                $user->save(); 
+            } else {
+                $user = User::create([
+                    'name' => $request->input('name'),
+                    'email' => $request->input('email'),
+                    'password' => Hash::make($request->input('password')),
+                    'profile_photo'=> $rutaImagen
+                ]);
+            }
+
+       
         event(new Registered($user));
 
         Auth::login($user);
