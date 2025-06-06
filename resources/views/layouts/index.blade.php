@@ -11,8 +11,11 @@
 <!-- jQuery y Select2 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.full.min.js"></script>
-<link rel="stylesheet" href="../../plugins/select2/css/select2.min.css">
-<link rel="stylesheet" href="../../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+
     @vite(['resources/css/index.css', 'resources/js/index.js'])
     
     <title>Document</title>
@@ -67,8 +70,8 @@
         <div class="projects-section-header">
             <p>Projects</p>
        {{-- <button class="custom-btn btn-14">Crear Proyecto</button> --}}
-            <h2 style="outline:2px solid none;color: #1f1c2e;text-align:center;" >Añadir Tarea</h2>
-            <a href="" class="app-sidebar-link active" data-toggle="modal" data-target="#exampleModal_task" style="position: absolute;margin-top:60px;">
+            <h2 style="outline:2px solid none;color: #1f1c2e;text-align:center;" data-toggle="modal" data-target="#exampleModal"  >Añadir Tarea</h2>
+            <a href="" class="app-sidebar-link active" data-toggle="modal" data-target="#exampleModal" style="position: absolute;margin-top:60px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -471,12 +474,12 @@
     </div>  --}}
     </div>
     </div>
-        {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
+        <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="height:1px;outline:2px solid none;position: absolute;margin-left:200px;">
             @include('modals.form_project')
-            </div>  --}}
+        </div> 
 
      
-
+<div id="pageOverlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background: rgba(0,0,0,0.6); z-index: 1;"></div>
 </body>
 </html>
 
@@ -562,3 +565,23 @@
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 </style>
+
+<script>
+    $(document).ready(function () {
+        $('#exampleModal').hide();
+      
+        $('.app-sidebar-link.active').click(function (e) {
+        e.preventDefault();
+        $('#exampleModal').fadeIn();
+        $('#exampleModal').css('z-index',9998);
+        $('#pageOverlay').fadeIn();
+        
+      });
+      $('.btn.secondary').click(function (e){
+            $('#exampleModal').fadeOut();
+            $('$pageOverlay').fadeOut();
+        });
+
+      
+    });
+</script>

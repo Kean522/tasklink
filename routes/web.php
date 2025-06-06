@@ -37,6 +37,9 @@ Route::get('/index', function () {
 Route::get('/task', function () {
     return view('task');
 });
+Route::get('/app', function () {
+    return view('layouts.app');
+});
 
 Route::get('/registrar_usuario', function () {
     Route::get('/profile', [ProfileController::class, 'edit']);

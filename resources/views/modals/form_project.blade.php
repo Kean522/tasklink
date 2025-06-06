@@ -1,5 +1,5 @@
 
-<div class="project-box" style="background-color: #e9e7fd;">
+<div class="project-box modal" style="background-color: #e9e7fd;">
             <div class="project-box-header">
             <span class="fecha" id="fecha">December 10, 2020</span>
             <div class="more-wrapper">
@@ -44,11 +44,9 @@
             </div>
             </div>
         </div>
-
-
-
+       
         <div class="contenido">
-            <form method="POST" action="#">
+            <form action="#">
                 @csrf
                 <label for="titulo">Titulo</label>
                 <input type="text" id="inputTitulo" onkeyup="displayInputValue(this)" name="inputTitulo">
@@ -61,31 +59,66 @@
                 <input type="color" id="inputColor" name="inputColor" class="color-hidden">
 
                 <label for="inputUsuarios">Usuarios</label>
-                <select id="inputUsuarios" name="inputUsuarios[]" class="form-control select2bs4" multiple="multiple" data-placeholder="Selecciona usuarios" style="width: 100%;">
-                    <option value="usuario1">Usuario 1</option>
-                    <option value="usuario2">Usuario 2</option>
-                    <option value="usuario3">Usuario 3</option>
-                    <option value="usuario4">Usuario 4</option>
-                </select>
+                <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;">
+                    <div class="dropdown-option" data-value="usuario1" style="height:33px;border:none;outline:2px solid none;width:140px;">
+                            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1" style="height:33px;width:45px;">
+                            <p style="outline:2px solid green;width:100px;">Usuario  </p>
+                            <i class="fas fa-times" style="outline:2px solid none;"></i>
+                        </div>
+                        <div class="dropdown-option" data-value="usuario1" style="height:33px;border:none;outline:2px solid none;width:140px;">
+                            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1">
+                            <p>Usuario2</p>
+                            <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;"></i>
+                        </div>
+                        <div class="dropdown-option" data-value="usuario1" style="height:33px;border:none;outline:2px solid none;width:140px;">
+                            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1">
+                          <p>fdsafdsa</p>
+                            <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;"></i>
+                        </div>
+                </div>
+                
+                <div class="custom-dropdown">
+                    <button class="dropdown-button">Selecciona un Usuario</button>
+                    <div class="dropdown-content">
+                        <div class="dropdown-option" data-value="usuario1">
+                            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1">
+                            Usuario 1
+                        </div>
+                        <div class="dropdown-option" data-value="usuario2">
+                            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Usuario 2">
+                            Usuario 2
+                        </div>
+                        <div class="dropdown-option" data-value="usuario3">
+                            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Usuario 3">
+                            Usuario 3
+                        </div>
+                        <div class="dropdown-option" data-value="usuario4">
+                            <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Usuario 4">
+                            Usuario 4
+                        </div>
+                    </div>
+                </div>
 
                 <label for="fecha">Fecha de finalizacion</label>
                 <input type="date" id="inputFechaFinalizacion"  name="inputFechaFinalizacion" >
 
                 <label for="imagen">Imagen</label>
-                <input type="file" id="imagen" name="imagen" style="position: absolute;opacity:0;">
-                <button type="button" class="btn" style="margin-top: 3px;">Seleccionar Archivo</button>
+                <input type="file" id="inputImagen" name="imagen" style="position: absolute;opacity:0;z-index:-1;">
+                <button type="button" class="btn" style="margin-top: 3px;" id="seleccionar-archivo">Seleccionar Archivo</button>
                 <p style="margin-top:4px;" id="archivo_seleccionado">Ningún archivo seleccionado</p>
 
 
                 <div class="button-group">
-                    <button type="submit" class="btn">LOG IN</button>
-                    <a href="#" class="btn secondary">REGISTER</a>
+                    <button type="submit" class="btn">Crear</button>
+                    <a href="#" class="btn secondary">Cerrar</a>
                 </div>
             </form>
         </div>
 
 
+
         <script>
+           
              function displayInputValue(input){
                 if(input.id=="inputTitulo") document.getElementById("titulo").innerHTML=input.value;
                 if(input.id=="inputDescripcion") document.getElementById("descripcion").innerHTML=input.value;
@@ -99,6 +132,16 @@
 
             displayDate();
             displayColor();
+            uploadImage();
+            function uploadImage(){
+                $('#seleccionar-archivo').click(function(e){
+                    $('#inputImagen').click();
+                });
+                $('#inputImagen').on('change',function(){
+                    let archivos=this.files;
+                    if(archivos) $('#archivo_seleccionado').html(`${archivos[0].name}`);
+                });
+            }
             function displayDate(){
                 document.getElementById('inputFechaFinalizacion').addEventListener('change', function() {
                         var input_date_time=new Date(this.value).getTime();
@@ -109,7 +152,7 @@
                 }
                 function displayColor(){
                      document.getElementById('inputColor').addEventListener('input', function() {
-                        document.querySelector('.project-box').style.background = this.value;
+                        document.querySelector('.project-box.modal').style.background = this.value;
                     });
                 }
                 function recolectarUsuario(){
@@ -117,15 +160,7 @@
                 }
 
 
-                 $(function () {
-                    //Initialize Select2 Elements
-                    $('.select2bs4').select2({
-                        theme: 'bootstrap4'
-                    });
-
-
-
-                });
+                
 
 
                 const input = document.getElementById("inputColor");
@@ -134,5 +169,86 @@
                 input.addEventListener("input", function () {
                     label.style.backgroundColor = this.value;
                 });
+
+                // Abre/cierra el dropdown al hacer clic en el botón
+document.querySelector('.dropdown-button').addEventListener('click', function() {
+    const dropdown = document.querySelector('.custom-dropdown');
+    dropdown.classList.toggle('open');
+});
+
+// Cuando elijas una opción, mostrar el nombre seleccionado en el botón
+document.querySelectorAll('.dropdown-option').forEach(function(option) {
+    option.addEventListener('click', function() {
+        const selectedValue = this.getAttribute('data-value');
+        const button = document.querySelector('.dropdown-button');
+        button.textContent = this.textContent;  // Cambiar el texto del botón al seleccionado
+        document.querySelector('.custom-dropdown').classList.remove('open');  // Cerrar el dropdown
+        console.log('Usuario seleccionado:', selectedValue);
+    });
+});
     
 </script>
+
+
+<style>
+    /* Contenedor principal del dropdown */
+.custom-dropdown {
+    position: relative;
+    width: 300px;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Botón del dropdown */
+.dropdown-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+/* Contenedor de las opciones */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1;
+}
+
+/* Estilo para cada opción del dropdown */
+.dropdown-option {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Estilo para la imagen */
+.dropdown-option img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Efecto hover para las opciones */
+.dropdown-option:hover {
+    background-color: #f1f1f1;
+}
+
+/* Mostrar las opciones cuando el dropdown está activo */
+.custom-dropdown.open .dropdown-content {
+    display: block;
+}
+</style>

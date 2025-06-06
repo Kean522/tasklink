@@ -26,6 +26,7 @@
                 <label for="inputUsuarios">Usuarios</label>
                 <select id="inputUsuarios" name="inputUsuarios[]" class="form-control select2bs4" multiple="multiple" data-placeholder="Selecciona usuarios" >
                     <option value="usuario1">Usuario 1</option>
+                    
                     <option value="usuario2">Usuario 2</option>
                     <option value="usuario3">Usuario 3</option>
                     <option value="usuario4">Usuario 4</option>
