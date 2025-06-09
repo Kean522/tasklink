@@ -66,7 +66,7 @@
                 <div class="custom-dropdown">
                     <button class="dropdown-button">Selecciona un Usuario</button>
                     <div class="dropdown-content" style="display:none;">
-                        <div class="dropdown-option usuario-disponible" data-value="usuario1" style="outline:2px solid red;">
+                        <div class="dropdown-option usuario-disponible" data-value="usuario1" style="outline:2px solid none;">
                             <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1">
                             Usuario1
                         </div>
@@ -169,9 +169,11 @@
                 function eliminarUsuario(){
                     $('.usuarios-elegidos .usuario-disponible i').each(function(){
                         $(this).on( "click", function() {
-                            const usuario=$(this).parent();
-                            console.log(usuario);
-                            $('.dropdown-content').append( usuario );
+                            const usuarioClonado= $(this).parent().clone();
+                            $(this).parent().remove();
+                            usuarioClonado.children().last().remove();
+                            $('.dropdown-content').append(usuarioClonado);
+                            anadirUsuario();
                         });
                     });
                 }
