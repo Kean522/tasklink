@@ -59,42 +59,28 @@
                 <input type="color" id="inputColor" name="inputColor" class="color-hidden">
 
                 <label for="inputUsuarios">Usuarios</label>
-                <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;">
-                    <div class="dropdown-option" data-value="usuario1" style="height:33px;border:none;outline:2px solid none;width:140px;">
-                            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1" style="height:33px;width:45px;">
-                            <p style="outline:2px solid green;width:100px;">Usuario  </p>
-                            <i class="fas fa-times" style="outline:2px solid none;"></i>
-                        </div>
-                        <div class="dropdown-option" data-value="usuario1" style="height:33px;border:none;outline:2px solid none;width:140px;">
-                            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1">
-                            <p>Usuario2</p>
-                            <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;"></i>
-                        </div>
-                        <div class="dropdown-option" data-value="usuario1" style="height:33px;border:none;outline:2px solid none;width:140px;">
-                            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1">
-                          <p>fdsafdsa</p>
-                            <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;"></i>
-                        </div>
+                <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;" class="usuarios-elegidos">
+                    
                 </div>
                 
                 <div class="custom-dropdown">
                     <button class="dropdown-button">Selecciona un Usuario</button>
-                    <div class="dropdown-content">
-                        <div class="dropdown-option" data-value="usuario1">
+                    <div class="dropdown-content" style="display:none;">
+                        <div class="dropdown-option usuario-disponible" data-value="usuario1" style="outline:2px solid red;">
                             <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1">
-                            Usuario 1
+                            Usuario1
                         </div>
-                        <div class="dropdown-option" data-value="usuario2">
+                        <div class="dropdown-option usuario-disponible" data-value="usuario2" >
                             <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Usuario 2">
-                            Usuario 2
+                            Usuario2
                         </div>
-                        <div class="dropdown-option" data-value="usuario3">
+                        <div class="dropdown-option usuario-disponible" data-value="usuario3">
                             <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Usuario 3">
-                            Usuario 3
+                            Usuario3
                         </div>
-                        <div class="dropdown-option" data-value="usuario4">
+                        <div class="dropdown-option usuario-disponible" data-value="usuario4">
                             <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Usuario 4">
-                            Usuario 4
+                            Usuario4
                         </div>
                     </div>
                 </div>
@@ -130,6 +116,9 @@
              }
 
 
+            
+
+
             displayDate();
             displayColor();
             uploadImage();
@@ -155,12 +144,37 @@
                         document.querySelector('.project-box.modal').style.background = this.value;
                     });
                 }
-                function recolectarUsuario(){
+                
+                function mostrarDropdownContent(){
+                    $('.dropdown-button').on('click',function(){
+                        $('.dropdown-content').toggle();
+                        anadirUsuario();
+                    });
+                }
+                mostrarDropdownContent();
 
+
+                function anadirUsuario(){
+                    $('.usuario-disponible').each(function(){
+                        $(this).on( "click", function() {
+                            $(this).append(`<i class="fas fa-times" style="outline:2px solid red;margin-left:4px;z-index:1;"></i>`);
+                            $('.usuarios-elegidos').append($(this));
+                            eliminarUsuario();
+                        });
+
+                    });
                 }
 
 
-                
+                function eliminarUsuario(){
+                    $('.usuarios-elegidos .usuario-disponible i').each(function(){
+                        $(this).on( "click", function() {
+                            const usuario=$(this).parent();
+                            console.log(usuario);
+                            $('.dropdown-content').append( usuario );
+                        });
+                    });
+                }
 
 
                 const input = document.getElementById("inputColor");
@@ -170,23 +184,6 @@
                     label.style.backgroundColor = this.value;
                 });
 
-                // Abre/cierra el dropdown al hacer clic en el botón
-document.querySelector('.dropdown-button').addEventListener('click', function() {
-    const dropdown = document.querySelector('.custom-dropdown');
-    dropdown.classList.toggle('open');
-});
-
-// Cuando elijas una opción, mostrar el nombre seleccionado en el botón
-document.querySelectorAll('.dropdown-option').forEach(function(option) {
-    option.addEventListener('click', function() {
-        const selectedValue = this.getAttribute('data-value');
-        const button = document.querySelector('.dropdown-button');
-        button.textContent = this.textContent;  // Cambiar el texto del botón al seleccionado
-        document.querySelector('.custom-dropdown').classList.remove('open');  // Cerrar el dropdown
-        console.log('Usuario seleccionado:', selectedValue);
-    });
-});
-    
 </script>
 
 
@@ -214,7 +211,6 @@ document.querySelectorAll('.dropdown-option').forEach(function(option) {
 
 /* Contenedor de las opciones */
 .dropdown-content {
-    display: none;
     position: absolute;
     top: 100%;
     left: 0;
@@ -251,4 +247,33 @@ document.querySelectorAll('.dropdown-option').forEach(function(option) {
 .custom-dropdown.open .dropdown-content {
     display: block;
 }
+.dropdown-option{
+    margin:2px;
+}
+#usuariosElegidos{
+    outline:1px solid rgba(128, 128, 128, 0.562);
+    min-height:33px;
+    border-radius:3px;
+    display:flex;
+    flex-wrap:wrap;
+}
+#usuariosElegidos .dropdown-option{
+    height:33px;
+    border:none;
+    outline:2px solid none;
+    width:140px;
+}
+#usuariosElegidos .dropdown-option img{
+    height:33px;
+    width:45px;
+}
+#usuariosElegidos .dropdown-option p{
+    width:80px;
+    outline:2px solid none;
+}
+ #usuariosElegidos .dropdown-option i{
+    margin-left:8px;
+    outline:2px solid none;
+}
+
 </style>
