@@ -39,8 +39,8 @@
                 </svg>
                 </button>
             </div>
-            <div class="days-left lbl" id="days_left" style="color: #4f3ff0;" >
-                <p style="width: 100%;height:0px;margin-top:6px;"> 2 Days Left</p>
+            <div class="days-left lbl" id="days_left" style="color: #4f3ff0;height:30px;display:flex;justify-content:center;align-items:center;" >
+                <p > 2 Days Left</p>
             </div>
             </div>
         </div>
@@ -59,26 +59,26 @@
                 <input type="color" id="inputColor" name="inputColor" class="color-hidden">
 
                 <label for="inputUsuarios">Usuarios</label>
-                <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;" class="usuarios-elegidos">
+                <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;" id="usuarios-elegidos">
                     
                 </div>
                 
                 <div class="custom-dropdown">
                     <button class="dropdown-button">Selecciona un Usuario</button>
-                    <div class="dropdown-content" style="display:none;">
-                        <div class="dropdown-option usuario-disponible" data-value="usuario1" style="outline:2px solid none;">
+                    <div class="dropdown-content" style="display:none;" id="usuarios-disponibles">
+                        <div class="dropdown-option" data-value="usuario1" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
                             <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1">
                             Usuario1
                         </div>
-                        <div class="dropdown-option usuario-disponible" data-value="usuario2" >
+                        <div class="dropdown-option" data-value="usuario2"  onclick="seleccionarUsuariosDisponibles(this)">
                             <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Usuario 2">
                             Usuario2
                         </div>
-                        <div class="dropdown-option usuario-disponible" data-value="usuario3">
+                        <div class="dropdown-option" data-value="usuario3"  onclick="seleccionarUsuariosDisponibles(this)">
                             <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Usuario 3">
                             Usuario3
                         </div>
-                        <div class="dropdown-option usuario-disponible" data-value="usuario4">
+                        <div class="dropdown-option" data-value="usuario4" onclick="seleccionarUsuariosDisponibles(this)">
                             <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Usuario 4">
                             Usuario4
                         </div>
@@ -148,34 +148,29 @@
                 function mostrarDropdownContent(){
                     $('.dropdown-button').on('click',function(){
                         $('.dropdown-content').toggle();
-                        anadirUsuario();
                     });
                 }
                 mostrarDropdownContent();
 
-
-                function anadirUsuario(){
-                    $('.usuario-disponible').each(function(){
-                        $(this).on( "click", function() {
-                            $(this).append(`<i class="fas fa-times" style="outline:2px solid red;margin-left:4px;z-index:1;"></i>`);
-                            $('.usuarios-elegidos').append($(this));
-                            eliminarUsuario();
-                        });
-
-                    });
+                function seleccionarUsuariosDisponibles(element){
+                    const usuarioSeleccionado=element;
+                    element.removeAttribute("onclick");
+                    usuarioSeleccionado.innerHTML+=` <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;" onclick="eliminarUsuariosElegidos(this)">`;
+                    document.getElementById('usuarios-elegidos').appendChild(usuarioSeleccionado);  
                 }
 
-
-                function eliminarUsuario(){
-                    $('.usuarios-elegidos .usuario-disponible i').each(function(){
-                        $(this).on( "click", function() {
-                            const usuarioClonado= $(this).parent().clone();
-                            $(this).parent().remove();
-                            usuarioClonado.children().last().remove();
-                            $('.dropdown-content').append(usuarioClonado);
-                            anadirUsuario();
-                        });
-                    });
+                function eliminarUsuariosElegidos(element){
+                    let usuarioSeleccionado=element.parentNode;
+                    let icono=usuarioSeleccionado.lastChild;
+                    icono.remove();
+                    let valorUsuario=usuarioSeleccionado.getAttribute('data-value');
+                    let usuario=`
+                        <div class="dropdown-option" data-value="${valorUsuario}" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
+                            ${usuarioSeleccionado.innerHTML}
+                        </div>
+                            `;
+                    usuarioSeleccionado.remove();
+                    document.getElementById('usuarios-disponibles').innerHTML+=usuario;  
                 }
 
 
@@ -252,28 +247,28 @@
 .dropdown-option{
     margin:2px;
 }
-#usuariosElegidos{
+#usuarios-elegidos{
     outline:1px solid rgba(128, 128, 128, 0.562);
     min-height:33px;
     border-radius:3px;
     display:flex;
     flex-wrap:wrap;
 }
-#usuariosElegidos .dropdown-option{
+#usuarios-elegidos .dropdown-option{
     height:33px;
     border:none;
     outline:2px solid none;
     width:140px;
 }
-#usuariosElegidos .dropdown-option img{
+#usuarios-elegidos .dropdown-option img{
     height:33px;
     width:45px;
 }
-#usuariosElegidos .dropdown-option p{
+#usuarios-elegidos .dropdown-option p{
     width:80px;
     outline:2px solid none;
 }
- #usuariosElegidos .dropdown-option i{
+#usuarios-elegidos .dropdown-option i{
     margin-left:8px;
     outline:2px solid none;
 }

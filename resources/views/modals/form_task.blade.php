@@ -58,7 +58,7 @@
         </div>
 
 
-        <div class="box box-1" style="margin-left:500px;margin-top:200px;">
+        <div class="box box-1" style="margin-left:660px;margin-top:300px;">
                 <h2 style="color: #1f1c2e">Tareas</h2>
                 <div class="table-container">
                 <table class="table-cryptic">
@@ -75,7 +75,7 @@
                     </thead>
                     <tbody>
                     <tr class="toggle-expandable" data-target="#row-1">
-                        <td>Diseñar Base de Datos</td>
+                        <td id="titulo-tarea">Diseñar Base de Datos</td>
                         <td>2025/04/10</td>
                         <td>
                             <p>60%</p>
@@ -118,14 +118,12 @@
                             
                             <div style="background-color: #fee4cb;margin-top:10px;" class="div-expandable">
                                 <div class="row">
-                                    <div style="margin-top:-14px;font-size:12px;outline:2px solid none;height:20px;margin-left:15px;font-weight: bold;">
-                                        DESCRIPCION: 
+                                    <div class="d-flex flex-wrap" style="margin-top:-14px;font-size:13px;outline:2px solid red;font-weight: bold;width:20px;align-content:flex-start;align-items:flex-start;margin-left:16px;">
+                                        <p>Descripcion: </p>
+                                        <p>fdoipafjiodasjfkidajsklfjdasklfhdklsahklñfhdasklfhlkdsahkfash
+                                            fdfdsafdsafsaffdasfasdjfohasdjufhaskdjhfkjladshjkfhdasjkhfjkadshlfhjdashljfkasjdassafdasfdasdfask</p>
                                     </div>
 
-                                    <div class="col-lg-8 col-lg-offset-1 col-md-7 col-md-offset-1 mt-2" style="margin-left:-198px;">
-                                        <p>Just once I'd like to eat dinner with a celebrity who isn't bound and gagged. But, like most politicians, he promised more than he could deliver. If rubbin' frozen dirt in your crotch is wrong, hey I don't wanna be right.</p>
-                                        <p>Tell her you just want to talk. It has nothing to do with mating. Well I'da done better, but it's plum hard pleading a case while awaiting trial for that there incompetence. Is that a cooking show? Bender! Ship! Stop bickering or I'm going to come back there and change your opinions manually!</p>
-                                    </div>
                                     <div class="col-lg-3 col-md-4">
                                     <div class="row" style="display:flex;flex-wrap:wrap;justify-content:center;outline:2px solid none;">
                                         <div class="tarea" style="outline:2px solid none;">
@@ -194,7 +192,9 @@
                                         <div class="col-xs-12"><hr></div>
                                     
                                         <div class="col-xs-0 text-center" style="margin-top: 0px;" data-toggle="modal" data-target="#modal-subtask"><a href="#" class="btn"><i class="fa fa-check-circle-o"></i> Añadir subtareas</a></div>
-                                        
+                                            <div class="modal fade" id="modal-subtask" tabindex="-1" role="dialog" aria-labelledby="modal-subtaskLabel" aria-hidden="true">
+                                                @include('modals.form_subtask')
+                                            </div>
                                     </div>
                                     </div>
                                 </div>
@@ -243,6 +243,11 @@
                         theme: 'bootstrap4'
                     });
 
+                    $('.toggle-expandable').on('click', function() {
+                        $('.expandable').toggle();
+                    });
+
+
                 const input = document.getElementById("inputColor");
                 const label = document.querySelector(".color-label");
                 const tituloTarea=document.getElementById("titulo-tarea");
@@ -275,7 +280,7 @@
             }
             #form_subtask{
                 margin-top: 290px;
-                margin-left: 1000px;
+                margin-left: 1400px;
                 width: 350px;
                 overflow-y: hidden;
                 overflow-x: hidden;
@@ -290,7 +295,7 @@
             
             }
             .contenido{
-                margin-left: 350px;
+                margin-left: 400px;
                 height: 320px;
                 margin-top: 180px;
             }
@@ -319,7 +324,7 @@
             }
             #exampleModal_task .contenido {
                 height: 800px;
-                margin-left: 0px;
+                margin-left: 190px;
                 margin-top: -10px;
             }
 
@@ -327,4 +332,6 @@
                 background-color:#fee4cb9f; 
             }
 
+
+            
         </style>

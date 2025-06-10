@@ -141,7 +141,7 @@
             <div class="modal" id="modal-subtask" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" >
                     @include('modals.form_subtask')
             </div>  --}}
-            <div class="modal fade" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
+            <div class="modal" id="exampleModal_task" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;">
                @include('modals.form_task')
             </div> 
             <div class="grid-container">
