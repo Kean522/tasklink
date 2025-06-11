@@ -11,7 +11,7 @@
     
 </head>
         <div class="contenido">
-            <form method="POST" action="#" >
+            <form method="POST" action="#">
                 @csrf
                 <label for="tarea">Nombre Tarea</label>
                 <input type="text" id="inputTitulo" onkeyup="displayInputValue(this)" name="inputTitulo">
@@ -24,29 +24,47 @@
                 <input type="color" id="inputColor" name="inputColor" class="color-hidden">
 
                 <label for="inputUsuarios">Usuarios</label>
-                <select id="inputUsuarios" name="inputUsuarios[]" class="form-control select2bs4" multiple="multiple" data-placeholder="Selecciona usuarios" >
-                    <option value="usuario1">Usuario 1</option>
+                <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;" id="usuarios-elegidos">
                     
-                    <option value="usuario2">Usuario 2</option>
-                    <option value="usuario3">Usuario 3</option>
-                    <option value="usuario4">Usuario 4</option>
-                </select>
+                </div>
+                
+                <div class="custom-dropdown">
+                    <button class="dropdown-button" type="button">Selecciona un Usuario</button>
+                    <div class="dropdown-content" style="display:none;" id="usuarios-disponibles">
+                        <div class="dropdown-option" data-value="usuario1" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
+                            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1"/>
+                            Usuario1
+                        </div>
+                        <div class="dropdown-option" data-value="usuario2"  onclick="seleccionarUsuariosDisponibles(this)">
+                            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Usuario 2"/>
+                            Usuario2
+                        </div>
+                        <div class="dropdown-option" data-value="usuario3"  onclick="seleccionarUsuariosDisponibles(this)">
+                            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Usuario 3"/>
+                            Usuario3
+                        </div>
+                        <div class="dropdown-option" data-value="usuario4" onclick="seleccionarUsuariosDisponibles(this)">
+                            <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Usuario 4"/>
+                            Usuario4
+                        </div>
+                    </div>
+                </div>
 
 
                 <label for="inputDepartamentos">Nivel de prioridad</label>
-                <select id="inputPrioridad" >
-                    <option value="departamento1">Departamento 1</option>
-                    <option value="usuario2">Departamento 2</option>
-                    <option value="usuario3">Departamento 3</option>
-                    <option value="usuario4">Departamento 4</option>
+                <select id="inputPrioridad" onchange="displayInputValue(this)">
+                    <option value="ALTA">Alta</option>
+                    <option value="BAJA">Baja</option>
+                    <option value="MEDIA">Media</option>
+                    <option value="IMPRESCINDIBLE">Imprescindible</option>
                 </select>
                 
                 <label for="fecha">Fecha de finalizacion</label>
                 <input type="date" id="inputFechaFinalizacion" onchange="displayInputValue(this)" name="inputFechaFinalizacion" >
 
                 <label for="imagen" style="position:absolute;">Imagen</label>
-                <input type="file" id="imagen" name="imagen" style="position: absolute;opacity:0;">
-                <button type="button" class="btn" style="margin-left: 0px;margin-top:35px;outline:2px solid none;">Seleccionar Archivo</button>
+                <input type="file" id="imagen" name="imagen" style="position:absolute;opacity:0;">
+                <button type="button" class="btn" style="margin-left: 0px;margin-top:35px;outline:2px solid none;" id="boton-seleccionar-archivo" onclick="displayInputValue(this)">Seleccionar Archivo</button>
                 <p id="archivo_seleccionado">Ningún archivo seleccionado</p>
 
 
@@ -69,6 +87,7 @@
                         <th>Progreso</th>
                         <th>Usuarios asignados</th>
                         <th>Prioridad</th>
+                        <th>Imagen</th>
                         <th>Acciones</th>
                         
                     </tr>
@@ -76,26 +95,21 @@
                     <tbody>
                     <tr class="toggle-expandable" data-target="#row-1">
                         <td id="titulo-tarea">Diseñar Base de Datos</td>
-                        <td>2025/04/10</td>
+                        <td id="fecha-tarea">2025/04/10</td>
                         <td>
-                            <p>60%</p>
-                            <div class="box-progress-bar" style="width:280px;margin-left:10px;height:8px;">
-                                <span class="box-progress" style="width: 60%; background-color: #ff942e;margin-left:-11px;height:8px;"></span>
+                            <p>0%</p>
+                            <div class="box-progress-bar" style="width:280px;margin-left:1px;height:8px;">
+                                <span class="box-progress" style="width: 0%; background-color: #ff942e;margin-left:-11px;height:8px;"></span>
                             </div>
                         </td>
-                        <td style="outline:2px solid none;">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt="profile image">
-                            <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt="profile image">
-                            <button class="add-participant" style="color: #ff942e;outline:2px solid none;border-radius: 50%;
-                                        width:40px;height:40px;margin-left:90px;margin-top:-40px;" data-target="anadir_usuarios">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus" style="width:20px;height:20px;">
-                                    <path d="M12 5v14M5 12h14"></path>
-                                </svg>
-                            </button>
+                        <td style="outline:2px solid none;" id="usuarios-asignados">
                             
-                   
                         </td>
-                        <td>ALTA</td>
+                        <td id="prioridad-tarea">ALTA</td>
+                        <td id="prioridad-imagen" >
+                            <i class="fa-solid fa-image fa-2x" style="margin-left:8px;"></i>
+                            
+                        </td>
                         
                         <td style="outline:2px solid none;display:flex;" id="botones-td">
                             <button class="btn btn-primary" style="outline:2px solid none;border-radius: 50%;" id="edit-task-btn">
@@ -118,95 +132,19 @@
                             
                             <div style="background-color: #fee4cb;margin-top:10px;" class="div-expandable">
                                 <div class="row">
-                                    <div class="d-flex flex-wrap" style="margin-top:-14px;font-size:13px;outline:2px solid red;font-weight: bold;width:20px;align-content:flex-start;align-items:flex-start;margin-left:16px;">
+                                    <div class="d-flex flex-wrap" style="margin-top:-14px;font-size:13px;outline:2px solid red;font-weight: bold;width:20px;align-content:flex-start;align-items:flex-start;margin-left:16px;height:0px;">
                                         <p>Descripcion: </p>
-                                        <p>fdoipafjiodasjfkidajsklfjdasklfhdklsahklñfhdasklfhlkdsahkfash
-                                            fdfdsafdsafsaffdasfasdjfohasdjufhaskdjhfkjladshjkfhdasjkhfjkadshlfhjdashljfkasjdassafdasfdasdfask</p>
                                     </div>
+                            </div>
+                            </div>
 
-                                    <div class="col-lg-3 col-md-4">
-                                    <div class="row" style="display:flex;flex-wrap:wrap;justify-content:center;outline:2px solid none;">
-                                        <div class="tarea" style="outline:2px solid none;">
-                                            <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: none;">
-                                                <p class="w-50 fw-bold">Tarea 1</p> 
-                                                <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
-                                            </div>
-                                            <div class="mini-tarea d-flex">
-                                                <input class="col-xs-10 text-left fw-normal" value="- Crear tablas" style="width:145px;margin-top:-3px;background-color:transparent;border:none;" id="ejemplo_subtarea">
-                                                <div class="icons">
-                                                    <i class="fa fa-check" title="Guardar cambios" style="color:green; cursor:pointer;" onclick="guardarEdicion()"></i>
-                                                    <i class="fa fa-times" title="Cancelar edición" style="color:red; cursor:pointer;" onclick="cancelarEdicion()"></i>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-left fw-normal" style="outline: 2px solid none;width:145px;margin-top:-3px;">- Crear modelo</div>
-                                                <div class="icons">
-                                                    <i class="fa fa-check " title="Marcar como hecho" onclick="alert('Marcado como hecho')"></i>
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12"><hr></div>
-                                        </div>
-                                        <div class="tarea">
-                                            <div class="col-xs-6 d-flex " style="outline:2px solid none;background-color: none;">
-                                                <p class="w-50 fw-bold">Tarea 2</p> 
-                                                <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
-                                            </div>
-                                            <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-left" style="outline: 2px solid none;width:145px;margin-top:-3px;font-weigth:none;">- Crear relaciones</div>
-                                                <div class="icons">
-                                                    <i class="fa fa-check" title="Marcar como hecho" style="color:grey;" onclick="alert('Marcado como hecho')"></i>
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                                </div>
-                                            </div>
-                                            <div class="mini-tarea d-flex">
-                                                <div class="col-xs-6 text-left" style="outline: 2px solid none;width:145px;margin-top:-3px;">- Crear restricciones</div>
-                                                <div class="icons">
-                                                    <i class="fa fa-check" title="Marcar como hecho" style="color:grey;" onclick="alert('Marcado como hecho')"></i>
-                                                    <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i>
-                                                    <i class="fa fa-trash" title="Borrar" onclick="alert('Borrar esta tarea')"></i>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12"><hr></div>
-                                        </div>
-                                        
-                                        
-                                        
-                                        <div class="col-xs-6 d-flex" style="font-size: 14px;outline:2px solid none;width:83%;">
-                                            <p style="outline:2px solid none;width:60px;margin-left:16px;">Total: </p>
-                                            <p style="outline:2px solid none;width:60px;">60%</p>
-
-                                                <div class="uppercase"><strong><i class="fa fa-check-circle"></i> Complete</strong></div>
-                                            
-                                        </div>
-                                
-                                        <br>
-                                        <br>
-                                
-                                        <div class="box-progress-bar" style="width:200px;margin-left:10px;height:8px;">
-                                            <span class="box-progress" style="width: 60%; background-color: #ff942e;margin-left:-11px;height:8px;"></span>
-                                        </div>
-                                        <div class="col-xs-12"><hr></div>
-                                    
-                                        <div class="col-xs-0 text-center" style="margin-top: 0px;" data-toggle="modal" data-target="#modal-subtask"><a href="#" class="btn"><i class="fa fa-check-circle-o"></i> Añadir subtareas</a></div>
-                                            <div class="modal fade" id="modal-subtask" tabindex="-1" role="dialog" aria-labelledby="modal-subtaskLabel" aria-hidden="true">
-                                                @include('modals.form_subtask')
-                                            </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>  
+                                <p style="width:800px;outline:2px solid red;margin-top:9px;" id="descripcion-tarea">djklfjakldjsklajkl</p>
+                         
                         </td>
                         
                     </tr>
                    
-                    
-
-
-               
+                
                     </tbody>
                     
                 </table>
@@ -216,6 +154,7 @@
 
         <script>
             
+
             function displayInputValue(input) {
 
                 if(input.id=="inputTitulo") document.getElementById("titulo-tarea").innerText = input.value;
@@ -225,12 +164,57 @@
                     const formateada=new Intl.DateTimeFormat('es-Es').format(fecha);
                     document.getElementById("fecha-tarea").innerText = formateada;
                 }
+                if(input.id=="inputPrioridad") document.getElementById('prioridad-tarea').innerText=input.value;
+                if(input.id=="boton-seleccionar-archivo")document.getElementById('prioridad-imagen');
             }
+            function mostrarDropdownContent(){
+                    $('.dropdown-button').on('click',function(){
+                        $('.dropdown-content').toggle();
+                    });
+            }
+                mostrarDropdownContent();
+
+                function seleccionarUsuariosDisponibles(element){
+                    const usuarioSeleccionado=element;
+
+                    const imagen=usuarioSeleccionado.firstElementChild.cloneNode(false);
+                    
+                    document.getElementById('usuarios-asignados').appendChild(imagen);
+                    element.removeAttribute("onclick");
+                    usuarioSeleccionado.innerHTML+=` <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;" onclick="eliminarUsuariosElegidos(this)">`;
+                    document.getElementById('usuarios-elegidos').appendChild(usuarioSeleccionado);  
+                }
+
+                function eliminarUsuariosElegidos(element){
+                    let usuarioSeleccionado=element.parentNode;
+                    let icono=usuarioSeleccionado.lastChild;
+                    icono.remove();
+                    let valorUsuario=usuarioSeleccionado.getAttribute('data-value');
+                    const imagenesAsignados=document.getElementById('usuarios-asignados').children;
+                    const srcUsuarioEliminado=usuarioSeleccionado.firstElementChild.getAttribute('src');
+                    console.log(usuarioSeleccionado);
+                    for(let imagen of imagenesAsignados){
+
+                        if(imagen.getAttribute('src')==srcUsuarioEliminado)imagen.remove();
+                    }
+
+                    let usuario=`
+                        <div class="dropdown-option" data-value="${valorUsuario}" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
+                            ${usuarioSeleccionado.innerHTML}
+                        </div>
+                            `;
+                    usuarioSeleccionado.remove();
+                    document.getElementById('usuarios-disponibles').innerHTML+=usuario;  
+                }
+
+
+          
 
             $(function () {
 
-                
-
+             
+                    
+                    
                     //Initialize Select2 Elements
                     $('.select2bs4').select2({
                         theme: 'bootstrap4'
@@ -332,6 +316,92 @@
                 background-color:#fee4cb9f; 
             }
 
+.custom-dropdown {
+    position: relative;
+    width: 300px;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Botón del dropdown */
+.dropdown-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    width: 124%;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+/* Contenedor de las opciones */
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1;
+}
+
+/* Estilo para cada opción del dropdown */
+.dropdown-option {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Estilo para la imagen */
+.dropdown-option img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Efecto hover para las opciones */
+.dropdown-option:hover {
+    background-color: #f1f1f1;
+}
+
+/* Mostrar las opciones cuando el dropdown está activo */
+.custom-dropdown.open .dropdown-content {
+    display: block;
+}
+.dropdown-option{
+    margin:2px;
+}
+#usuarios-elegidos{
+    outline:1px solid rgba(128, 128, 128, 0.562);
+    min-height:33px;
+    border-radius:3px;
+    display:flex;
+    flex-wrap:wrap;
+}
+#usuarios-elegidos .dropdown-option{
+    height:33px;
+    border:none;
+    outline:2px solid none;
+    width:140px;
+}
+#usuarios-elegidos .dropdown-option img{
+    height:33px;
+    width:45px;
+}
+#usuarios-elegidos .dropdown-option p{
+    width:80px;
+    outline:2px solid none;
+}
+#usuarios-elegidos .dropdown-option i{
+    margin-left:8px;
+    outline:2px solid none;
+}
 
             
         </style>
