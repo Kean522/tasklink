@@ -11,7 +11,7 @@
     
 </head>
         <div class="contenido">
-            <form method="POST" action="#">
+            <form action="{{route('crear_tarea')}}" id="" method="POST" action="#">
                 @csrf
                 <label for="tarea">Nombre Tarea</label>
                 <input type="text" id="inputTitulo" onkeyup="displayInputValue(this)" name="inputTitulo">

@@ -55,6 +55,10 @@ Route::middleware('auth')->group(function () {
     
 });
 
+
+
+
+
 // Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 
