@@ -527,9 +527,8 @@
                                 
                                 </style>
 
-                                <script>
-                                    $('#ejemplo').click(function(){
-                                        
-                                    });
-                                    $('#ejemplo_subtarea')
-                                </script>
+<script>
+    $('.toggle-expandable').on("click", function () {
+        $('.expandable').toggle();
+    });
+</script>

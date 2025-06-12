@@ -20,8 +20,12 @@
                 <input type="text" id="inputDescripcion" onkeyup="displayInputValue(this)" name="inputDescripcion" >
 
                 <label for="">Color</label>
-                <label for="inputColor" class="color-label"></label>
-                <input type="color" id="inputColor" name="inputColor" class="color-hidden">
+                <label for="inputColor" class="color-label" id="color-label"></label>
+                <input type="color" id="inputColor" name="inputColor" class="color-hidden" onclick="displayInputValue(this)">
+
+                <label for="">Color del cabezado</label>
+                <label for="inputColorCabezado" class="color-label" id="color-label-cabezado"></label>
+                <input type="color" id="inputColorCabezado" name="inputColor" class="color-hidden" onclick="displayInputValue(this)">
 
                 <label for="inputUsuarios">Usuarios</label>
                 <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;" id="usuarios-elegidos">
@@ -63,8 +67,8 @@
                 <input type="date" id="inputFechaFinalizacion" onchange="displayInputValue(this)" name="inputFechaFinalizacion" >
 
                 <label for="imagen" style="position:absolute;">Imagen</label>
-                <input type="file" id="imagen" name="imagen" style="position:absolute;opacity:0;">
-                <button type="button" class="btn" style="margin-left: 0px;margin-top:35px;outline:2px solid none;" id="boton-seleccionar-archivo" onclick="displayInputValue(this)">Seleccionar Archivo</button>
+                <input type="file" id="imagen" name="imagen" style="position:absolute;opacity:0;margin-left:1000px;">
+                <button type="button" class="btn" style="margin-left: 0px;margin-top:35px;outline:2px solid none;" id="boton-seleccionar-archivo" onclick="seleccionarArchivo()">Seleccionar Archivo</button>
                 <p id="archivo_seleccionado">Ningún archivo seleccionado</p>
 
 
@@ -81,7 +85,7 @@
                 <div class="table-container">
                 <table class="table-cryptic">
                     <thead>
-                    <tr>
+                    <tr id="cabezado">
                         <th>Tarea</th>
                         <th>Fecha de Finalización</th>
                         <th>Progreso</th>
@@ -93,7 +97,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="toggle-expandable" data-target="#row-1">
+                    <tr class="toggle-expandable-modal" data-target="#row-1">
                         <td id="titulo-tarea">Diseñar Base de Datos</td>
                         <td id="fecha-tarea">2025/04/10</td>
                         <td>
@@ -107,15 +111,15 @@
                         </td>
                         <td id="prioridad-tarea">ALTA</td>
                         <td id="prioridad-imagen" >
-                            <i class="fa-solid fa-image fa-2x" style="margin-left:8px;"></i>
-                            
+                          
+
                         </td>
                         
                         <td style="outline:2px solid none;display:flex;" id="botones-td">
-                            <button class="btn btn-primary" style="outline:2px solid none;border-radius: 50%;" id="edit-task-btn">
+                            <button class="btn btn-primary" style="outline:2px solid none;border-radius: 50%;margin-top:10px;" id="edit-task-btn">
                                 <i class="fa fa-edit" title="Editar" onclick="alert('Editar esta tarea')"></i> 
                             </button>
-                            <button class="btn btn-primary" style="outline:2px solid none;border-radius: 50%;" id="edit-task-btn">
+                            <button class="btn btn-primary" style="outline:2px solid none;border-radius: 50%;margin-top:10px;" id="edit-task-btn">
                                 <i class="fa fa-trash" title="Editar" onclick="alert('Editar esta tarea')"></i> 
                             </button>
                             <span class="row-toggle" style="z-index: 1;margin-left:55px;margin-top:-3px;">
@@ -126,19 +130,19 @@
                         
                     </tr>
                  
-                    <tr id="row-1" class="expandable" style="display: none;">
-                        <td colspan="6">
+                    <tr id="row-1" class="expandable-modal" style="display: none;">
+                        <td colspan="8">
                                 
                             
                             <div style="background-color: #fee4cb;margin-top:10px;" class="div-expandable">
                                 <div class="row">
-                                    <div class="d-flex flex-wrap" style="margin-top:-14px;font-size:13px;outline:2px solid red;font-weight: bold;width:20px;align-content:flex-start;align-items:flex-start;margin-left:16px;height:0px;">
+                                    <div class="d-flex flex-wrap" style="margin-top:-14px;font-size:13px;outline:2px solid none;font-weight: bold;width:20px;align-content:flex-start;align-items:flex-start;margin-left:16px;height:0px;">
                                         <p>Descripcion: </p>
                                     </div>
                             </div>
                             </div>
 
-                                <p style="width:800px;outline:2px solid red;margin-top:9px;" id="descripcion-tarea">djklfjakldjsklajkl</p>
+                                <p style="width:800px;outline:2px solid none;margin-top:9px;" id="descripcion-tarea">djklfjakldjsklajkl</p>
                          
                         </td>
                         
@@ -158,14 +162,34 @@
             function displayInputValue(input) {
 
                 if(input.id=="inputTitulo") document.getElementById("titulo-tarea").innerText = input.value;
-                if(input.id=="inputDescripcion") document.getElementById("descripcion-tarea").innerText = input.value;
+                if(input.id=="inputDescripcion") {
+                    $('.expandable-modal').show();
+                    document.getElementById("descripcion-tarea").innerText = input.value;
+                }
                 if(input.id=="inputFechaFinalizacion") {
                     const fecha=new Date(input.value);
                     const formateada=new Intl.DateTimeFormat('es-Es').format(fecha);
                     document.getElementById("fecha-tarea").innerText = formateada;
                 }
                 if(input.id=="inputPrioridad") document.getElementById('prioridad-tarea').innerText=input.value;
-                if(input.id=="boton-seleccionar-archivo")document.getElementById('prioridad-imagen');
+                if(input.id=="inputColor") {
+                    input.addEventListener("input", function () {
+                        $(".toggle-expandable-modal").css("background-color",input.value);
+                        $(".toggle-expandable-modal").css("outline","2px solid "+input.value);
+                        $("#color-label").css("background-color",input.value);
+                        
+                    });
+                }
+                if(input.id=="inputColorCabezado"){
+                    input.addEventListener("input", function () {
+                        let children=$('#cabezado').children();
+                        for(let child of children){
+                            child.style.background=input.value;
+                        }
+                       $("#color-label-cabezado").css("background-color",input.value);
+                        
+                    });
+                }
             }
             function mostrarDropdownContent(){
                     $('.dropdown-button').on('click',function(){
@@ -176,9 +200,7 @@
 
                 function seleccionarUsuariosDisponibles(element){
                     const usuarioSeleccionado=element;
-
                     const imagen=usuarioSeleccionado.firstElementChild.cloneNode(false);
-                    
                     document.getElementById('usuarios-asignados').appendChild(imagen);
                     element.removeAttribute("onclick");
                     usuarioSeleccionado.innerHTML+=` <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;" onclick="eliminarUsuariosElegidos(this)">`;
@@ -207,12 +229,14 @@
                     document.getElementById('usuarios-disponibles').innerHTML+=usuario;  
                 }
 
+              
 
+
+
+          
           
 
             $(function () {
-
-             
                     
                     
                     //Initialize Select2 Elements
@@ -227,29 +251,40 @@
                         theme: 'bootstrap4'
                     });
 
-                    $('.toggle-expandable').on('click', function() {
-                        $('.expandable').toggle();
+                    $('.toggle-expandable-modal').on('click', function() {
+                        $('.expandable-modal').toggle();
                     });
 
 
-                const input = document.getElementById("inputColor");
+                //const input = document.getElementById("inputColor");
                 const label = document.querySelector(".color-label");
                 const tituloTarea=document.getElementById("titulo-tarea");
                 const fechaTarea=document.getElementById("fecha-tarea");
                 const descripcionTarea=document.getElementById("descripcion-tarea");
 
-                input.addEventListener("input", function () {
-                    label.style.backgroundColor = this.value;
-                    $(".table-container.modal-table tbody tr").css("background-color",this.value);
-                    $(".table-container.modal-table tbody tr").css("outline","2px solid "+this.value);
-                    $(".expandable").css("outline","2px solid "+this.value);
-                });
+                // input.addEventListener("input", function () {
+                //     label.style.backgroundColor = this.value;
+                //     $(".table-container.modal-table tbody tr").css("background-color",this.value);
+                //     $(".table-container.modal-table tbody tr").css("outline","2px solid "+this.value);
+                //     $(".expandable-modal").css("outline","2px solid "+this.value);
+                //     $("tbody").css("background-color",this.value);
+                // });
 
                 });
 
 
 
-
+                    $( "#imagen" ).on('change',function(){
+                        let archivo=this.files[0];
+                        let src = URL.createObjectURL(archivo);
+                        $('#archivo_seleccionado').html(`${archivo.name}`);
+                        $('#prioridad-imagen').append(`<img src="${src}" style="width:60px;height:50px;border-radius:0%;">`); 
+                    });
+             
+                      function seleccionarArchivo(){
+                    
+                        $('#imagen').trigger('click');
+                      }
 
 
 
@@ -280,7 +315,7 @@
             }
             .contenido{
                 margin-left: 400px;
-                height: 320px;
+                height: 340px;
                 margin-top: 180px;
             }
             #form_subtask .icons>i:first-child{
@@ -307,7 +342,7 @@
                 background-color: #ff942e;
             }
             #exampleModal_task .contenido {
-                height: 800px;
+                height: 900px;
                 margin-left: 190px;
                 margin-top: -10px;
             }
