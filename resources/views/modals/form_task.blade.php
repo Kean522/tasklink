@@ -11,22 +11,22 @@
     
 </head>
         <div class="contenido">
-            <form action="{{route('tarea',['funcion'=>'crear'])}}"  method="POST" action="#"  enctype='multipart/form-data'>
+            <form action="{{route('tarea',['funcion'=>'create'])}}"  method="POST" action="#"  enctype='multipart/form-data'>
                 @csrf
                 @method('POST')
                 <label for="tarea">Nombre Tarea</label>
-                <input type="text" id="inputTitulo" onkeyup="displayInputValue(this)" name="inputTitulo">
+                <input type="text" id="inputTitulo" onkeyup="displayInputValue(this)" name="titulo">
 
                 <label for="descripcion">Descripcion</label>
-                <input type="text" id="inputDescripcion" onkeyup="displayInputValue(this)" name="inputDescripcion" >
+                <input type="text" id="inputDescripcion" onkeyup="displayInputValue(this)" name="descripcion" >
 
                 <label for="">Color</label>
                 <label for="inputColor" class="color-label" id="color-label"></label>
-                <input type="color" id="inputColor" name="inputColor" class="color-hidden" onclick="displayInputValue(this)">
+                <input type="color" id="inputColor" name="colorTarea" class="color-hidden" onclick="displayInputValue(this)">
 
                 <label for="">Color del cabezado</label>
                 <label for="inputColorCabezado" class="color-label" id="color-label-cabezado"></label>
-                <input type="color" id="inputColorCabezado" name="inputColorCabezado" class="color-hidden" onclick="displayInputValue(this)">
+                <input type="color" id="inputColorCabezado" name="colorCabezado" class="color-hidden" onclick="displayInputValue(this)">
 
                 <label for="inputUsuarios">Usuarios</label>
                 <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;" id="usuarios-elegidos">
@@ -65,7 +65,7 @@
                 </select>
                 
                 <label for="fecha">Fecha de finalizacion</label>
-                <input type="date" id="inputFechaFinalizacion" onchange="displayInputValue(this)" name="inputFechaFinalizacion" >
+                <input type="date" id="inputFechaFinalizacion" onchange="displayInputValue(this)" name="fechaFinalizacion" >
 
                 <label for="imagen" style="position:absolute;">Imagen</label>
                 <input type="file" id="imagen" name="imagen" style="position:absolute;opacity:0;margin-left:1000px;">
@@ -178,7 +178,8 @@
                         $(".toggle-expandable-modal").css("background-color",input.value);
                         $(".toggle-expandable-modal").css("outline","2px solid "+input.value);
                         $("#color-label").css("background-color",input.value);
-                        
+                        $(".expandable-modal").css("background-color",input.value);
+                        $(".expandable-modal").css("outline","2px solid "+ input.value);
                     });
                 }
                 if(input.id=="inputColorCabezado"){
@@ -206,7 +207,7 @@
                     element.removeAttribute("onclick");
                     usuarioSeleccionado.innerHTML+=` <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;" onclick="eliminarUsuariosElegidos(this)">`;
                     const valorUsuario=usuarioSeleccionado.getAttribute('data-value');
-                    usuarioSeleccionado.innerHTML+=`<input type="hidden" name="usuario-disponible[]" value="${valorUsuario}">`;
+                    usuarioSeleccionado.innerHTML+=`<input type="hidden" name="usuario[]" value="${valorUsuario}">`;
                     document.getElementById('usuarios-elegidos').appendChild(usuarioSeleccionado);  
                 }
 

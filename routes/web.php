@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
+use App\Http\Controllers\TareaController;
 
 
 
@@ -52,7 +52,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::post('tarea/{funcion}', [TareaController::class, 'create'])->name('tarea');
+    echo "has llegado hasta aquí";
+    Route::post('tarea/{funcion}', [TareaController::class, 'index'])->name('tarea');
 });
 
 
