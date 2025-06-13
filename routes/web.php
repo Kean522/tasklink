@@ -52,7 +52,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    
+    Route::post('tarea/{funcion}', [TareaController::class, 'create'])->name('tarea');
 });
 
 

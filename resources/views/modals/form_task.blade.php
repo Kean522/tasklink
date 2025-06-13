@@ -11,8 +11,9 @@
     
 </head>
         <div class="contenido">
-            <form action="{{route('crear_tarea')}}" id="" method="POST" action="#">
+            <form action="{{route('tarea',['funcion'=>'crear'])}}"  method="POST" action="#"  enctype='multipart/form-data'>
                 @csrf
+                @method('POST')
                 <label for="tarea">Nombre Tarea</label>
                 <input type="text" id="inputTitulo" onkeyup="displayInputValue(this)" name="inputTitulo">
 
@@ -25,7 +26,7 @@
 
                 <label for="">Color del cabezado</label>
                 <label for="inputColorCabezado" class="color-label" id="color-label-cabezado"></label>
-                <input type="color" id="inputColorCabezado" name="inputColor" class="color-hidden" onclick="displayInputValue(this)">
+                <input type="color" id="inputColorCabezado" name="inputColorCabezado" class="color-hidden" onclick="displayInputValue(this)">
 
                 <label for="inputUsuarios">Usuarios</label>
                 <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;" id="usuarios-elegidos">
@@ -56,7 +57,7 @@
 
 
                 <label for="inputDepartamentos">Nivel de prioridad</label>
-                <select id="inputPrioridad" onchange="displayInputValue(this)">
+                <select id="inputPrioridad" onchange="displayInputValue(this)" name="prioridad">
                     <option value="ALTA">Alta</option>
                     <option value="BAJA">Baja</option>
                     <option value="MEDIA">Media</option>
@@ -204,6 +205,8 @@
                     document.getElementById('usuarios-asignados').appendChild(imagen);
                     element.removeAttribute("onclick");
                     usuarioSeleccionado.innerHTML+=` <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;" onclick="eliminarUsuariosElegidos(this)">`;
+                    const valorUsuario=usuarioSeleccionado.getAttribute('data-value');
+                    usuarioSeleccionado.innerHTML+=`<input type="hidden" name="usuario-disponible[]" value="${valorUsuario}">`;
                     document.getElementById('usuarios-elegidos').appendChild(usuarioSeleccionado);  
                 }
 
@@ -223,8 +226,7 @@
                     let usuario=`
                         <div class="dropdown-option" data-value="${valorUsuario}" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
                             ${usuarioSeleccionado.innerHTML}
-                        </div>
-                            `;
+                        </div>`;
                     usuarioSeleccionado.remove();
                     document.getElementById('usuarios-disponibles').innerHTML+=usuario;  
                 }
