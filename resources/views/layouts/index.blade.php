@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -235,6 +235,70 @@
             </div>
         </div>
         </div>
+        
+            @foreach($proyectosDisponibles as $proyecto)
+            <div class="project-box-wrapper">
+                <div class="project-box" style="background-color:{{$proyecto->color_project}}">
+                    <div class="project-box-header">
+                        <span>{{$proyecto->created_at}}</span>
+                        <div class="more-wrapper">
+                            <button class="project-btn-more">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                <circle cx="12" cy="12" r="1" />
+                                <circle cx="12" cy="5" r="1" />
+                                <circle cx="12" cy="19" r="1" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="project-box-content-header">
+                        <p class="box-content-header">{{$proyecto->name}}</p>
+                        <p class="box-content-subheader">{{$proyecto->description}}</p>
+                    </div>
+                    <div class="box-progress-wrapper">
+                        <p class="box-progress-header">Progress</p>
+                        <div class="box-progress-bar">
+                            <span class="box-progress" style="width: 20%; background-color: #df3670"></span>
+                        </div>
+                        <p class="box-progress-percentage">20%</p>
+                        <div class="days-left editar" style="color: #4f3ff0;">
+                            Editar
+                        </div>
+                        <div class="days-left ver" style="color: #4f3ff0;">
+                            Ver
+                        </div>
+                    </div>
+                    <div class="project-box-footer">
+                    <div class="participants">
+                        <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant">
+                        <img src="https://images.unsplash.com/photo-1587628604439-3b9a0aa7a163?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjR8fHdvbWFufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant">
+                        <button class="add-participant" style="color: #df3670;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg>
+                        </button>
+                    </div>
+                    <div class="days-left" style="color: #df3670;" id="days-left">
+                      
+                        @php
+                            $tiempoAhora=new DateTime();
+                            $tiempoAhoraSegundos=$tiempoAhora->getTimestamp();
+                            $tiempoProyectoSegundos=$proyecto->due_date->getTimestamp(); 
+                            $diferenciaDias=abs(($tiempoProyectoSegundos-$tiempoAhoraSegundos)/(1000*60*60*24));
+                        @endphp
+
+                    
+                        @php
+                            echo $diferenciaDias." Days Left";
+                        @endphp
+                    </div>
+                    </div>
+
+                </div>
+                </div>
+            @endforeach
+        
+fdasfdsa
+
         <div class="project-box-wrapper">
         <div class="project-box" style="background-color: #ffd3e2;">
             <div class="project-box-header">
@@ -321,7 +385,7 @@
                 </svg>
                 </button>
             </div>
-            <div class="days-left" style="color: #34c471;">
+            <div class="days-left" style="color: #34c471;" id="days-left">
                 2 Days Left
             </div>
             </div>
@@ -567,6 +631,17 @@
 </style>
 
 <script>
+
+    function displayDate(){
+        document.getElementById('inputFechaFinalizacion').addEventListener('change', function() {
+                var input_date_time=new Date(this.value).getTime();
+                var actual_date_time=new Date().getTime();
+                var diff_dias=Math.abs((actual_date_time-input_date_time)/(1000*60*60*24));
+                document.getElementById('days-left').innerHTML=`${Math.trunc(diff_dias)} Days Left`;
+            });
+        }
+
+
     $(document).ready(function () {
         
        $('#exampleModal').fadeOut();

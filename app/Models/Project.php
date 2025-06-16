@@ -15,7 +15,7 @@ class Project extends Model
         'description',  
         'color_project', 
         'due_date', 
-        'image', 
+        'image',
         'created_at',
         'updated_at'
     ];

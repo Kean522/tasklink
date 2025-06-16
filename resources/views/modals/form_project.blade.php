@@ -46,17 +46,18 @@
         </div>
        
         <div class="contenido">
-            <form action="#">
+            <form action="{{route('project.create')}}"  method="POST" enctype='multipart/form-data'>
                 @csrf
+                @method('POST')
                 <label for="titulo">Titulo</label>
-                <input type="text" id="inputTitulo" onkeyup="displayInputValue(this)" name="inputTitulo">
+                <input type="text" id="inputTitulo" onkeyup="displayInputValue(this)" name="titulo">
 
                 <label for="descripcion">Descripcion</label>
-                <input type="text" id="inputDescripcion" onkeyup="displayInputValue(this)" name="inputDescripcion" >
+                <input type="text" id="inputDescripcion" onkeyup="displayInputValue(this)" name="descripcion" >
 
                 <label for="">Color</label>
                <label for="inputColor" class="color-label"></label>
-                <input type="color" id="inputColor" name="inputColor" class="color-hidden">
+                <input type="color" id="inputColor" name="color" class="color-hidden">
 
                 <label for="inputUsuarios">Usuarios</label>
                 <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;" id="usuarios-elegidos">
@@ -64,29 +65,19 @@
                 </div>
                 
                 <div class="custom-dropdown">
-                    <button class="dropdown-button">Selecciona un Usuario</button>
+                    <button class="dropdown-button" type="button">Selecciona un Usuario</button>
                     <div class="dropdown-content" style="display:none;" id="usuarios-disponibles">
-                        <div class="dropdown-option" data-value="usuario1" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
-                            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1">
-                            Usuario1
-                        </div>
-                        <div class="dropdown-option" data-value="usuario2"  onclick="seleccionarUsuariosDisponibles(this)">
-                            <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Usuario 2">
-                            Usuario2
-                        </div>
-                        <div class="dropdown-option" data-value="usuario3"  onclick="seleccionarUsuariosDisponibles(this)">
-                            <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Usuario 3">
-                            Usuario3
-                        </div>
-                        <div class="dropdown-option" data-value="usuario4" onclick="seleccionarUsuariosDisponibles(this)">
-                            <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Usuario 4">
-                            Usuario4
-                        </div>
+                        @foreach($usuariosDisponibles as $usuario)
+                            <div class="dropdown-option" data-value="{{$usuario->id}}" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
+                                <img src="{{asset('storage/'.$usuario->profile_photo)}}"/>
+                                {{$usuario->name}}
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
                 <label for="fecha">Fecha de finalizacion</label>
-                <input type="date" id="inputFechaFinalizacion"  name="inputFechaFinalizacion" >
+                <input type="date" id="inputFechaFinalizacion"  name="fechaFinalizacion" >
 
                 <label for="imagen">Imagen</label>
                 <input type="file" id="inputImagen" name="imagen" style="position: absolute;opacity:0;z-index:-1;">
@@ -104,6 +95,7 @@
 
 
         <script>
+           
            
              function displayInputValue(input){
                 if(input.id=="inputTitulo") document.getElementById("titulo").innerHTML=input.value;
@@ -156,6 +148,8 @@
                     const usuarioSeleccionado=element;
                     element.removeAttribute("onclick");
                     usuarioSeleccionado.innerHTML+=` <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;" onclick="eliminarUsuariosElegidos(this)">`;
+                    const valorUsuario=usuarioSeleccionado.getAttribute('data-value');
+                    usuarioSeleccionado.innerHTML+=`<input type="hidden" name="usuario[]" value="${valorUsuario}">`;
                     document.getElementById('usuarios-elegidos').appendChild(usuarioSeleccionado);  
                 }
 

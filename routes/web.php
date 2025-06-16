@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\TareaController;
+use App\Http\Controllers\ProjectController;
 use App\Models\User;
+use App\Models\Project;
 
 
 
@@ -32,11 +34,12 @@ Route::get('/registrar', function () {
 })->name('registrar');
 
 Route::get('/index', function () {
-    return view('index');
+    $usuariosDisponibles=User::all();
+    $proyectosDisponibles=Project::all();
+    return view('index',compact('usuariosDisponibles','proyectosDisponibles'));
 });
 Route::get('/task', function () {
     $usuariosDisponibles=User::all();
-    
     return view('task',compact('usuariosDisponibles'));
 });
 Route::get('/app', function () {
@@ -56,6 +59,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     //Route::get('tarea/{funcion}', [TareaController::class, 'index'])->name('tarea');
     Route::post('/tarea/crear', [TareaController::class, 'create'])->name('tarea.create');
+    Route::post('/proyecto/crear', [ProjectController::class, 'create'])->name('project.create');
 });
 
 
