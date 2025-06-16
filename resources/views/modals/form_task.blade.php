@@ -11,7 +11,8 @@
     
 </head>
         <div class="contenido">
-            <form action="{{route('tarea',['funcion'=>'create'])}}"  method="POST" action="#"  enctype='multipart/form-data'>
+            <form action="{{route('tarea.create')}}"  method="POST" enctype='multipart/form-data'>
+            {{-- <form action="{{route('tarea',['funcion'=>'create'])}}"  method="POST" enctype='multipart/form-data'> --}}
                 @csrf
                 @method('POST')
                 <label for="tarea">Nombre Tarea</label>
@@ -36,7 +37,15 @@
                 <div class="custom-dropdown">
                     <button class="dropdown-button" type="button">Selecciona un Usuario</button>
                     <div class="dropdown-content" style="display:none;" id="usuarios-disponibles">
-                        <div class="dropdown-option" data-value="usuario1" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
+                           
+                        @foreach($usuariosDisponibles as $usuario)
+                            <div class="dropdown-option" data-value="{{$usuario->id}}" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
+                                <img src="{{asset('storage/'.$usuario->profile_photo)}}"/>
+                                {{$usuario->name}}
+                            </div>
+                        @endforeach
+
+                        {{-- <div class="dropdown-option" data-value="usuario1" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
                             <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="Usuario 1"/>
                             Usuario1
                         </div>
@@ -51,7 +60,7 @@
                         <div class="dropdown-option" data-value="usuario4" onclick="seleccionarUsuariosDisponibles(this)">
                             <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Usuario 4"/>
                             Usuario4
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -158,7 +167,7 @@
                 </div>
 
         <script>
-            
+      
 
             function displayInputValue(input) {
 
@@ -193,11 +202,14 @@
                     });
                 }
             }
+          
             function mostrarDropdownContent(){
                     $('.dropdown-button').on('click',function(){
                         $('.dropdown-content').toggle();
                     });
             }
+
+            
                 mostrarDropdownContent();
 
                 function seleccionarUsuariosDisponibles(element){

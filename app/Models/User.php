@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'profile_photo',
+        'created_at',
+        'updated_at'
     ];
 
     /**
@@ -43,4 +45,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function tasks(){
+        return $this->belongsToMany(Tarea::class,'task_user','user_id','task_id');
+    }
 }

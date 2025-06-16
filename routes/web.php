@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\TareaController;
-
+use App\Models\User;
 
 
 
@@ -35,7 +35,9 @@ Route::get('/index', function () {
     return view('index');
 });
 Route::get('/task', function () {
-    return view('task');
+    $usuariosDisponibles=User::all();
+    
+    return view('task',compact('usuariosDisponibles'));
 });
 Route::get('/app', function () {
     return view('layouts.app');
@@ -52,8 +54,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    echo "has llegado hasta aquí";
-    Route::post('tarea/{funcion}', [TareaController::class, 'index'])->name('tarea');
+    //Route::get('tarea/{funcion}', [TareaController::class, 'index'])->name('tarea');
+    Route::post('/tarea/crear', [TareaController::class, 'create'])->name('tarea.create');
 });
 
 
