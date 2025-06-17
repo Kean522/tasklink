@@ -1437,10 +1437,23 @@ option{
 #days-left p{
   margin-top:0px;
 }
-
+#exampleModal{
+  outline:2px solid red;
+}
 #exampleModal .project-box{
+  position: absolute;
+  margin-top:-780px;
+ 
+}
+#exampleModal .contenido{
+  position: absolute;
+  margin-left: 600px;
   margin-top: -900px;
 }
 .contenido form{
   outline: 2px solid none;
 }
+#exampleModal .color-label{
+  width: 380px;
+}
+ 

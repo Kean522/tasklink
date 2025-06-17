@@ -556,7 +556,7 @@
     </div>  --}}
     </div>
     </div>
-        <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="height:1px;outline:2px solid none;position: absolute;margin-left:200px;">
+        <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;margin-left:80px;">
             @include('modals.form_project')
         </div> 
 
