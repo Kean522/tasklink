@@ -1,49 +1,66 @@
+ 
+         
+           
+                <div class="project-box" style="background-color:rgb(101, 101, 146)">
+                    <div class="project-box-header">
+                        @php
+                         
+                        @endphp
+                        <span>Enero 20,2030</span>
+                        <div class="more-wrapper">
+                            <button class="project-btn-more">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                <circle cx="12" cy="12" r="1" />
+                                <circle cx="12" cy="5" r="1" />
+                                <circle cx="12" cy="19" r="1" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="project-box-content-header">
+                        <p class="box-content-header">Lenguaje de programacion de phyton</p>
+                        <p class="box-content-subheader">Phyton,Java,C#,CSS,JS,JavaScript</p>
+                        {{-- <p class="box-content-header">{{$proyecto->name}}</p>
+                        <p class="box-content-subheader">{{$proyecto->description}}</p> --}}
+                    </div>
+                    <div class="box-progress-wrapper">
+                        <p class="box-progress-header">Progress</p>
+                        <div class="box-progress-bar">
+                            <span class="box-progress"></span>
+                        </div>
+                        <p class="box-progress-percentage">20%</p>
+                        <div class="days-left editar">
+                           <p>Editar</p> 
+                        </div>
+                        <div class="days-left ver">
+                            <p>Ver</p>
+                        </div>
+                    </div>
+                    <div class="project-box-footer">
+                    <div class="participants">
+                        {{-- Participantes --}}
+                        @php
+                            foreach ($proyecto->users as $usuario) {
+                                echo "<img src='asset('storage/'.$usuario->profile_photo)'/>";
+                            }
+                        @endphp
+                        <button class="add-participant" style="color: #df3670;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg>
+                        </button>
+                    </div>
+                    <div class="days-left" style="color: #df3670;" id="days-left">
+                        
 
-<div class="project-box modal" style="background-color: #e9e7fd;">
-            <div class="project-box-header">
-            <span class="fecha" id="fecha">December 10, 2020</span>
-            <div class="more-wrapper">
-                <button class="project-btn-more">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" /></svg>
-                </button>
-            </div>
-            </div>
-            <div class="project-box-content-header">
-            <p class="box-content-header"  id="titulo">Testing</p> 
-            <p class="box-content-subheader" id="descripcion">Prototyping</p>
-            </div>
-            <div class="box-progress-wrapper">
-            <p class="box-progress-header">Progress</p>
-            <div class="box-progress-bar">
-                <span class="box-progress" style="width: 50%; background-color: #4f3ff0"></span>
-            </div>
-            <div class="days-left editar" style="color: #4f3ff0;">
-                Editar
-            </div>
-            <div class="days-left ver" style="color: #4f3ff0;">
-                Ver
-            </div>
-            <p class="box-progress-percentage">50%</p>
-            </div>
-            
-            <div class="project-box-footer">
-            <div class="participants" id="usuarios">
-                <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="participant">
-                <img src="https://images.unsplash.com/photo-1583195764036-6dc248ac07d9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2555&q=80" alt="participant">
-                <button class="add-participant" style="color: #4f3ff0;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-                    <path d="M12 5v14M5 12h14" />
-                </svg>
-                </button>
-            </div>
-            <div class="days-left lbl" id="days_left" style="color: #4f3ff0;height:30px;display:flex;justify-content:center;align-items:center;" >
-                <p > 2 Days Left</p>
-            </div>
-            </div>
-        </div>
+                        @php
+                            echo "<p>".$diasRestantes." Days Left"."</p>";                      
+                        @endphp
+                    </div>
+                    </div>
+
+                </div>
+       
+          
        
         <div class="contenido">
             <form action="{{route('project.create')}}"  method="POST" enctype='multipart/form-data'>

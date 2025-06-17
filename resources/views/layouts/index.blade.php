@@ -96,7 +96,7 @@
             </div>
            
         </div>
-        <div class="project-boxes jsGridView">
+        {{-- <div class="project-boxes jsGridView">
             <div class="project-box-wrapper">
             <div class="project-box" style="background-color: #fee4cb;">
                 <div class="project-box-header">
@@ -235,12 +235,23 @@
             </div>
         </div>
         </div>
-        
+         --}}
+          <div class="project-box-wrapper">  
             @foreach($proyectosDisponibles as $proyecto)
-            <div class="project-box-wrapper">
+           
                 <div class="project-box" style="background-color:{{$proyecto->color_project}}">
                     <div class="project-box-header">
-                        <span>{{$proyecto->created_at}}</span>
+                        @php
+                            $mesesCastellano = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+                            $mesesIngles = array( "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" );
+                            $fechaCreacionProyecto=new DateTime($proyecto->due_date);
+                            $nombreMesProyecto=$fechaCreacionProyecto->format('F');
+                            $nombreMesProyectoTraducido=str_replace($mesesIngles,$mesesCastellano,$nombreMesProyecto);
+
+                            $diaCreacionProyecto=$fechaCreacionProyecto->format('d');
+                            $anoCreacionProyecto=$fechaCreacionProyecto->format('Y');
+                        @endphp
+                        <span>{{$nombreMesProyectoTraducido." ".$diaCreacionProyecto.", ".$anoCreacionProyecto;}}</span>
                         <div class="more-wrapper">
                             <button class="project-btn-more">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
@@ -251,26 +262,32 @@
                         </div>
                     </div>
                     <div class="project-box-content-header">
-                        <p class="box-content-header">{{$proyecto->name}}</p>
-                        <p class="box-content-subheader">{{$proyecto->description}}</p>
+                        <p class="box-content-header">Lenguaje de programacion de phyton</p>
+                        <p class="box-content-subheader">Phyton,Java,C#,CSS,JS,JavaScript</p>
+                        {{-- <p class="box-content-header">{{$proyecto->name}}</p>
+                        <p class="box-content-subheader">{{$proyecto->description}}</p> --}}
                     </div>
                     <div class="box-progress-wrapper">
                         <p class="box-progress-header">Progress</p>
                         <div class="box-progress-bar">
-                            <span class="box-progress" style="width: 20%; background-color: #df3670"></span>
+                            <span class="box-progress"></span>
                         </div>
                         <p class="box-progress-percentage">20%</p>
-                        <div class="days-left editar" style="color: #4f3ff0;">
-                            Editar
+                        <div class="days-left editar">
+                           <p>Editar</p> 
                         </div>
-                        <div class="days-left ver" style="color: #4f3ff0;">
-                            Ver
+                        <div class="days-left ver">
+                            <p>Ver</p>
                         </div>
                     </div>
                     <div class="project-box-footer">
                     <div class="participants">
-                        <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant">
-                        <img src="https://images.unsplash.com/photo-1587628604439-3b9a0aa7a163?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjR8fHdvbWFufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant">
+                        {{-- Participantes --}}
+                        @php
+                            foreach ($proyecto->users as $usuario) {
+                                echo "<img src='asset('storage/'.$usuario->profile_photo)'/>";
+                            }
+                        @endphp
                         <button class="add-participant" style="color: #df3670;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
                             <path d="M12 5v14M5 12h14" />
@@ -278,26 +295,27 @@
                         </button>
                     </div>
                     <div class="days-left" style="color: #df3670;" id="days-left">
-                      
                         @php
-                            $tiempoAhora=new DateTime();
-                            $tiempoAhoraSegundos=$tiempoAhora->getTimestamp();
-                            $tiempoProyectoSegundos=$proyecto->due_date->getTimestamp(); 
-                            $diferenciaDias=abs(($tiempoProyectoSegundos-$tiempoAhoraSegundos)/(1000*60*60*24));
+                            $fechaActual=date('Y-m-d');
+                            $fechaActualSegundos=strtotime($fechaActual);
+                            $fechaProyectoSegundos=strtotime($proyecto->due_date);
+                            $diasRestantes=($fechaProyectoSegundos-$fechaActualSegundos)/(60*60*24);
                         @endphp
 
-                    
                         @php
-                            echo $diferenciaDias." Days Left";
+                            if($diasRestantes<0) echo "<p>".$diasRestantes." Day Passed"."</p>";
+                            else if($diasRestantes==1) echo "<p>".$diasRestantes." Last Day"."</p>";
+                            else if($diasRestantes==0) echo "<p>".$diasRestantes." Today"."</p>";
+                            else echo "<p>".$diasRestantes." Days Left"."</p>";                      
                         @endphp
                     </div>
                     </div>
 
-                </div>
                 </div>
             @endforeach
-        
-fdasfdsa
+               </div>
+{{--         
+
 
         <div class="project-box-wrapper">
         <div class="project-box" style="background-color: #ffd3e2;">
@@ -438,7 +456,7 @@ fdasfdsa
         </div>
         </div>
     </div> 
-     </div> 
+     </div>  --}}
      {{-- <div class="messages-section">
     <button class="messages-close">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">

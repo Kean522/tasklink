@@ -966,10 +966,7 @@ body {
   flex-wrap: wrap;
   margin-left:10px;
 }
-.project-box div{
-  outline: 2px solid none;
-  width: 300px;
-}
+
 .project-box-header{
   display: flex;
   flex-wrap: wrap;
@@ -979,40 +976,7 @@ body {
   width: 10px;
 }
 
-.project-box-content-header{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.project-box-content-header p{
-    outline: 2px solid none;
-    width: 200px;
-    text-align: center;
-}
-.project-box-content-header p:nth-of-type(1){
-    font-size: 20px;
-}
-.project-box-content-header p:nth-of-type(2){
-    font-size: 16px;
-    margin-top: -7px;
-}
-.box-progress-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-}
-.box-progress-wrapper p:nth-of-type(1) {
-  font-weight: bold;
-  outline: 2px solid none;
-}
-.box-progress-wrapper p:nth-of-type(2) {
-  font-weight: bold;
-  outline: 2px solid none;
-  margin-left: 250px;
-}
-.box-progress{
-  height: 7px;
-  outline: 1px solid none;
-}
+
 .box-progress-bar{
   background-color: rgba(255, 255, 255, 0.616);
   border-radius: 6px;
@@ -1071,38 +1035,6 @@ body {
   top: 2px;
 } */
 
-
-#exampleModal{
-  margin-left: -800px;
-  margin-top: 100px;
-}
-#exampleModal .project-box{
-  width: 350px;
-  height: 400px;
-  position: absolute;
-  margin-left: -300px;
-  margin-top: 100px;
-}
-#exampleModal .project-box .fecha{
-  outline: 2px solid none;
-  width: 290px;
-}
-#exampleModal .project-box .box-progress-bar{
-  outline: 2px solid none;  
-  height: 9px;
-}
-#exampleModal .project-box .box-progress{
-  height: 9px;
-}
-#exampleModal .project-box .days-left.editar,#exampleModal .project-box .days-left.ver{
-  margin-top: 88px;
-}
-#exampleModal .project-box .box-content-header{
-  font-size: 35px;
-}
-#exampleModal .project-box .box-content-subheader{
-  font-size: 25px;
-}
 /* https://codepen.io/kristen17/pen/NPKrxBd */
 
 
@@ -1111,23 +1043,24 @@ body {
 
 
 #exampleModal .titulo  {
+    
     margin-bottom: 20px;
     font-size: 30px;
     color: #4A4A4A;
     text-align: center;
     font-weight: bold;
     position: relative;
-    width: 120000px;
+    width: 120px;
 }
 
 #exampleModal .contenido  {
-    width: 390px;
-    padding: 40px;
+ 
+    width: 380px;
+    padding: 20px;
     background-color: #fff;
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    margin-left: 400px;
-    margin-top:100px;
+
     
 }
 
@@ -1178,9 +1111,7 @@ body {
 #exampleModal .btn:hover  {
     background-color: #3a3650;
 }
-#exampleModal form{
-    margin-left: -20px;
-}
+
 
 
 
@@ -1388,4 +1319,128 @@ option{
 .add-participant:hover{
   cursor: pointer;
   transform: scale(1.23);
+}
+
+.projects-section{
+  outline: 2px solid none;
+  min-height: 1000px;
+} 
+
+.project-box-wrapper{
+  outline:2px solid none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.project-box{
+  outline: 3px solid none;
+  margin: 20px;
+  height: 350px;
+}
+.project-box-header{
+  outline:2px solid none;
+  width: 310px;
+}
+.more-wrapper{
+  outline:2px solid none;
+}
+.project-box-content-header{
+  outline: 2px solid none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: -23px;
+}
+
+.box-content-header{
+  outline:2px solid none;
+  text-align: center;
+  width: 230px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  opacity: 0.7
+}
+.box-content-subheader{
+  outline: 2px solid none;
+  margin-top: -20px;
+}
+
+
+
+.box-progress-wrapper{
+  outline: 2px solid none;
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+  height:90px;
+  margin-top: 0px;
+}
+.box-progress-header{
+  outline:2px solid none;
+  width: 150px;
+  font-weight: 700;
+}
+.box-progress-bar{
+  outline:2px solid none;
+  width:100%;
+  height: 5px;
+  margin-top:-4px;
+}
+.box-progress{
+  outline:2px solid none;
+  background-color: none;
+  height: 5px;
+}
+.box-progress-percentage{
+  outline: 2px solid none;
+  margin-left: 253px;
+  font-size: 17px;
+  font-weight: bold;
+}
+.editar{
+  outline:2px solid none;
+  height: 22px;
+}
+.editar p{
+  margin-top: -3px;
+  
+}
+.ver{
+  outline:2px solid none;
+  height: 22px;
+}
+.ver p{
+  margin-top: -3px;
+}
+.project-box-footer{
+  outline:2px solid none;
+  width:400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 20px;
+}
+.participants{
+  outline:2px solid none;
+  width: 160px;
+  height: 20px;
+  margin-top: 5px;
+}
+#days-left{
+  outline:2px solid none;
+  width: 135px;
+  height: 30px;
+  margin-top: 0px;
+}
+#days-left p{
+  margin-top:0px;
+}
+
+#exampleModal .project-box{
+  margin-top: -900px;
+}
+.contenido form{
+  outline: 2px solid none;
 }

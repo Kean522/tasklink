@@ -19,7 +19,7 @@ class ProjectController extends Controller
             'image'=>strval($imagePath)
         ]);
 
-        //$project->users()->attach($request->input('usuario'));
+        $project->users()->attach($request->input('usuario'));
         return redirect()->back();
     }
 }
