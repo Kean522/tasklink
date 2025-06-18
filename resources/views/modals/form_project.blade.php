@@ -1,12 +1,12 @@
  
          
            
-                <div class="project-box" style="background-color:rgb(101, 101, 146)">
+    <div class="project-box" style="background-color:rgb(101, 101, 146)">
                     <div class="project-box-header">
                         @php
                          
                         @endphp
-                        <span>Enero 20,2030</span>
+                        <span onclick="changeColorFont(this)" data-value='1' id="font">Enero 20,2030</span>
                         <div class="more-wrapper">
                             <button class="project-btn-more">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
@@ -17,44 +17,40 @@
                         </div>
                     </div>
                     <div class="project-box-content-header">
-                        <p class="box-content-header">Lenguaje de programacion de phyton</p>
-                        <p class="box-content-subheader">Phyton,Java,C#,CSS,JS,JavaScript</p>
+                        <p class="box-content-header" onclick="changeColorFont(this)" data-value='2' id="font">Lenguaje de programacion de phyton</p>
+                        <p class="box-content-subheader" onclick="changeColorFont(this)" data-value='3' id="font">Phyton,Java,C#,CSS,JS,JavaScript</p>
                         {{-- <p class="box-content-header">{{$proyecto->name}}</p>
                         <p class="box-content-subheader">{{$proyecto->description}}</p> --}}
                     </div>
                     <div class="box-progress-wrapper">
-                        <p class="box-progress-header">Progress</p>
+                        <p class="box-progress-header" onclick="changeColorFont(this)" data-value='4' id="font">Progress</p>
                         <div class="box-progress-bar">
                             <span class="box-progress"></span>
                         </div>
-                        <p class="box-progress-percentage">20%</p>
-                        <div class="days-left editar">
+                        <p class="box-progress-percentage" onclick="changeColorFont(this)" data-value='5' id="font">20%</p>
+                        <div class="days-left editar" onclick="changeColorFont(this)" data-value='6' id="font">
                            <p>Editar</p> 
                         </div>
-                        <div class="days-left ver">
+                        <div class="days-left ver" onclick="changeColorFont(this)" data-value='7' id="font" >
                             <p>Ver</p>
                         </div>
                     </div>
                     <div class="project-box-footer">
                     <div class="participants">
                         {{-- Participantes --}}
-                        @php
-                            foreach ($proyecto->users as $usuario) {
-                                echo "<img src='asset('storage/'.$usuario->profile_photo)'/>";
-                            }
-                        @endphp
-                        <button class="add-participant" style="color: #df3670;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-                            <path d="M12 5v14M5 12h14" />
-                        </svg>
+
+                        
+                   
+                        <button class="add-participant" style="color: #df3670;" onclick="changeColorFont(this)" id="font">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                                <path d="M12 5v14M5 12h14" />
+                            </svg>
                         </button>
                     </div>
-                    <div class="days-left" style="color: #df3670;" id="days-left">
-                        
-
+                    <div class="days-left" style="color: #df3670;" id="days-left" onclick="changeColorFont(this)" data-value='8' id="font"> 
                         @php
-                            echo "<p>".$diasRestantes." Days Left"."</p>";                      
-                        @endphp
+                            echo "Dias Restantes";
+                        @endphp    
                     </div>
                     </div>
 
@@ -72,11 +68,20 @@
                 <label for="descripcion">Descripcion</label>
                 <input type="text" id="inputDescripcion" onkeyup="displayInputValue(this)" name="descripcion" >
 
-                <label for="">Color</label>
+                <label for="">Color fondo</label>
                <label for="inputColor" class="color-label"></label>
                 <input type="color" id="inputColor" name="color" class="color-hidden">
 
+                <label for="">Color fuente</label>
+                <label for="inputColorFuente" class="color-label-fuente">
+                    <i class="fa-solid fa-arrow-pointer" style="color:black;"></i>
+                </label>
+                <label for="">Pulsa sobre la letra para cambiar de color</label>
+                <input type="color" id="inputColorFuente" name="color" class="color-hidden-font">
+                <input type="hidden" name="colorElegido" id="colorElegido" value="">
+                <input type="hidden" name="etiquetaElegida" id="etiquetaElegida" value="">
                 <label for="inputUsuarios">Usuarios</label>
+                <input type="hidden" name="font" id="colorFonts" value="">
                 <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;" id="usuarios-elegidos">
                     
                 </div>
@@ -150,8 +155,35 @@
                 }
                 function displayColor(){
                      document.getElementById('inputColor').addEventListener('input', function() {
-                        document.querySelector('.project-box.modal').style.background = this.value;
+                        document.querySelector('#exampleModal .project-box').style.background = this.value;
                     });
+                    document.getElementById('inputColorFuente').addEventListener('input', function() {
+                        document.querySelector('#exampleModal .color-label-fuente').style.background = this.value;
+                        document.body.style.cursor='crosshair';
+                        document.querySelector('#exampleModal .add-participant').style.cursor='crosshair';
+                        document.querySelector('#exampleModal .project-box').style.cursor='crosshair';
+                        const colorElegido=this.value;
+                        document.getElementById('colorElegido').value=colorElegido;
+                    });
+                }
+
+                function changeColorFont(element){
+                    const colorElegido=document.getElementById('colorElegido').value;
+                    element.style.color=colorElegido;
+                }
+
+                saveColorFont();
+                function saveColorFont(){
+                    let colores=[];
+                    let palabras=document.querySelectorAll('#font');
+                    palabras.forEach(palabra => {
+                        let color=palabra.style.color;
+                        if(color===null || color==null || color=='' ||color==' ') color="#000000";
+                        colores.push(color);
+                    });
+                    document.getElementById('colorFonts').value=colores;
+                    console.log(typeof document.getElementById('colorFonts').value);
+                    console.log(document.getElementById('colorFonts').value);
                 }
                 
                 function mostrarDropdownContent(){
@@ -283,5 +315,6 @@
     margin-left:8px;
     outline:2px solid none;
 }
+
 
 </style>

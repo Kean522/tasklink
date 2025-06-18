@@ -10,16 +10,18 @@ class ProjectController extends Controller
     public function create(Request $request){
         $image=$request->file('imagen');
         $imagePath= $image->move(storage_path('app/public/profiles'),$image->getClientOriginalName());
+        echo $request->input('font');
         
-        $project=Project::create([
-            'name'=>$request->input('titulo'),
-            'description'=>$request->input('descripcion'),
-            'color_project'=>$request->input('color'),
-            'due_date'=>$request->input('fechaFinalizacion'),
-            'image'=>strval($imagePath)
-        ]);
+        // $project=Project::create([
+        //     'name'=>$request->input('titulo'),
+        //     'description'=>$request->input('descripcion'),
+        //     'color_project'=>$request->input('color'),
+        //     'color_font'=>$request->input('font'),
+        //     'due_date'=>$request->input('fechaFinalizacion'),
+        //     'image'=>strval($imagePath)
+        // ]);
 
-        $project->users()->attach($request->input('usuario'));
-        return redirect()->back();
+        // $project->users()->attach($request->input('usuario'));
+        // return redirect()->back();
     }
 }

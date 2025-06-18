@@ -237,82 +237,92 @@
         </div>
          --}}
           <div class="project-box-wrapper">  
-            @foreach($proyectosDisponibles as $proyecto)
-           
-                <div class="project-box" style="background-color:{{$proyecto->color_project}}">
-                    <div class="project-box-header">
-                        @php
-                            $mesesCastellano = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
-                            $mesesIngles = array( "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" );
-                            $fechaCreacionProyecto=new DateTime($proyecto->due_date);
-                            $nombreMesProyecto=$fechaCreacionProyecto->format('F');
-                            $nombreMesProyectoTraducido=str_replace($mesesIngles,$mesesCastellano,$nombreMesProyecto);
+            @if($proyectosDisponibles->isNotEmpty())
+                @foreach($proyectosDisponibles as $proyecto)
+                    
+                    @php
+                        $colores = $proyecto->color_font;
+                        $color = explode(",", $colores);
+                    @endphp
+                    <div class="project-box" style="background-color:{{$proyecto->color_project}}">
+                        <div class="project-box-header">
+                            @php
+                                $mesesCastellano = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+                                $mesesIngles = array( "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" );
+                                $fechaCreacionProyecto=new DateTime($proyecto->due_date);
+                                $nombreMesProyecto=$fechaCreacionProyecto->format('F');
+                                $nombreMesProyectoTraducido=str_replace($mesesIngles,$mesesCastellano,$nombreMesProyecto);
 
-                            $diaCreacionProyecto=$fechaCreacionProyecto->format('d');
-                            $anoCreacionProyecto=$fechaCreacionProyecto->format('Y');
-                        @endphp
-                        <span>{{$nombreMesProyectoTraducido." ".$diaCreacionProyecto.", ".$anoCreacionProyecto;}}</span>
-                        <div class="more-wrapper">
-                            <button class="project-btn-more">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                                <circle cx="12" cy="12" r="1" />
-                                <circle cx="12" cy="5" r="1" />
-                                <circle cx="12" cy="19" r="1" /></svg>
+                                $diaCreacionProyecto=$fechaCreacionProyecto->format('d');
+                                $anoCreacionProyecto=$fechaCreacionProyecto->format('Y');
+                            @endphp
+                            <span style="color:{{$color[0]}}">{{$nombreMesProyectoTraducido." ".$diaCreacionProyecto.", ".$anoCreacionProyecto;}}</span>
+                            <div class="more-wrapper">
+                                <button class="project-btn-more">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                    <circle cx="12" cy="12" r="1" />
+                                    <circle cx="12" cy="5" r="1" />
+                                    <circle cx="12" cy="19" r="1" /></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="project-box-content-header">
+                            <p class="box-content-header" style="color:{{$color[1]}}">Lenguaje de programacion de phyton</p>
+                            <p class="box-content-subheader" style="color:{{$color[2]}}">Phyton,Java,C#,CSS,JS,JavaScript</p>
+                            {{-- <p class="box-content-header">{{$proyecto->name}}</p>
+                            <p class="box-content-subheader">{{$proyecto->description}}</p> --}}
+                        </div>
+                        <div class="box-progress-wrapper">
+                            <p class="box-progress-header" style="color:{{$color[3]}}">Progress</p>
+                            <div class="box-progress-bar">
+                                <span class="box-progress"></span>
+                            </div>
+                            <p class="box-progress-percentage" style="color:{{$color[4]}}">20%</p>
+                            <div class="days-left editar" style="color:{{$color[5]}}">
+                            <p>Editar</p> 
+                            </div>
+                            <div class="days-left ver" style="color:{{$color[6]}}">
+                                <p>Ver</p>
+                            </div>
+                        </div>
+                        <div class="project-box-footer">
+                        <div class="participants">
+                            {{-- Participantes --}}
+                            
+                            @php
+                                foreach ($proyecto->users as $usuario) {
+                                    echo "<img src='asset('storage/'.$usuario->profile_photo)'/>";
+                                }
+                            @endphp
+                            <button class="add-participant"  style="color:{{$color[7]}}" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                                <path d="M12 5v14M5 12h14" />
+                            </svg>
                             </button>
                         </div>
-                    </div>
-                    <div class="project-box-content-header">
-                        <p class="box-content-header">Lenguaje de programacion de phyton</p>
-                        <p class="box-content-subheader">Phyton,Java,C#,CSS,JS,JavaScript</p>
-                        {{-- <p class="box-content-header">{{$proyecto->name}}</p>
-                        <p class="box-content-subheader">{{$proyecto->description}}</p> --}}
-                    </div>
-                    <div class="box-progress-wrapper">
-                        <p class="box-progress-header">Progress</p>
-                        <div class="box-progress-bar">
-                            <span class="box-progress"></span>
-                        </div>
-                        <p class="box-progress-percentage">20%</p>
-                        <div class="days-left editar">
-                           <p>Editar</p> 
-                        </div>
-                        <div class="days-left ver">
-                            <p>Ver</p>
-                        </div>
-                    </div>
-                    <div class="project-box-footer">
-                    <div class="participants">
-                        {{-- Participantes --}}
-                        @php
-                            foreach ($proyecto->users as $usuario) {
-                                echo "<img src='asset('storage/'.$usuario->profile_photo)'/>";
-                            }
-                        @endphp
-                        <button class="add-participant" style="color: #df3670;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-                            <path d="M12 5v14M5 12h14" />
-                        </svg>
-                        </button>
-                    </div>
-                    <div class="days-left" style="color: #df3670;" id="days-left">
-                        @php
-                            $fechaActual=date('Y-m-d');
-                            $fechaActualSegundos=strtotime($fechaActual);
-                            $fechaProyectoSegundos=strtotime($proyecto->due_date);
-                            $diasRestantes=($fechaProyectoSegundos-$fechaActualSegundos)/(60*60*24);
-                        @endphp
+                        <div class="days-left" id="days-left" style="color:{{$color[8]}}">
+                            @php
+                                $fechaActual=date('Y-m-d');
+                                $fechaActualSegundos=strtotime($fechaActual);
+                                $fechaProyectoSegundos=strtotime($proyecto->due_date);
+                                $diasRestantes=($fechaProyectoSegundos-$fechaActualSegundos)/(60*60*24);
+                            @endphp
 
-                        @php
-                            if($diasRestantes<0) echo "<p>".$diasRestantes." Day Passed"."</p>";
-                            else if($diasRestantes==1) echo "<p>".$diasRestantes." Last Day"."</p>";
-                            else if($diasRestantes==0) echo "<p>".$diasRestantes." Today"."</p>";
-                            else echo "<p>".$diasRestantes." Days Left"."</p>";                      
-                        @endphp
-                    </div>
-                    </div>
+                            @php
+                                if($diasRestantes<0) echo "<p>".$diasRestantes." Day Passed"."</p>";
+                                else if($diasRestantes==1) echo "<p>".$diasRestantes." Last Day"."</p>";
+                                else if($diasRestantes==0) echo "<p>".$diasRestantes." Today"."</p>";
+                                else echo "<p>".$diasRestantes." Days Left"."</p>";                      
+                            @endphp
+                        </div>
+                        </div>
 
-                </div>
-            @endforeach
+                    </div>
+                @endforeach
+            @endif
+
+
+
                </div>
 {{--         
 

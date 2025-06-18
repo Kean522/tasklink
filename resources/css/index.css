@@ -1276,10 +1276,22 @@ option{
   visibility: hidden;
   position: absolute;
 }
+.color-hidden-font{
+  visibility: hidden;
+  position: absolute;
+}
 
 .color-label {
   display: inline-block;
   width: 307px;
+  height: 40px;
+  background-color: #ccc;
+  border: 2px solid none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.color-label-fuente{
+   width: 307px;
   height: 40px;
   background-color: #ccc;
   border: 2px solid none;
@@ -1375,23 +1387,28 @@ option{
   flex-wrap: wrap;
   width: 400px;
   height:90px;
-  margin-top: 0px;
+  margin-top: -6px;
+
 }
 .box-progress-header{
   outline:2px solid none;
   width: 150px;
   font-weight: 700;
+  height: 30px;
+  margin-top: 0px;
+  font-size: 16px;
 }
 .box-progress-bar{
   outline:2px solid none;
   width:100%;
-  height: 5px;
+  height: 8px;
   margin-top:-4px;
 }
 .box-progress{
   outline:2px solid none;
-  background-color: none;
-  height: 5px;
+  background-color: rgb(51, 60, 110);
+  height: 8px;
+  width: 30%;
 }
 .box-progress-percentage{
   outline: 2px solid none;
@@ -1401,18 +1418,22 @@ option{
 }
 .editar{
   outline:2px solid none;
-  height: 22px;
+  height: 28px;
 }
 .editar p{
-  margin-top: -3px;
-  
+  margin-top: -1px;
+  font-size: 13px;
 }
 .ver{
   outline:2px solid none;
-  height: 22px;
+  height: 28px;
 }
 .ver p{
-  margin-top: -3px;
+  margin-top: -1px;
+  font-size: 13px;
+}
+.box-progress-percentage{
+  margin-top: 22px;
 }
 .project-box-footer{
   outline:2px solid none;
@@ -1435,10 +1456,10 @@ option{
   margin-top: 0px;
 }
 #days-left p{
-  margin-top:0px;
+  margin-top:1px;
 }
 #exampleModal{
-  outline:2px solid red;
+  outline:2px solid none;
 }
 #exampleModal .project-box{
   position: absolute;
@@ -1454,6 +1475,19 @@ option{
   outline: 2px solid none;
 }
 #exampleModal .color-label{
-  width: 380px;
+  width: 340px;
+}
+#exampleModal .color-label-fuente{
+  width: 50px;
+  height: 45px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-label-fuente{
+  /* cursor: none; */
+  /* cursor: crosshair; */
 }
  
