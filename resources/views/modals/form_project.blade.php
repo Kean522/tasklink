@@ -17,8 +17,8 @@
                         </div>
                     </div>
                     <div class="project-box-content-header">
-                        <p class="box-content-header" onclick="changeColorFont(this)" data-value='2' id="font">Lenguaje de programacion de phyton</p>
-                        <p class="box-content-subheader" onclick="changeColorFont(this)" data-value='3' id="font">Phyton,Java,C#,CSS,JS,JavaScript</p>
+                        <p class="box-content-header" onclick="changeColorFont(this)" data-value='2' id="font">Lenguajes de programacion</p>
+                        <p class="box-content-subheader"  onclick="changeColorFont(this)" data-value='3' id="font">JavaScript,Java,C#,CSS,HTML</p>
                         {{-- <p class="box-content-header">{{$proyecto->name}}</p>
                         <p class="box-content-subheader">{{$proyecto->description}}</p> --}}
                     </div>
@@ -41,13 +41,13 @@
 
                         
                    
-                        <button class="add-participant" style="color: #df3670;" onclick="changeColorFont(this)" id="font">
+                        <button class="add-participant" onclick="changeColorFont(this)" id="font">
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
                                 <path d="M12 5v14M5 12h14" />
                             </svg>
                         </button>
                     </div>
-                    <div class="days-left" style="color: #df3670;" id="days-left" onclick="changeColorFont(this)" data-value='8' id="font"> 
+                    <div class="days-left" id="days-left" onclick="changeColorFont(this)" data-value='8' id="font"> 
                         @php
                             echo "Dias Restantes";
                         @endphp    
@@ -82,6 +82,7 @@
                 <input type="hidden" name="etiquetaElegida" id="etiquetaElegida" value="">
                 <label for="inputUsuarios">Usuarios</label>
                 <input type="hidden" name="font" id="colorFonts" value="">
+                <input type="hidden" name="projectBackgroundColor" id="projectBackgroundColor" value="">
                 <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;" id="usuarios-elegidos">
                     
                 </div>
@@ -120,9 +121,9 @@
            
            
              function displayInputValue(input){
-                if(input.id=="inputTitulo") document.getElementById("titulo").innerHTML=input.value;
-                if(input.id=="inputDescripcion") document.getElementById("descripcion").innerHTML=input.value;
-                if(input.id=="inputColor") document.getElementById("titulo").innerHTML=input.value;
+                if(input.id=="inputTitulo") document.querySelector(".box-content-header").innerHTML=input.value;
+                if(input.id=="inputDescripcion") document.querySelector(".box-content-subheader").innerHTML=input.value;
+                if(input.id=="inputColor") document.querySelector("titulo").innerHTML=input.value;
                 if(input.id=="inputUsuarios") document.getElementById("usuarios").innerHTML=input.value;
                 if(input.id=="inputFechaFinalizacion") {
                     
@@ -156,6 +157,7 @@
                 function displayColor(){
                      document.getElementById('inputColor').addEventListener('input', function() {
                         document.querySelector('#exampleModal .project-box').style.background = this.value;
+                        document.getElementById('projectBackgroundColor').value=this.value;
                     });
                     document.getElementById('inputColorFuente').addEventListener('input', function() {
                         document.querySelector('#exampleModal .color-label-fuente').style.background = this.value;
@@ -170,6 +172,7 @@
                 function changeColorFont(element){
                     const colorElegido=document.getElementById('colorElegido').value;
                     element.style.color=colorElegido;
+                    saveColorFont();
                 }
 
                 saveColorFont();
@@ -177,13 +180,18 @@
                     let colores=[];
                     let palabras=document.querySelectorAll('#font');
                     palabras.forEach(palabra => {
-                        let color=palabra.style.color;
-                        if(color===null || color==null || color=='' ||color==' ') color="#000000";
-                        colores.push(color);
+                        let colorRGB=palabra.style.color;
+                        let colorHEX;
+                        if(colorRGB===null || colorRGB==null || colorRGB=='' ||colorRGB==' ') colorHEX="#000000";
+                        else{
+                            colorHEX=rgbStringToHex(colorRGB);
+                            console.log(colorHEX);
+                        }
+                        colores.push(colorHEX);
+                        
                     });
                     document.getElementById('colorFonts').value=colores;
-                    console.log(typeof document.getElementById('colorFonts').value);
-                    console.log(document.getElementById('colorFonts').value);
+                    
                 }
                 
                 function mostrarDropdownContent(){
@@ -215,6 +223,26 @@
                     usuarioSeleccionado.remove();
                     document.getElementById('usuarios-disponibles').innerHTML+=usuario;  
                 }
+
+
+                function rgbToHex(r, g, b) {
+                    return "#" +
+                        r.toString(16).padStart(2, '0') +
+                        g.toString(16).padStart(2, '0') +
+                        b.toString(16).padStart(2, '0');
+                }
+
+                function rgbStringToHex(rgbString) {
+                    let matches = rgbString.match(/rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/);
+                    if (matches) {
+                        let r = parseInt(matches[1]);
+                        let g = parseInt(matches[2]);
+                        let b = parseInt(matches[3]);
+                        return rgbToHex(r, g, b);
+                    }
+                    return null;  // o un valor por defecto
+                }
+                
 
 
                 const input = document.getElementById("inputColor");
@@ -315,6 +343,17 @@
     margin-left:8px;
     outline:2px solid none;
 }
-
-
+#exampleModal .project-box-content-header{
+    display: flex;
+    flex-wrap: wrap;
+    outline:2px solid none;
+}
+#exampleModal .box-content-header{
+    outline:2px solid none;
+    width: 315px;
+    /* 63 */
+}
+#exampleModal .box-content-subheader{
+    outline: 2px solid none;
+}
 </style>

@@ -39,6 +39,20 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle">
             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
         </button>
+
+        <div class="modal-project-options" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;position: absolute;z-index:1;outline:2px solid none;width:180px;height:110px;margin-left:520px;margin-top:120px;background-color:#f3f6fd;border-radius:20px;">
+            <div style="width:190px;height:10px;display:flex;justify-content:center;align-items:center;"> <p style="">Eliminar</p></div>
+            <div style="border-width: 1px 0px 0px 0px;border-style: solid;border-color: rgba(150, 142, 142, 0.527);width:190px;height:40px;display:flex;justify-content:center;align-items:center;margin-top:-10px;"><p style="margin-top:30px;">Editar</p></div>
+        </div>
+        <div class="triangle" style="
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 30px solid red;margin-left:598px;margin-top:230px;">
+        </div>
+
         <button class="profile-btn">
             @php
                 $user=auth()->user();
@@ -239,7 +253,6 @@
           <div class="project-box-wrapper">  
             @if($proyectosDisponibles->isNotEmpty())
                 @foreach($proyectosDisponibles as $proyecto)
-                    
                     @php
                         $colores = $proyecto->color_font;
                         $color = explode(",", $colores);
@@ -267,8 +280,8 @@
                             </div>
                         </div>
                         <div class="project-box-content-header">
-                            <p class="box-content-header" style="color:{{$color[1]}}">Lenguaje de programacion de phyton</p>
-                            <p class="box-content-subheader" style="color:{{$color[2]}}">Phyton,Java,C#,CSS,JS,JavaScript</p>
+                            <p class="box-content-header" style="color:{{$color[1]}}">{{$proyecto->name}}</p>
+                            <p class="box-content-subheader" style="color:{{$color[2]}}">{{$proyecto->description}}</p>
                             {{-- <p class="box-content-header">{{$proyecto->name}}</p>
                             <p class="box-content-subheader">{{$proyecto->description}}</p> --}}
                         </div>
@@ -300,7 +313,7 @@
                             </svg>
                             </button>
                         </div>
-                        <div class="days-left" id="days-left" style="color:{{$color[8]}}">
+                        <div class="days-left" id="days-left"    >
                             @php
                                 $fechaActual=date('Y-m-d');
                                 $fechaActualSegundos=strtotime($fechaActual);
@@ -655,6 +668,9 @@
     line-height: 1.5;
     border-radius: .25rem;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.modal-project-options div:hover{
+    background-color: red;
 }
 </style>
 

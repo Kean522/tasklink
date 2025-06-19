@@ -1368,7 +1368,7 @@ option{
 .box-content-header{
   outline:2px solid none;
   text-align: center;
-  width: 230px;
+  width: 315px;
   font-size: 18px;
   line-height: 24px;
   font-weight: 700;
@@ -1438,6 +1438,7 @@ option{
 .project-box-footer{
   outline:2px solid none;
   width:400px;
+  /* 230 */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -1463,13 +1464,13 @@ option{
 }
 #exampleModal .project-box{
   position: absolute;
-  margin-top:-780px;
+  margin-top:-830px;
  
 }
 #exampleModal .contenido{
   position: absolute;
   margin-left: 600px;
-  margin-top: -900px;
+  margin-top: -1000px;
 }
 .contenido form{
   outline: 2px solid none;
