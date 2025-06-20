@@ -25,4 +25,11 @@ class ProjectController extends Controller
         $project->users()->attach($request->input('usuario'));
         return redirect()->back();
     }
+
+    public function delete(Request $request){
+        $projectId=$request->input('id');
+        $project=Project::find($projectId);
+        if($project) $project->delete();
+        return redirect()->back();
+    }
 }

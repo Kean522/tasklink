@@ -1308,14 +1308,6 @@ option{
   display: none;
 }
 
-.project-box:hover{
-  cursor: pointer;
-  outline:2px solid none;
-  
-  transform: scale(1.01);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-} 
-
 .project-box .days-left.editar:hover,.project-box .days-left.ver:hover{
   transform: scale(1.03);
   

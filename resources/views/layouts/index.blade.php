@@ -14,7 +14,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @vite(['resources/css/index.css', 'resources/js/index.js'])
     
@@ -40,18 +40,8 @@
             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
         </button>
 
-        <div class="modal-project-options" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;position: absolute;z-index:1;outline:2px solid none;width:180px;height:110px;margin-left:520px;margin-top:120px;background-color:#f3f6fd;border-radius:20px;">
-            <div style="width:190px;height:10px;display:flex;justify-content:center;align-items:center;"> <p style="">Eliminar</p></div>
-            <div style="border-width: 1px 0px 0px 0px;border-style: solid;border-color: rgba(150, 142, 142, 0.527);width:190px;height:40px;display:flex;justify-content:center;align-items:center;margin-top:-10px;"><p style="margin-top:30px;">Editar</p></div>
-        </div>
-        <div class="triangle" style="
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 30px solid red;margin-left:598px;margin-top:230px;">
-        </div>
+        
+            
 
         <button class="profile-btn">
             @php
@@ -251,12 +241,16 @@
         </div>
          --}}
           <div class="project-box-wrapper">  
+            
             @if($proyectosDisponibles->isNotEmpty())
                 @foreach($proyectosDisponibles as $proyecto)
+                
+                
                     @php
                         $colores = $proyecto->color_font;
                         $color = explode(",", $colores);
                     @endphp
+                    
                     <div class="project-box" style="background-color:{{$proyecto->color_project}}">
                         <div class="project-box-header">
                             @php
@@ -269,6 +263,7 @@
                                 $diaCreacionProyecto=$fechaCreacionProyecto->format('d');
                                 $anoCreacionProyecto=$fechaCreacionProyecto->format('Y');
                             @endphp
+                            
                             <span style="color:{{$color[0]}}">{{$nombreMesProyectoTraducido." ".$diaCreacionProyecto.", ".$anoCreacionProyecto;}}</span>
                             <div class="more-wrapper">
                                 <button class="project-btn-more">
@@ -277,6 +272,20 @@
                                     <circle cx="12" cy="5" r="1" />
                                     <circle cx="12" cy="19" r="1" /></svg>
                                 </button>
+                                <div class="modal-project-options" style="display:none;">
+                    <p>Editar</p>
+                    <hr>
+                    <p onclick="confirmarEliminado({{$proyecto->id}})">Eliminar</p>
+                    <div class="triangle" style="
+                        position: absolute;
+                        z-index:1;
+                        width: 0;
+                        height: 0;
+                        border-left: 10px solid transparent;
+                        border-right: 10px solid transparent;
+                        border-top: 30px solid #f3f6fd;margin-left:598px;margin-left:58px;margin-top:-16px;">
+                    </div>
+                </div>
                             </div>
                         </div>
                         <div class="project-box-content-header">
@@ -583,13 +592,68 @@
             @include('modals.form_project')
         </div> 
 
-     
+ 
 <div id="pageOverlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background: rgba(0,0,0,0.6); z-index: 1;"></div>
+
+<form id="form_eliminar_proyecto" method="POST" action="{{ route('project.delete') }}" style="display:none;position: absolute;">
+    @csrf
+    <input type="hidden" name="id" id="proyecto-id" value="">
+</form>
+
 </body>
 </html>
 
-
 <style>
+div.modal-project-options {
+  z-index: 1;
+  position: absolute;
+  width: 140px;
+  height: 90px;
+  margin-left: -56px;
+  margin-top: -150px;
+  border-radius: 20px;
+}
+
+
+div.modal-project-options p:first-of-type {
+  background-color: #f3f6fd;
+  margin-top: 7px;
+  outline: 2px solid none;
+  width: 140px;
+  text-align: center;
+  height: 40px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 8px;
+}
+
+.project-box .project-box-header .more-wrapper .modal-project-options p:hover .project-box{
+    scale: (1.00);
+}
+
+
+
+div.modal-project-options hr {
+  width: 140px;
+  margin-top: -17px;
+}
+
+div.modal-project-options p:last-of-type {
+  background-color: #f3f6fd;
+  margin-top: -8px;
+  outline: 2px solid none;
+  width: 140px;
+  text-align: center;
+  height: 40px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 8px;
+}
+
+ 
+
+
+
          .app-sidebar-link.active {
     background-color: #1f1c2e;
     color: #fff;
@@ -618,8 +682,7 @@
     object-fit: cover;
     width: 40px;
     height: 40px;
-    display: flex
-;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     outline: 2px solid none;
@@ -669,12 +732,48 @@
     border-radius: .25rem;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
-.modal-project-options div:hover{
-    background-color: red;
-}
+
 </style>
 
 <script>
+    document.querySelectorAll('.project-box').forEach(box => {
+    box.addEventListener('mouseenter', () => {
+        box.style.cursor = 'pointer';
+        box.style.outline = '2px solid none';
+        box.style.transform = 'scale(1.01)';
+        box.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+    });
+
+    box.addEventListener('mouseleave', () => {
+        box.style.cursor = '';
+        box.style.outline = '';
+        box.style.transform = '';
+        box.style.boxShadow = '';
+    });
+    });
+
+
+
+    document.querySelectorAll('.modal-project-options p').forEach(p => {
+        p.addEventListener('mouseenter', () => {
+            p.style.background='#dfdfdf';
+            document.querySelectorAll('.project-box').forEach(box => {
+                box.style.transform = 'scale(1.00)';
+                box.style.boxShadow='0px 0px 0px 0px';
+            });
+            
+        });
+
+        p.addEventListener('mouseleave', () => {
+            p.style.background='';
+        });
+    });
+
+        $('.project-btn-more').on('click', function() {
+            const projectBox = $(this).closest('.project-box');
+            const modal = projectBox.find('.modal-project-options');
+            modal.fadeToggle(200); 
+        });
 
     function displayDate(){
         document.getElementById('inputFechaFinalizacion').addEventListener('change', function() {
@@ -684,6 +783,10 @@
                 document.getElementById('days-left').innerHTML=`${Math.trunc(diff_dias)} Days Left`;
             });
         }
+
+        
+
+        
 
 
     $(document).ready(function () {
@@ -702,6 +805,30 @@
             $('#pageOverlay').fadeOut();
         });
 
+        
+
       
     });
+function confirmarEliminado(projectId){
+    console.log(projectId);
+        Swal.fire({
+            title: "¿Seguro que deseas eliminar?",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "Si",
+            denyButtonText: `No`
+                }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('proyecto-id').value=projectId;
+                document.getElementById('form_eliminar_proyecto').submit();
+                Swal.fire("Eliminado", "", "success");
+            } else if (result.isDenied) {
+                Swal.fire("No se eliminó ", "", "info");
+            }
+    });
+}
+
+
+
+   
 </script>

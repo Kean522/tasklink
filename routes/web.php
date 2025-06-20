@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function () {
     //Route::get('tarea/{funcion}', [TareaController::class, 'index'])->name('tarea');
     Route::post('/tarea/crear', [TareaController::class, 'create'])->name('tarea.create');
     Route::post('/proyecto/crear', [ProjectController::class, 'create'])->name('project.create');
+    Route::post('/proyecto/eliminar', [ProjectController::class, 'delete'])->name('project.delete');
 });
 
 
