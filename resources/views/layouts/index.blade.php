@@ -272,7 +272,7 @@
                                     <circle cx="12" cy="19" r="1" /></svg>
                                 </button>
                                 <div class="modal-project-options" style="display:none;">
-                    <p onclick="editarProyecto({{$proyecto}})">Editar</p>
+                    <p onclick="editarProyecto({{$proyecto}},{{$proyecto->users}})">Editar</p>
                     <hr>
                     <p onclick="confirmarEliminado({{$proyecto->id}})">Eliminar</p>
                     <div class="triangle" style="
@@ -313,7 +313,7 @@
                             {{-- profiles/DeAUpz4ikJpcdklmCXZfUDPtpny8CToEvnMCnwXy.jpg
                             <img src="C:/laragon/www/tasklink/storage/app/public/profiles/01iei3EjjfXMgLDUpvGSjFboBJrRwiMUlKMMLdeP.jpg" alt=""> --}}
                             @foreach($proyecto->users as $usuario)
-                                <img src="{{asset('storage/app/public/'.$usuario->profile_photo)}}">
+                                <img src="{{asset('storage/'.$usuario->profile_photo)}}" id="imagenesUsuariosProyecto"/>
                             @endforeach
                             
                             {{-- @php
@@ -853,29 +853,91 @@ function confirmarEliminado(projectId){
    
 </script>
 <script>
-    function editarProyecto(proyecto) {
-                $('#exampleModal').fadeIn();
-                $('#exampleModal').css('z-index',9998);
-                $('#pageOverlay').fadeIn();
+    function editarProyecto(proyecto,usuarios) {
+            $('#exampleModal').fadeIn();
+            $('#exampleModal').css('z-index',9998);
+            $('#pageOverlay').fadeIn();
 
-                //El proyecto en sí
-                const fechaElegida=new Date(proyecto.due_date);
-                
-                const meses=[
-                        "Enero","Febrero","Marzo","Abril","Mayo","Junio",
-                        "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
-                    ];
-                const diaElegido=fechaElegida.getDate();
-                const mesElegido=meses[fechaElegida.getMonth()];
-                const anoElegido=fechaElegida.getFullYear();
-                console.log(diaElegido,mesElegido,anoElegido);
-                // const fechaElegidaFormateada=`${mesElegido} ${diaElegido},${anoElegido}`;
-                $('.project-box-header').children().first().html(`${anoElegido}`);
+            //El proyecto en sí
+            fillContentProjectBox(proyecto,usuarios);
+            fillContentFormProjectBox(proyecto,usuarios);
 
-
-                //
-                console.log(typeof proyecto); 
-                console.log(proyecto);
-                console.log(proyecto.id);
           }
+
+          function fillContentProjectBox(proyecto,usuarios){
+            const fechaElegida=new Date(proyecto.due_date);
+            
+            const meses=[
+                    "Enero","Febrero","Marzo","Abril","Mayo","Junio",
+                    "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
+                ];
+            const diaElegido=fechaElegida.getDate();
+            const mesElegido=meses[fechaElegida.getMonth()];
+            const anoElegido=fechaElegida.getFullYear();
+            const fechaElegidaFormateada=`${mesElegido} ${diaElegido},${anoElegido}`;
+            $('#exampleModal .project-box-header').children().first().html(`${fechaElegidaFormateada}`);
+            $('#exampleModal .project-box-content-header').children().first().html(`${proyecto.name}`);
+            $('#exampleModal .project-box-content-header').children().last().html(`${proyecto.description}`);
+            $('#exampleModal .box-progress').css('background',proyecto.color_progress_bar);
+
+            const fechaActual=new Date();
+            const fechasResta=fechaElegida.getTime()-fechaActual.getTime();
+            const diasRestantes=Math.round(fechasResta/ (1000*60*60*24));
+            let frase="";
+            if(diasRestantes<0) frase="Dia expirado";
+            if(diasRestantes==0) frase="Hoy";
+            if(diasRestantes==1) frase=`Queda 1 día`;
+            if(diasRestantes>1) frase=`Quedan ${diasRestantes} días`;
+            $('#exampleModal #days-left').html(`${frase}`); 
+
+            $('#exampleModal .participants').html('');
+            $('#exampleModal .participants').prepend(
+                `<button class="add-participant" onclick="changeColorFont(this)" id="font">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+                        <path d="M12 5v14M5 12h14" />
+                    </svg>
+                 </button>`);
+
+            for (let usuario of usuarios) {
+                $('#exampleModal .participants').append(`<img src="{{asset('storage/${usuario.profile_photo}')}}"/>`);   
+            }
+
+            const coloresFont=proyecto.color_font.split(',');
+            $('#exampleModal #font').each(function(x, font) {
+                $(this).css('color',coloresFont[x]);
+                console.log(coloresFont[x]);
+            });
+          }
+
+
+          function fillContentFormProjectBox(proyecto,usuarios) { 
+                $('#inputTitulo').val(proyecto.name);
+                $('#inputDescripcion').val(proyecto.description);
+                $('#inputColor').val(proyecto.color_project);
+                $('.color-label').css('background',proyecto.color_project);
+                $('#usuarios-elegidos').html('');
+
+                for(let usuario of usuarios){
+                    let usuarioEtiqueta=`
+                    <div class="dropdown-option" data-value="${usuario.id}" style="outline:2px solid none;">
+                        <img src="http://tasklink.test/storage/${usuario.profile_photo}">
+                        ${usuario.name}
+                        <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;" onclick="eliminarUsuariosElegidos(this)"></i><input type="hidden" name="usuario[]" value="4">
+                    </div>
+                    `;
+                    $('#usuarios-elegidos').append(`${usuarioEtiqueta}`);
+                    
+                    $('.dropdown-content').children().each(function(i) {
+                        console.log($('.dropdown-content'));
+                    });
+                    // @foreach($usuariosDisponibles as $usuario)
+                    //         <div class="dropdown-option" data-value="{{$usuario->id}}" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
+                    //             <img src="{{asset('storage/'.$usuario->profile_photo)}}"/>
+                    //             {{$usuario->name}}
+                    //         </div>
+                    //     @endforeach
+                    
+                }
+
+           }
 </script>

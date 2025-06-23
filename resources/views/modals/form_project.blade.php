@@ -6,7 +6,7 @@
                         @php
                          
                         @endphp
-                        <span onclick="changeColorFont(this)" data-value='1' id="font">Enero 20,2030</span>
+                        <span onclick="changeColorFont(this)" data-value='1' id="font" class="fecha">Enero 20,2030</span>
                         <div class="more-wrapper">
                             <button class="project-btn-more">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
@@ -82,6 +82,7 @@
                 <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;" id="usuarios-elegidos">
                     
                 </div>
+                
                 
                 <div class="custom-dropdown">
                     <button class="dropdown-button" type="button">Selecciona un Usuario</button>
