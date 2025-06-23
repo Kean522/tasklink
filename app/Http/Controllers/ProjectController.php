@@ -17,11 +17,11 @@ class ProjectController extends Controller
             'description'=>$request->input('descripcion'),
             'color_project'=>$request->input('projectBackgroundColor'),
             'color_font'=>$request->input('font'),
+            'color_progress_bar'=>$request->input('progressBarBackground'),
             'due_date'=>$request->input('fechaFinalizacion'),
             'image'=>strval($imagePath)
         ]);
 
-        echo $project;
         $project->users()->attach($request->input('usuario'));
         return redirect()->back();
     }
@@ -30,6 +30,7 @@ class ProjectController extends Controller
         $projectId=$request->input('id');
         $project=Project::find($projectId);
         if($project) $project->delete();
+        else echo "Error 303";
         return redirect()->back();
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('color_project');
             $table->string('color_font');
+            $table->string('color_progress_bar');
             $table->date('due_date');
             $table->string('image');
             $table->timestamps();

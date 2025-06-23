@@ -244,8 +244,7 @@
             
             @if($proyectosDisponibles->isNotEmpty())
                 @foreach($proyectosDisponibles as $proyecto)
-                
-                
+
                     @php
                         $colores = $proyecto->color_font;
                         $color = explode(",", $colores);
@@ -273,7 +272,7 @@
                                     <circle cx="12" cy="19" r="1" /></svg>
                                 </button>
                                 <div class="modal-project-options" style="display:none;">
-                    <p>Editar</p>
+                    <p onclick="editarProyecto({{$proyecto}})">Editar</p>
                     <hr>
                     <p onclick="confirmarEliminado({{$proyecto->id}})">Eliminar</p>
                     <div class="triangle" style="
@@ -297,7 +296,7 @@
                         <div class="box-progress-wrapper">
                             <p class="box-progress-header" style="color:{{$color[3]}}">Progress</p>
                             <div class="box-progress-bar">
-                                <span class="box-progress"></span>
+                                <span class="box-progress" style="background:{{$proyecto->color_progress_bar}}"></span>
                             </div>
                             <p class="box-progress-percentage" style="color:{{$color[4]}}">20%</p>
                             <div class="days-left editar" style="color:{{$color[5]}}">
@@ -310,12 +309,18 @@
                         <div class="project-box-footer">
                         <div class="participants">
                             {{-- Participantes --}}
+                            {{-- C:/laragon\www\tasklink\storage\app\public\profiles\01iei3EjjfXMgLDUpvGSjFboBJrRwiMUlKMMLdeP.jpg --}}
+                            {{-- profiles/DeAUpz4ikJpcdklmCXZfUDPtpny8CToEvnMCnwXy.jpg
+                            <img src="C:/laragon/www/tasklink/storage/app/public/profiles/01iei3EjjfXMgLDUpvGSjFboBJrRwiMUlKMMLdeP.jpg" alt=""> --}}
+                            @foreach($proyecto->users as $usuario)
+                                <img src="{{asset('storage/app/public/'.$usuario->profile_photo)}}">
+                            @endforeach
                             
-                            @php
+                            {{-- @php
                                 foreach ($proyecto->users as $usuario) {
-                                    echo "<img src='asset('storage/'.$usuario->profile_photo)'/>";
+                                    echo "<img src='asset('storage/app/public/$usuario->profile_photo')'/>";
                                 }
-                            @endphp
+                            @endphp --}}
                             <button class="add-participant"  style="color:{{$color[7]}}" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
                                 <path d="M12 5v14M5 12h14" />
@@ -591,7 +596,7 @@
         <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;margin-left:80px;">
             @include('modals.form_project')
         </div> 
-
+       
  
 <div id="pageOverlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background: rgba(0,0,0,0.6); z-index: 1;"></div>
 
@@ -792,7 +797,8 @@ div.modal-project-options p:last-of-type {
     $(document).ready(function () {
         
        $('#exampleModal').fadeOut();
-            $('#pageOverlay').fadeOut();
+       $('#exampleModalEdit').fadeOut();
+       $('#pageOverlay').fadeOut();
         $('.app-sidebar-link.active').click(function (e) {
             e.preventDefault();
             $('#exampleModal').fadeIn();
@@ -804,11 +810,26 @@ div.modal-project-options p:last-of-type {
             $('#exampleModal').fadeOut();
             $('#pageOverlay').fadeOut();
         });
+        $('#exampleModal .btn.secondary').click(function(e){
+            $('#exampleModal').fadeOut();
+            $('#pageOverlay').fadeOut();
+        });
 
+       
+       
+     
+           
+
+
+
+        
         
 
       
     });
+   
+   
+
 function confirmarEliminado(projectId){
     console.log(projectId);
         Swal.fire({
@@ -829,6 +850,32 @@ function confirmarEliminado(projectId){
 }
 
 
-
    
+</script>
+<script>
+    function editarProyecto(proyecto) {
+                $('#exampleModal').fadeIn();
+                $('#exampleModal').css('z-index',9998);
+                $('#pageOverlay').fadeIn();
+
+                //El proyecto en sí
+                const fechaElegida=new Date(proyecto.due_date);
+                
+                const meses=[
+                        "Enero","Febrero","Marzo","Abril","Mayo","Junio",
+                        "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
+                    ];
+                const diaElegido=fechaElegida.getDate();
+                const mesElegido=meses[fechaElegida.getMonth()];
+                const anoElegido=fechaElegida.getFullYear();
+                console.log(diaElegido,mesElegido,anoElegido);
+                // const fechaElegidaFormateada=`${mesElegido} ${diaElegido},${anoElegido}`;
+                $('.project-box-header').children().first().html(`${anoElegido}`);
+
+
+                //
+                console.log(typeof proyecto); 
+                console.log(proyecto);
+                console.log(proyecto.id);
+          }
 </script>

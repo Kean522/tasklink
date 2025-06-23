@@ -24,9 +24,9 @@
                     </div>
                     <div class="box-progress-wrapper">
                         <p class="box-progress-header" onclick="changeColorFont(this)" data-value='4' id="font">Progress</p>
-                        <div class="box-progress-bar">
-                            <span class="box-progress"></span>
-                        </div>
+                        <div class="box-progress-bar" onclick="changeColorFont(this)" >
+                            <span class="box-progress"  ></span>
+                        </div> 
                         <p class="box-progress-percentage" onclick="changeColorFont(this)" data-value='5' id="font">20%</p>
                         <div class="days-left editar" onclick="changeColorFont(this)" data-value='6' id="font">
                            <p>Editar</p> 
@@ -36,21 +36,16 @@
                         </div>
                     </div>
                     <div class="project-box-footer">
-                    <div class="participants">
+                    <div class="participants" >
                         {{-- Participantes --}}
-
-                        
-                   
                         <button class="add-participant" onclick="changeColorFont(this)" id="font">
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
                                 <path d="M12 5v14M5 12h14" />
                             </svg>
                         </button>
                     </div>
-                    <div class="days-left" id="days-left" onclick="changeColorFont(this)" data-value='8' id="font"> 
-                        @php
-                            echo "Dias Restantes";
-                        @endphp    
+                    <div class="days-left" id="days-left" onclick="changeColorFont(this)" data-value='8' id="font">  
+                        <p>Dias Restantes</p>
                     </div>
                     </div>
 
@@ -83,6 +78,7 @@
                 <label for="inputUsuarios">Usuarios</label>
                 <input type="hidden" name="font" id="colorFonts" value="">
                 <input type="hidden" name="projectBackgroundColor" id="projectBackgroundColor" value="">
+                <input type="hidden" name="progressBarBackground" id="progressBarBackground" value="#333C6E">
                 <div style="outline:1px solid rgba(128, 128, 128, 0.562);min-height:33px;border-radius:3px;display:flex;flex-wrap:wrap;" id="usuarios-elegidos">
                     
                 </div>
@@ -100,7 +96,7 @@
                 </div>
 
                 <label for="fecha">Fecha de finalizacion</label>
-                <input type="date" id="inputFechaFinalizacion"  name="fechaFinalizacion" >
+                <input type="date" id="inputFechaFinalizacion" name="fechaFinalizacion" >
 
                 <label for="imagen">Imagen</label>
                 <input type="file" id="inputImagen" name="imagen" style="position: absolute;opacity:0;z-index:-1;">
@@ -121,13 +117,27 @@
            
            
              function displayInputValue(input){
-                if(input.id=="inputTitulo") document.querySelector(".box-content-header").innerHTML=input.value;
-                if(input.id=="inputDescripcion") document.querySelector(".box-content-subheader").innerHTML=input.value;
-                if(input.id=="inputColor") document.querySelector("titulo").innerHTML=input.value;
-                if(input.id=="inputUsuarios") document.getElementById("usuarios").innerHTML=input.value;
-                if(input.id=="inputFechaFinalizacion") {
+                if(input.id=="inputTitulo") document.querySelector("#exampleModal .box-content-header").innerHTML=input.value;
+                if(input.id=="inputDescripcion") document.querySelector("#exampleModal .box-content-subheader").innerHTML=input.value;
+                if(input.id=="inputColor") document.querySelector("#exampleModal titulo").innerHTML=input.value;
+                if(input.id=="inputUsuarios") document.getElementById("#exampleModal usuarios").innerHTML=input.value;
+                // if(input.id=="inputFechaFinalizacion") {
+                //     const fechaActual=new Date();
+                //     const ano=fechaActual.getFullYear();
+                //     const mes=fechaActual.getMonth();
+                //     const dia=fechaActual.getDay();
+                //     const fechaFormateadaActual=ano+"-"+mes+"-"+dia;
                     
-                }
+                //     const fechaElegida=input.value;
+                //     const diasRestantes=(fechaFormateadaActual-fechaElegida)/(60*60*24);
+                //     let frase="";
+                //     if(diasRestantes<0) frase="Dia expirado";
+                //     if(diasRestantes==0) frase="Hoy";
+                //     if(diasRestantes==1) frase=`Queda 1 día`;
+                //     if(diasRestantes>1) frase=`Quedan ${diasRestantes} días`;
+                //     document.getElementById('#exampleModal #days-left').innerHTML=`${frase}`;    
+                // }
+                
              }
 
 
@@ -148,12 +158,30 @@
             }
             function displayDate(){
                 document.getElementById('inputFechaFinalizacion').addEventListener('change', function() {
-                        var input_date_time=new Date(this.value).getTime();
-                        var actual_date_time=new Date().getTime();
-                        var diff_dias=Math.abs((actual_date_time-input_date_time)/(1000*60*60*24));
-                        document.getElementById('days_left').innerHTML=`${Math.trunc(diff_dias)} Days Left`;
-                    });
-                }
+                    const fechaElegida=new Date(this.value);
+                    const fechaActual=new Date();
+
+                    const fechasResta=fechaElegida.getTime()-fechaActual.getTime();
+                    const diasRestantes=Math.round(fechasResta/ (1000*60*60*24));
+                    
+                    console.log(diasRestantes);
+                    let frase="";
+                    if(diasRestantes<0) frase="Dia expirado";
+                    if(diasRestantes==0) frase="Hoy";
+                    if(diasRestantes==1) frase=`Queda 1 día`;
+                    if(diasRestantes>1) frase=`Quedan ${diasRestantes} días`;
+                    document.querySelector('#exampleModal #days-left').innerHTML=`${frase}`; 
+                    const diaElegido=fechaElegida.getDate();
+                    const meses=[
+                        "Enero","Febrero","Marzo","Abril","Mayo","Junio",
+                        "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
+                    ];
+                    const mesElegido=meses[fechaElegida.getMonth()];
+                    const anoElegido=fechaElegida.getFullYear();
+                    const fechaElegidaFormateada=`${mesElegido} ${diaElegido},${anoElegido}`;
+                    document.querySelector('.project-box-header').firstElementChild.innerHTML=`${fechaElegidaFormateada}`;
+                });
+            }
                 function displayColor(){
                      document.getElementById('inputColor').addEventListener('input', function() {
                         document.querySelector('#exampleModal .project-box').style.background = this.value;
@@ -162,17 +190,40 @@
                     document.getElementById('inputColorFuente').addEventListener('input', function() {
                         document.querySelector('#exampleModal .color-label-fuente').style.background = this.value;
                         document.body.style.cursor='crosshair';
-                        document.querySelector('#exampleModal .add-participant').style.cursor='crosshair';
-                        document.querySelector('#exampleModal .project-box').style.cursor='crosshair';
+                        let addParticipant = document.querySelector('#exampleModal .add-participant');
+                        let projectBox = document.querySelector('#exampleModal .project-box');
+
+                        addParticipant.addEventListener('mouseenter', function() {
+                            this.style.cursor = 'crosshair';
+                        });
+                        addParticipant.addEventListener('mouseleave', function() {
+                            this.style.cursor = ''; 
+                        });
+
+                        projectBox.addEventListener('mouseenter', function() {
+                            this.style.cursor = 'crosshair';
+                        });
+                        projectBox.addEventListener('mouseleave', function() {
+                            this.style.cursor = '';
+                        });
                         const colorElegido=this.value;
                         document.getElementById('colorElegido').value=colorElegido;
                     });
                 }
 
+                
+
                 function changeColorFont(element){
-                    const colorElegido=document.getElementById('colorElegido').value;
-                    element.style.color=colorElegido;
-                    saveColorFont();
+                    if(element.className =="box-progress-bar"){
+                        const colorElegido=document.getElementById('colorElegido').value;
+                        document.getElementById('progressBarBackground').value=colorElegido;
+                        element.firstElementChild.style.background=colorElegido;
+                    }else{
+                        const colorElegido=document.getElementById('colorElegido').value;
+                        element.style.color=colorElegido;
+                        saveColorFont();
+                    }
+                    
                 }
 
                 saveColorFont();
@@ -208,6 +259,8 @@
                     const valorUsuario=usuarioSeleccionado.getAttribute('data-value');
                     usuarioSeleccionado.innerHTML+=`<input type="hidden" name="usuario[]" value="${valorUsuario}">`;
                     document.getElementById('usuarios-elegidos').appendChild(usuarioSeleccionado);  
+                    const imagenUsuario=usuarioSeleccionado.firstElementChild.cloneNode(false);
+                    document.querySelector('.participants').appendChild(imagenUsuario);
                 }
 
                 function eliminarUsuariosElegidos(element){
@@ -355,5 +408,8 @@
 }
 #exampleModal .box-content-subheader{
     outline: 2px solid none;
+}
+#exampleModal .project-box .participants img{
+    margin: 4px;
 }
 </style>

@@ -15,6 +15,7 @@ class Project extends Model
         'description',  
         'color_project', 
         'color_font',
+        'color_progress_bar',
         'due_date', 
         'image',
         'created_at',
