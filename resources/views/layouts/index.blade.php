@@ -596,8 +596,13 @@
         <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;margin-left:80px;">
             @include('modals.form_project')
         </div> 
-       
- 
+       <div class="modal" id="exampleModal Clonado" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;margin-left:80px;display:none;">
+            @include('modals.form_project')
+        </div> 
+        {{-- <div class="modal" id="exampleModal Clone" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;margin-left:80px;display:none;">
+            @include('modals.form_project')
+        </div> 
+  --}}
 <div id="pageOverlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background: rgba(0,0,0,0.6); z-index: 1;"></div>
 
 <form id="form_eliminar_proyecto" method="POST" action="{{ route('project.delete') }}" style="display:none;position: absolute;">
@@ -804,7 +809,11 @@ div.modal-project-options p:last-of-type {
             $('#exampleModal').fadeIn();
             $('#exampleModal').css('z-index',9998);
             $('#pageOverlay').fadeIn();
-        
+            $('#exampleModal #projectId').val();
+            $('#exampleModal #rutaImagen').val();
+            const clonedForm=document.getElementById('exampleModal').cloneNode(true);
+            document.getElementById('modalClonado').appendChild(clonedForm);
+            
       });
       $('.btn.secondary').click(function (e){
             $('#exampleModal').fadeOut();
@@ -865,6 +874,8 @@ function confirmarEliminado(projectId){
           }
 
           function fillContentProjectBox(proyecto,usuarios){
+            const colorProyecto=proyecto.color_project;
+            $('#exampleModal .project-box').css('background',colorProyecto);
             const fechaElegida=new Date(proyecto.due_date);
             
             const meses=[
@@ -928,8 +939,32 @@ function confirmarEliminado(projectId){
                     $('#usuarios-elegidos').append(`${usuarioEtiqueta}`);
                     
                     $('.dropdown-content').children().each(function(i) {
-                        console.log($('.dropdown-content'));
+                        if($(this).attr('data-value')==usuario.id) $(this).remove();
                     });
+
+
+
+                    $('#inputFechaFinalizacion').val(proyecto.due_date.split('T')[0]);
+                    
+
+                
+
+
+
+
+                    
+                    console.log(proyecto.image.length);
+
+                    const archivoRuta=proyecto.image;
+                    console.log(archivoRuta)
+                    const nombreArchivo=archivoRuta.replace("C:\\laragon\\www\\tasklink\\storage\\app/public/profiles\\","");
+                    console.log(nombreArchivo);
+                    $('#archivo_seleccionado').html(nombreArchivo);
+                    $('#projectId').val(proyecto.id);
+                    const rutaImagen="http://tasklink.test/storage/profiles/"+nombreArchivo;
+                    $('#imagenSeleccionada').attr('src',rutaImagen);
+                    $('#rutaImagen').attr('src',"profiles/"+nombreArchivo);
+                    // $('#imagenSeleccionado').attr('src',archivoRuta);
                     // @foreach($usuariosDisponibles as $usuario)
                     //         <div class="dropdown-option" data-value="{{$usuario->id}}" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
                     //             <img src="{{asset('storage/'.$usuario->profile_photo)}}"/>

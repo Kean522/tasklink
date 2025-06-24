@@ -50,6 +50,7 @@
                     </div>
 
                 </div>
+
        
           
        
@@ -57,6 +58,7 @@
             <form action="{{route('project.create')}}"  method="POST" enctype='multipart/form-data'>
                 @csrf
                 @method('POST')
+                <input type="hidden" name="projectId" id="projectId" value="">
                 <label for="titulo">Titulo</label>
                 <input type="text" id="inputTitulo" onkeyup="displayInputValue(this)" name="titulo">
 
@@ -103,8 +105,8 @@
                 <input type="file" id="inputImagen" name="imagen" style="position: absolute;opacity:0;z-index:-1;">
                 <button type="button" class="btn" style="margin-top: 3px;" id="seleccionar-archivo">Seleccionar Archivo</button>
                 <p style="margin-top:4px;" id="archivo_seleccionado">Ningún archivo seleccionado</p>
-
-
+                <img src="" id="imagenSeleccionada" style="width:80px;height:80px;">
+                <input type="hidden" name="rutaImagen" id="rutaImagen" value="">
                 <div class="button-group">
                     <button type="submit" class="btn">Crear</button>
                     <a href="#" class="btn secondary">Cerrar</a>
@@ -115,7 +117,7 @@
 
 
         <script>
-           
+           console.log(document.getElementById('imagen'););
            
              function displayInputValue(input){
                 if(input.id=="inputTitulo") document.querySelector("#exampleModal .box-content-header").innerHTML=input.value;
@@ -154,11 +156,17 @@
                 });
                 $('#inputImagen').on('change',function(){
                     let archivos=this.files;
-                    if(archivos) $('#archivo_seleccionado').html(`${archivos[0].name}`);
+                    if(archivos){
+                        $('#imagenSeleccionada').attr('src',URL.createObjectURL(archivos[0]));
+                        console.log($('#imagenSeleccionada').attr('src'));
+                        $('#archivo_seleccionado').html(`${archivos[0].name}`);
+                        console.log(archivos[0].name);
+                    } 
                 });
             }
             function displayDate(){
                 document.getElementById('inputFechaFinalizacion').addEventListener('change', function() {
+                    console.log(this.value);
                     const fechaElegida=new Date(this.value);
                     const fechaActual=new Date();
 
