@@ -746,6 +746,89 @@ div.modal-project-options p:last-of-type {
 </style>
 
 <script>
+    function displayColor(){
+        const modal=$('[id="exampleModal"]');
+        const inputColor=$('[id="inputColor"]');
+        const inputColorFuente=$('[id="inputColorFuente"]');
+        inputColor.on('input',function(){
+            const colorElegido=$(this).val();
+            const projectBox=modal.find('.project-box');
+            const inputColorProyectoFondo=modal.find('#projectBackgroundColor');
+            projectBox.css('background-color',colorElegido);
+            inputColorProyectoFondo.val(colorElegido);
+
+        });
+        inputColorFuente.on('input',function(){
+            
+        });
+    }
+    
+    function displayDate(){
+        const inputFechaFinalizacion=$('[id="inputFechaFinalizacion"]');
+        inputFechaFinalizacion.on('change',function(){
+            const fechaElegida=new Date($(this).val());
+            const fechaActual=new Date();
+            
+            const fechasResta=fechaElegida.getTime()-fechaActual.getTime();
+            const diasRestantes=Math.round(fechasResta/ (1000*60*60*24));
+
+            let frase="";
+            if(diasRestantes<0) frase="Dia expirado";
+            if(diasRestantes==0) frase="Hoy";
+            if(diasRestantes==1) frase=`Queda 1 día`;
+            if(diasRestantes>1) frase=`Quedan ${diasRestantes} días`;
+
+            const modal = $('[id="exampleModal"]'); 
+            modal.find("#days-left").html(frase);
+
+            const diaElegido=fechaElegida.getDate();
+            const meses=[
+                "Enero","Febrero","Marzo","Abril","Mayo","Junio",
+                "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
+            ];
+            const mesElegido=meses[fechaElegida.getMonth()];
+            const anoElegido=fechaElegida.getFullYear();
+            const fechaElegidaFormateada=`${mesElegido} ${diaElegido},${anoElegido}`;
+            console.log(fechaElegidaFormateada);
+            modal.find('.project-box-header').children().first().html(fechaElegidaFormateada);
+
+        });
+
+    }
+    displayDate();
+
+
+
+        function displayInputValue(input) {
+            const $input = $(input);
+            const modal = $('[id="exampleModal"]'); 
+
+            if ($input.attr('id') == "inputTitulo") {
+                modal.find(".box-content-header").html($input.val());
+            }
+
+            if ($input.attr('id') == "inputDescripcion") {
+                modal.find(".box-content-subheader").html($input.val());
+            }
+        }
+    
+    // $('#exampleModal').each(function (e) {
+    //     console.log("Modal:"+e);
+
+    //     // displayInputValue($('#inputTitulo'));
+    //     // displayInputValue($('#inputDescripcion'));
+    // });
+
+   
+
+
+
+
+
+
+
+
+
     document.querySelectorAll('.project-box').forEach(box => {
     box.addEventListener('mouseenter', () => {
         box.style.cursor = 'pointer';
@@ -792,14 +875,14 @@ div.modal-project-options p:last-of-type {
        
         
 
-    function displayDate(){
-        document.getElementById('inputFechaFinalizacion').addEventListener('change', function() {
-                var input_date_time=new Date(this.value).getTime();
-                var actual_date_time=new Date().getTime();
-                var diff_dias=Math.abs((actual_date_time-input_date_time)/(1000*60*60*24));
-                document.getElementById('days-left').innerHTML=`${Math.trunc(diff_dias)} Days Left`;
-            });
-        }
+    // function displayDate(){
+    //     document.getElementById('inputFechaFinalizacion').addEventListener('change', function() {
+    //             var input_date_time=new Date(this.value).getTime();
+    //             var actual_date_time=new Date().getTime();
+    //             var diff_dias=Math.abs((actual_date_time-input_date_time)/(1000*60*60*24));
+    //             document.getElementById('days-left').innerHTML=`${Math.trunc(diff_dias)} Days Left`;
+    //         });
+    //     }
 
         
 

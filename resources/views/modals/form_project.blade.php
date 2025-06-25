@@ -149,172 +149,172 @@
             
 
 
-            displayDate();
-            displayColor();
-            uploadImage();
-            function uploadImage(){
-                $('#seleccionar-archivo').click(function(e){
-                    $('#inputImagen').click();
-                });
-                $('#inputImagen').on('change',function(){
-                    let archivos=this.files;
-                    if(archivos){
-                        $('#imagenSeleccionada').attr('src',URL.createObjectURL(archivos[0]));
-                        console.log($('#imagenSeleccionada').attr('src'));
-                        $('#archivo_seleccionado').html(`${archivos[0].name}`);
-                        console.log(archivos[0].name);
-                    } 
-                });
-            }
-            function displayDate(){
-                document.getElementById('inputFechaFinalizacion').addEventListener('change', function() {
-                    console.log(this.value);
-                    const fechaElegida=new Date(this.value);
-                    const fechaActual=new Date();
+            // displayDate();
+            // displayColor();
+            // uploadImage();
+            // function uploadImage(){
+            //     $('#seleccionar-archivo').click(function(e){
+            //         $('#inputImagen').click();
+            //     });
+            //     $('#inputImagen').on('change',function(){
+            //         let archivos=this.files;
+            //         if(archivos){
+            //             $('#imagenSeleccionada').attr('src',URL.createObjectURL(archivos[0]));
+            //             console.log($('#imagenSeleccionada').attr('src'));
+            //             $('#archivo_seleccionado').html(`${archivos[0].name}`);
+            //             console.log(archivos[0].name);
+            //         } 
+            //     });
+            // }
+            // function displayDate(){
+            //     document.getElementById('inputFechaFinalizacion').addEventListener('change', function() {
+            //         console.log(this.value);
+            //         const fechaElegida=new Date(this.value);
+            //         const fechaActual=new Date();
 
-                    const fechasResta=fechaElegida.getTime()-fechaActual.getTime();
-                    const diasRestantes=Math.round(fechasResta/ (1000*60*60*24));
+            //         const fechasResta=fechaElegida.getTime()-fechaActual.getTime();
+            //         const diasRestantes=Math.round(fechasResta/ (1000*60*60*24));
                     
-                    console.log(diasRestantes);
-                    let frase="";
-                    if(diasRestantes<0) frase="Dia expirado";
-                    if(diasRestantes==0) frase="Hoy";
-                    if(diasRestantes==1) frase=`Queda 1 día`;
-                    if(diasRestantes>1) frase=`Quedan ${diasRestantes} días`;
-                    document.querySelector('#exampleModal #days-left').innerHTML=`${frase}`; 
-                    const diaElegido=fechaElegida.getDate();
-                    const meses=[
-                        "Enero","Febrero","Marzo","Abril","Mayo","Junio",
-                        "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
-                    ];
-                    const mesElegido=meses[fechaElegida.getMonth()];
-                    const anoElegido=fechaElegida.getFullYear();
-                    const fechaElegidaFormateada=`${mesElegido} ${diaElegido},${anoElegido}`;
-                    document.querySelector('.project-box-header').firstElementChild.innerHTML=`${fechaElegidaFormateada}`;
-                });
-            }
-                function displayColor(){
-                     document.getElementById('inputColor').addEventListener('input', function() {
-                        document.querySelector('#exampleModal .project-box').style.background = this.value;
-                        document.getElementById('projectBackgroundColor').value=this.value;
-                    });
-                    document.getElementById('inputColorFuente').addEventListener('input', function() {
-                        document.querySelector('#exampleModal .color-label-fuente').style.background = this.value;
-                        document.body.style.cursor='crosshair';
-                        let addParticipant = document.querySelector('#exampleModal .add-participant');
-                        let projectBox = document.querySelector('#exampleModal .project-box');
+            //         console.log(diasRestantes);
+            //         let frase="";
+            //         if(diasRestantes<0) frase="Dia expirado";
+            //         if(diasRestantes==0) frase="Hoy";
+            //         if(diasRestantes==1) frase=`Queda 1 día`;
+            //         if(diasRestantes>1) frase=`Quedan ${diasRestantes} días`;
+            //         document.querySelector('#exampleModal #days-left').innerHTML=`${frase}`; 
+            //         const diaElegido=fechaElegida.getDate();
+            //         const meses=[
+            //             "Enero","Febrero","Marzo","Abril","Mayo","Junio",
+            //             "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
+            //         ];
+            //         const mesElegido=meses[fechaElegida.getMonth()];
+            //         const anoElegido=fechaElegida.getFullYear();
+            //         const fechaElegidaFormateada=`${mesElegido} ${diaElegido},${anoElegido}`;
+            //         document.querySelector('.project-box-header').firstElementChild.innerHTML=`${fechaElegidaFormateada}`;
+            //     });
+            // }
+            //     function displayColor(){
+            //          document.getElementById('inputColor').addEventListener('input', function() {
+            //             document.querySelector('#exampleModal .project-box').style.background = this.value;
+            //             document.getElementById('projectBackgroundColor').value=this.value;
+            //         });
+            //         document.getElementById('inputColorFuente').addEventListener('input', function() {
+            //             document.querySelector('#exampleModal .color-label-fuente').style.background = this.value;
+            //             document.body.style.cursor='crosshair';
+            //             let addParticipant = document.querySelector('#exampleModal .add-participant');
+            //             let projectBox = document.querySelector('#exampleModal .project-box');
 
-                        addParticipant.addEventListener('mouseenter', function() {
-                            this.style.cursor = 'crosshair';
-                        });
-                        addParticipant.addEventListener('mouseleave', function() {
-                            this.style.cursor = ''; 
-                        });
+            //             addParticipant.addEventListener('mouseenter', function() {
+            //                 this.style.cursor = 'crosshair';
+            //             });
+            //             addParticipant.addEventListener('mouseleave', function() {
+            //                 this.style.cursor = ''; 
+            //             });
 
-                        projectBox.addEventListener('mouseenter', function() {
-                            this.style.cursor = 'crosshair';
-                        });
-                        projectBox.addEventListener('mouseleave', function() {
-                            this.style.cursor = '';
-                        });
-                        const colorElegido=this.value;
-                        document.getElementById('colorElegido').value=colorElegido;
-                    });
-                }
+            //             projectBox.addEventListener('mouseenter', function() {
+            //                 this.style.cursor = 'crosshair';
+            //             });
+            //             projectBox.addEventListener('mouseleave', function() {
+            //                 this.style.cursor = '';
+            //             });
+            //             const colorElegido=this.value;
+            //             document.getElementById('colorElegido').value=colorElegido;
+            //         });
+            //     }
 
                 
 
-                function changeColorFont(element){
-                    if(element.className =="box-progress-bar"){
-                        const colorElegido=document.getElementById('colorElegido').value;
-                        document.getElementById('progressBarBackground').value=colorElegido;
-                        element.firstElementChild.style.background=colorElegido;
-                    }else{
-                        const colorElegido=document.getElementById('colorElegido').value;
-                        element.style.color=colorElegido;
-                        saveColorFont();
-                    }
+            //     function changeColorFont(element){
+            //         if(element.className =="box-progress-bar"){
+            //             const colorElegido=document.getElementById('colorElegido').value;
+            //             document.getElementById('progressBarBackground').value=colorElegido;
+            //             element.firstElementChild.style.background=colorElegido;
+            //         }else{
+            //             const colorElegido=document.getElementById('colorElegido').value;
+            //             element.style.color=colorElegido;
+            //             saveColorFont();
+            //         }
                     
-                }
+            //     }
 
-                saveColorFont();
-                function saveColorFont(){
-                    let colores=[];
-                    let palabras=document.querySelectorAll('#font');
-                    palabras.forEach(palabra => {
-                        let colorRGB=palabra.style.color;
-                        let colorHEX;
-                        if(colorRGB===null || colorRGB==null || colorRGB=='' ||colorRGB==' ') colorHEX="#000000";
-                        else{
-                            colorHEX=rgbStringToHex(colorRGB);
-                            console.log(colorHEX);
-                        }
-                        colores.push(colorHEX);
+            //     saveColorFont();
+            //     function saveColorFont(){
+            //         let colores=[];
+            //         let palabras=document.querySelectorAll('#font');
+            //         palabras.forEach(palabra => {
+            //             let colorRGB=palabra.style.color;
+            //             let colorHEX;
+            //             if(colorRGB===null || colorRGB==null || colorRGB=='' ||colorRGB==' ') colorHEX="#000000";
+            //             else{
+            //                 colorHEX=rgbStringToHex(colorRGB);
+            //                 console.log(colorHEX);
+            //             }
+            //             colores.push(colorHEX);
                         
-                    });
-                    document.getElementById('colorFonts').value=colores;
+            //         });
+            //         document.getElementById('colorFonts').value=colores;
                     
-                }
+            //     }
                 
-                function mostrarDropdownContent(){
-                    $('.dropdown-button').on('click',function(){
-                        $('.dropdown-content').toggle();
-                    });
-                }
-                mostrarDropdownContent();
+            //     function mostrarDropdownContent(){
+            //         $('.dropdown-button').on('click',function(){
+            //             $('.dropdown-content').toggle();
+            //         });
+            //     }
+            //     mostrarDropdownContent();
 
-                function seleccionarUsuariosDisponibles(element){
-                    const usuarioSeleccionado=element;
-                    element.removeAttribute("onclick");
-                    usuarioSeleccionado.innerHTML+=` <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;" onclick="eliminarUsuariosElegidos(this)">`;
-                    const valorUsuario=usuarioSeleccionado.getAttribute('data-value');
-                    usuarioSeleccionado.innerHTML+=`<input type="hidden" name="usuario[]" value="${valorUsuario}">`;
-                    document.getElementById('usuarios-elegidos').appendChild(usuarioSeleccionado);  
-                    const imagenUsuario=usuarioSeleccionado.firstElementChild.cloneNode(false);
-                    document.querySelector('.participants').appendChild(imagenUsuario);
-                }
+            //     function seleccionarUsuariosDisponibles(element){
+            //         const usuarioSeleccionado=element;
+            //         element.removeAttribute("onclick");
+            //         usuarioSeleccionado.innerHTML+=` <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;" onclick="eliminarUsuariosElegidos(this)">`;
+            //         const valorUsuario=usuarioSeleccionado.getAttribute('data-value');
+            //         usuarioSeleccionado.innerHTML+=`<input type="hidden" name="usuario[]" value="${valorUsuario}">`;
+            //         document.getElementById('usuarios-elegidos').appendChild(usuarioSeleccionado);  
+            //         const imagenUsuario=usuarioSeleccionado.firstElementChild.cloneNode(false);
+            //         document.querySelector('.participants').appendChild(imagenUsuario);
+            //     }
 
-                function eliminarUsuariosElegidos(element){
-                    let usuarioSeleccionado=element.parentNode;
-                    let icono=usuarioSeleccionado.lastChild;
-                    icono.remove();
-                    let valorUsuario=usuarioSeleccionado.getAttribute('data-value');
-                    let usuario=`
-                        <div class="dropdown-option" data-value="${valorUsuario}" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
-                            ${usuarioSeleccionado.innerHTML}
-                        </div>
-                            `;
-                    usuarioSeleccionado.remove();
-                    document.getElementById('usuarios-disponibles').innerHTML+=usuario;  
-                }
+            //     function eliminarUsuariosElegidos(element){
+            //         let usuarioSeleccionado=element.parentNode;
+            //         let icono=usuarioSeleccionado.lastChild;
+            //         icono.remove();
+            //         let valorUsuario=usuarioSeleccionado.getAttribute('data-value');
+            //         let usuario=`
+            //             <div class="dropdown-option" data-value="${valorUsuario}" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
+            //                 ${usuarioSeleccionado.innerHTML}
+            //             </div>
+            //                 `;
+            //         usuarioSeleccionado.remove();
+            //         document.getElementById('usuarios-disponibles').innerHTML+=usuario;  
+            //     }
 
 
-                function rgbToHex(r, g, b) {
-                    return "#" +
-                        r.toString(16).padStart(2, '0') +
-                        g.toString(16).padStart(2, '0') +
-                        b.toString(16).padStart(2, '0');
-                }
+            //     function rgbToHex(r, g, b) {
+            //         return "#" +
+            //             r.toString(16).padStart(2, '0') +
+            //             g.toString(16).padStart(2, '0') +
+            //             b.toString(16).padStart(2, '0');
+            //     }
 
-                function rgbStringToHex(rgbString) {
-                    let matches = rgbString.match(/rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/);
-                    if (matches) {
-                        let r = parseInt(matches[1]);
-                        let g = parseInt(matches[2]);
-                        let b = parseInt(matches[3]);
-                        return rgbToHex(r, g, b);
-                    }
-                    return null;  // o un valor por defecto
-                }
+            //     function rgbStringToHex(rgbString) {
+            //         let matches = rgbString.match(/rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/);
+            //         if (matches) {
+            //             let r = parseInt(matches[1]);
+            //             let g = parseInt(matches[2]);
+            //             let b = parseInt(matches[3]);
+            //             return rgbToHex(r, g, b);
+            //         }
+            //         return null;  // o un valor por defecto
+            //     }
                 
 
 
-                const input = document.getElementById("inputColor");
-                const label = document.querySelector(".color-label");
+            //     const input = document.getElementById("inputColor");
+            //     const label = document.querySelector(".color-label");
 
-                input.addEventListener("input", function () {
-                    label.style.backgroundColor = this.value;
-                });
+            //     input.addEventListener("input", function () {
+            //         label.style.backgroundColor = this.value;
+            //     });
 
 </script>
 
