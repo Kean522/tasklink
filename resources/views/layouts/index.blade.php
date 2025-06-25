@@ -266,7 +266,7 @@
                             <span style="color:{{$color[0]}}">{{$nombreMesProyectoTraducido." ".$diaCreacionProyecto.", ".$anoCreacionProyecto;}}</span>
                             <div class="more-wrapper">
                                 <button class="project-btn-more">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                <svg xmlns="http://www.w3.org/2000/svg" style="z-index:-1;" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
                                     <circle cx="12" cy="12" r="1" />
                                     <circle cx="12" cy="5" r="1" />
                                     <circle cx="12" cy="19" r="1" /></svg>
@@ -338,7 +338,7 @@
                             @php
                                 if($diasRestantes<0) echo "<p>".$diasRestantes." Day Passed"."</p>";
                                 else if($diasRestantes==1) echo "<p>".$diasRestantes." Last Day"."</p>";
-                                else if($diasRestantes==0) echo "<p>".$diasRestantes." Today"."</p>";
+                                else if($diasRestantes==0) echo "<p>"." Today"."</p>";
                                 else echo "<p>".$diasRestantes." Days Left"."</p>";                      
                             @endphp
                         </div>
@@ -596,7 +596,7 @@
         <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;margin-left:80px;">
             @include('modals.form_project')
         </div> 
-       <div class="modal" id="exampleModal Clonado" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;margin-left:80px;display:none;">
+       <div class="modal Clonado" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;margin-left:80px;">
             @include('modals.form_project')
         </div> 
         {{-- <div class="modal" id="exampleModal Clone" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true" style="position: absolute;margin-left:80px;display:none;">
@@ -778,12 +778,19 @@ div.modal-project-options p:last-of-type {
             p.style.background='';
         });
     });
-
-        $('.project-btn-more').on('click', function() {
+     $('.project-btn-more').on('click', function(e) {
             const projectBox = $(this).closest('.project-box');
             const modal = projectBox.find('.modal-project-options');
-            modal.fadeToggle(200); 
-        });
+            modal.fadeToggle(200);
+     });
+    $(document).on("click", function(event){
+        if(event.target.className!='[object SVGAnimatedString]')$('.modal-project-options').fadeOut(200);
+        
+    })
+        
+            
+       
+        
 
     function displayDate(){
         document.getElementById('inputFechaFinalizacion').addEventListener('change', function() {
@@ -800,39 +807,49 @@ div.modal-project-options p:last-of-type {
 
 
     $(document).ready(function () {
+        const formularioEditar=$('.modal.Clonado');
+        const formularioCrear=$('#exampleModal');
+
+        formularioEditar.fadeOut();
+        formularioCrear.fadeOut();
+        $('#pageOverlay').fadeOut();
         
-       $('#exampleModal').fadeOut();
-       $('#exampleModalEdit').fadeOut();
-       $('#pageOverlay').fadeOut();
+       
+        //$('#exampleModal#Clonado').fadeOut();
+    //    $('#exampleModal').fadeOut();
+    //    $('#exampleModalEdit').fadeOut();
+    //    $('#pageOverlay').fadeOut();
         $('.app-sidebar-link.active').click(function (e) {
             e.preventDefault();
-            $('#exampleModal').fadeIn();
-            $('#exampleModal').css('z-index',9998);
+            formularioCrear.fadeIn();
             $('#pageOverlay').fadeIn();
-            $('#exampleModal #projectId').val();
-            $('#exampleModal #rutaImagen').val();
-            const clonedForm=document.getElementById('exampleModal').cloneNode(true);
-            document.getElementById('modalClonado').appendChild(clonedForm);
-            
+            formularioCrear.css('z-index',9998);
+            formularioCrear.find('#projectId').val();
+            formularioCrear.find('#rutaImagen').val();
+            //  $('#exampleModal#Clonado').fadeIn();
+            //  $('#exampleModal#Clonado').css('z-index',9998);  
+            // $('#exampleModal').fadeIn();
+            // $('#exampleModal').css('z-index',9998);
+            // $('#pageOverlay').fadeIn();
+            // $('#exampleModal #projectId').val();
+            // $('#exampleModal #rutaImagen').val();
+            // $('#exampleModal Clonado').fadeIn();
+            // $('#exampleModal Clonado').css('z-index',9998);            
       });
-      $('.btn.secondary').click(function (e){
-            $('#exampleModal').fadeOut();
-            $('#pageOverlay').fadeOut();
-        });
-        $('#exampleModal .btn.secondary').click(function(e){
-            $('#exampleModal').fadeOut();
-            $('#pageOverlay').fadeOut();
-        });
+    //   $('.btn.secondary').click(function (e){
+    //         $('#exampleModal').fadeOut();
+    //         $('#pageOverlay').fadeOut();
+    //     });
+    const botonFormularioCrear=formularioCrear.find('.btn.secondary');
+    botonFormularioCrear.click(function(e){
+        formularioCrear.fadeOut();
+        $('#pageOverlay').fadeOut();
+    });
 
-       
-       
-     
-           
-
-
-
-        
-        
+        // $('#exampleModal .btn.secondary').click(function(e){
+        //     $('#exampleModal').fadeOut();
+        //     $('#pageOverlay').fadeOut();
+        // });
 
       
     });
@@ -862,20 +879,32 @@ function confirmarEliminado(projectId){
    
 </script>
 <script>
+    const formularioEditar=$('.modal.Clonado');
+    const formularioCrear=$('#exampleModal');
+
+    formularioEditar.fadeIn();
+    formularioEditar.css('z-index',9998);
     function editarProyecto(proyecto,usuarios) {
-            $('#exampleModal').fadeIn();
-            $('#exampleModal').css('z-index',9998);
+            formularioEditar.fadeIn();
+            formularioEditar.css('z-index',9998);
             $('#pageOverlay').fadeIn();
 
             //El proyecto en sí
             fillContentProjectBox(proyecto,usuarios);
             fillContentFormProjectBox(proyecto,usuarios);
 
+            const botonFormularioEditar=formularioEditar.find('.btn.secondary');
+            botonFormularioEditar.click(function(e){
+                formularioEditar.fadeOut();
+                $('#pageOverlay').fadeOut();
+            });
+
+
           }
 
           function fillContentProjectBox(proyecto,usuarios){
             const colorProyecto=proyecto.color_project;
-            $('#exampleModal .project-box').css('background',colorProyecto);
+            $('.modal.Clonado .project-box').css('background',colorProyecto);
             const fechaElegida=new Date(proyecto.due_date);
             
             const meses=[
@@ -886,10 +915,10 @@ function confirmarEliminado(projectId){
             const mesElegido=meses[fechaElegida.getMonth()];
             const anoElegido=fechaElegida.getFullYear();
             const fechaElegidaFormateada=`${mesElegido} ${diaElegido},${anoElegido}`;
-            $('#exampleModal .project-box-header').children().first().html(`${fechaElegidaFormateada}`);
-            $('#exampleModal .project-box-content-header').children().first().html(`${proyecto.name}`);
-            $('#exampleModal .project-box-content-header').children().last().html(`${proyecto.description}`);
-            $('#exampleModal .box-progress').css('background',proyecto.color_progress_bar);
+            $('.modal.Clonado .project-box-header').children().first().html(`${fechaElegidaFormateada}`);
+            $('.modal.Clonado .project-box-content-header').children().first().html(`${proyecto.name}`);
+            $('.modal.Clonado .project-box-content-header').children().last().html(`${proyecto.description}`);
+            $('.modal.Clonado .box-progress').css('background',proyecto.color_progress_bar);
 
             const fechaActual=new Date();
             const fechasResta=fechaElegida.getTime()-fechaActual.getTime();
@@ -899,10 +928,10 @@ function confirmarEliminado(projectId){
             if(diasRestantes==0) frase="Hoy";
             if(diasRestantes==1) frase=`Queda 1 día`;
             if(diasRestantes>1) frase=`Quedan ${diasRestantes} días`;
-            $('#exampleModal #days-left').html(`${frase}`); 
+            $('.modal.Clonado #days-left').html(`${frase}`); 
 
-            $('#exampleModal .participants').html('');
-            $('#exampleModal .participants').prepend(
+            $('.modal.Clonado .participants').html('');
+            $('.modal.Clonado .participants').prepend(
                 `<button class="add-participant" onclick="changeColorFont(this)" id="font">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
                         <path d="M12 5v14M5 12h14" />
@@ -910,11 +939,11 @@ function confirmarEliminado(projectId){
                  </button>`);
 
             for (let usuario of usuarios) {
-                $('#exampleModal .participants').append(`<img src="{{asset('storage/${usuario.profile_photo}')}}"/>`);   
+                $('.modal.Clonado .participants').append(`<img src="{{asset('storage/${usuario.profile_photo}')}}"/>`);   
             }
 
             const coloresFont=proyecto.color_font.split(',');
-            $('#exampleModal #font').each(function(x, font) {
+            $('.modal.Clonado #font').each(function(x, font) {
                 $(this).css('color',coloresFont[x]);
                 console.log(coloresFont[x]);
             });
@@ -922,11 +951,11 @@ function confirmarEliminado(projectId){
 
 
           function fillContentFormProjectBox(proyecto,usuarios) { 
-                $('#inputTitulo').val(proyecto.name);
-                $('#inputDescripcion').val(proyecto.description);
-                $('#inputColor').val(proyecto.color_project);
-                $('.color-label').css('background',proyecto.color_project);
-                $('#usuarios-elegidos').html('');
+                $('.modal.Clonado #inputTitulo').val(proyecto.name);
+                $('.modal.Clonado #inputDescripcion').val(proyecto.description);
+                $('.modal.Clonado #inputColor').val(proyecto.color_project);
+                $('.modal.Clonado .color-label').css('background',proyecto.color_project);
+                $('.modal.Clonado #usuarios-elegidos').html('');
 
                 for(let usuario of usuarios){
                     let usuarioEtiqueta=`
@@ -936,15 +965,15 @@ function confirmarEliminado(projectId){
                         <i class="fas fa-times" style="outline:2px solid none;margin-left:4px;" onclick="eliminarUsuariosElegidos(this)"></i><input type="hidden" name="usuario[]" value="4">
                     </div>
                     `;
-                    $('#usuarios-elegidos').append(`${usuarioEtiqueta}`);
+                    $('.modal.Clonado #usuarios-elegidos').append(`${usuarioEtiqueta}`);
                     
-                    $('.dropdown-content').children().each(function(i) {
+                    $('.modal.Clonado .dropdown-content').children().each(function(i) {
                         if($(this).attr('data-value')==usuario.id) $(this).remove();
                     });
 
 
 
-                    $('#inputFechaFinalizacion').val(proyecto.due_date.split('T')[0]);
+                    $('.modal.Clonado #inputFechaFinalizacion').val(proyecto.due_date.split('T')[0]);
                     
 
                 
@@ -959,11 +988,11 @@ function confirmarEliminado(projectId){
                     console.log(archivoRuta)
                     const nombreArchivo=archivoRuta.replace("C:\\laragon\\www\\tasklink\\storage\\app/public/profiles\\","");
                     console.log(nombreArchivo);
-                    $('#archivo_seleccionado').html(nombreArchivo);
-                    $('#projectId').val(proyecto.id);
+                    $('.modal.Clonado #archivo_seleccionado').html(nombreArchivo);
+                    $('.modal.Clonado #projectId').val(proyecto.id);
                     const rutaImagen="http://tasklink.test/storage/profiles/"+nombreArchivo;
-                    $('#imagenSeleccionada').attr('src',rutaImagen);
-                    $('#rutaImagen').attr('src',"profiles/"+nombreArchivo);
+                    $('.modal.Clonado #imagenSeleccionada').attr('src',rutaImagen);
+                    $('.modal.Clonado #rutaImagen').attr('src',"profiles/"+nombreArchivo);
                     // $('#imagenSeleccionado').attr('src',archivoRuta);
                     // @foreach($usuariosDisponibles as $usuario)
                     //         <div class="dropdown-option" data-value="{{$usuario->id}}" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
@@ -975,4 +1004,53 @@ function confirmarEliminado(projectId){
                 }
 
            }
+
+           //Funcionalidades de los formularios
+
+            // const projectBoxModal=document.querySelectorAll('#exampleModal');
+
+            // for(let i=0;projectBoxModal.length;i++){
+            //     console.log("A ver cuantos hay");
+            // }
+
+            //  function displayInputValue(input){
+            //     //if(input.id=="inputTitulo") document.querySelector("#exampleModal .box-content-header").innerHTML=input.value;
+            //     if(input.id=="inputDescripcion") document.querySelector("#exampleModal .box-content-subheader").innerHTML=input.value;
+            //     if(input.id=="inputColor") document.querySelector("#exampleModal titulo").innerHTML=input.value;
+            //     if(input.id=="inputUsuarios") document.getElementById("#exampleModal usuarios").innerHTML=input.value;
+            //     // if(input.id=="inputFechaFinalizacion") {
+            //     //     const fechaActual=new Date();
+            //     //     const ano=fechaActual.getFullYear();
+            //     //     const mes=fechaActual.getMonth();
+            //     //     const dia=fechaActual.getDay();
+            //     //     const fechaFormateadaActual=ano+"-"+mes+"-"+dia;
+                    
+            //     //     const fechaElegida=input.value;
+            //     //     const diasRestantes=(fechaFormateadaActual-fechaElegida)/(60*60*24);
+            //     //     let frase="";
+            //     //     if(diasRestantes<0) frase="Dia expirado";
+            //     //     if(diasRestantes==0) frase="Hoy";
+            //     //     if(diasRestantes==1) frase=`Queda 1 día`;
+            //     //     if(diasRestantes>1) frase=`Quedan ${diasRestantes} días`;
+            //     //     document.getElementById('#exampleModal #days-left').innerHTML=`${frase}`;    
+            //     // }
+                
+            //  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>

@@ -117,31 +117,33 @@
 
 
         <script>
-           console.log(document.getElementById('imagen'););
-           
-             function displayInputValue(input){
-                if(input.id=="inputTitulo") document.querySelector("#exampleModal .box-content-header").innerHTML=input.value;
-                if(input.id=="inputDescripcion") document.querySelector("#exampleModal .box-content-subheader").innerHTML=input.value;
-                if(input.id=="inputColor") document.querySelector("#exampleModal titulo").innerHTML=input.value;
-                if(input.id=="inputUsuarios") document.getElementById("#exampleModal usuarios").innerHTML=input.value;
-                // if(input.id=="inputFechaFinalizacion") {
-                //     const fechaActual=new Date();
-                //     const ano=fechaActual.getFullYear();
-                //     const mes=fechaActual.getMonth();
-                //     const dia=fechaActual.getDay();
-                //     const fechaFormateadaActual=ano+"-"+mes+"-"+dia;
+            // const projectBoxModal=document.querySelectorAll('#exampleModal');
+
+            
+
+            //  function displayInputValue(input){
+            //     //if(input.id=="inputTitulo") document.querySelector("#exampleModal .box-content-header").innerHTML=input.value;
+            //     if(input.id=="inputDescripcion") document.querySelector("#exampleModal .box-content-subheader").innerHTML=input.value;
+            //     if(input.id=="inputColor") document.querySelector("#exampleModal titulo").innerHTML=input.value;
+            //     if(input.id=="inputUsuarios") document.getElementById("#exampleModal usuarios").innerHTML=input.value;
+            //     // if(input.id=="inputFechaFinalizacion") {
+            //     //     const fechaActual=new Date();
+            //     //     const ano=fechaActual.getFullYear();
+            //     //     const mes=fechaActual.getMonth();
+            //     //     const dia=fechaActual.getDay();
+            //     //     const fechaFormateadaActual=ano+"-"+mes+"-"+dia;
                     
-                //     const fechaElegida=input.value;
-                //     const diasRestantes=(fechaFormateadaActual-fechaElegida)/(60*60*24);
-                //     let frase="";
-                //     if(diasRestantes<0) frase="Dia expirado";
-                //     if(diasRestantes==0) frase="Hoy";
-                //     if(diasRestantes==1) frase=`Queda 1 día`;
-                //     if(diasRestantes>1) frase=`Quedan ${diasRestantes} días`;
-                //     document.getElementById('#exampleModal #days-left').innerHTML=`${frase}`;    
-                // }
+            //     //     const fechaElegida=input.value;
+            //     //     const diasRestantes=(fechaFormateadaActual-fechaElegida)/(60*60*24);
+            //     //     let frase="";
+            //     //     if(diasRestantes<0) frase="Dia expirado";
+            //     //     if(diasRestantes==0) frase="Hoy";
+            //     //     if(diasRestantes==1) frase=`Queda 1 día`;
+            //     //     if(diasRestantes>1) frase=`Quedan ${diasRestantes} días`;
+            //     //     document.getElementById('#exampleModal #days-left').innerHTML=`${frase}`;    
+            //     // }
                 
-             }
+            //  }
 
 
             
