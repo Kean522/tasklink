@@ -68,7 +68,6 @@
                 <label for="">Color fondo</label>
                <label for="inputColor" class="color-label"></label>
                 <input type="color" id="inputColor" name="color" class="color-hidden">
-
                 <label for="">Color fuente</label>
                 <label for="inputColorFuente" class="color-label-fuente">
                     <i class="fa-solid fa-arrow-pointer" style="color:black;"></i>

@@ -250,7 +250,7 @@
                         $color = explode(",", $colores);
                     @endphp
                     
-                    <div class="project-box" style="background-color:{{$proyecto->color_project}}">
+                    <div class="project-box" style="background-color:{{$proyecto->color_project}}" id="project-box">
                         <div class="project-box-header">
                             @php
                                 $mesesCastellano = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
@@ -746,23 +746,36 @@ div.modal-project-options p:last-of-type {
 </style>
 
 <script>
-    function displayColor(){
-        const modal=$('[id="exampleModal"]');
-        const inputColor=$('[id="inputColor"]');
-        const inputColorFuente=$('[id="inputColorFuente"]');
-        inputColor.on('input',function(){
-            const colorElegido=$(this).val();
-            const projectBox=modal.find('.project-box');
-            const inputColorProyectoFondo=modal.find('#projectBackgroundColor');
-            projectBox.css('background-color',colorElegido);
-            inputColorProyectoFondo.val(colorElegido);
+    function displayInputValue(input) {
+            const $input = $(input);
+            const modal = $('[id="exampleModal"]'); 
 
+            if ($input.attr('id') == "inputTitulo") {
+                modal.find(".box-content-header").html($input.val());
+            }
+
+            if ($input.attr('id') == "inputDescripcion") {
+                modal.find(".box-content-subheader").html($input.val());
+            }
+        }
+
+    displayDate();
+    displayColor();
+    uploadImage();
+    function uploadImage(){
+        const modal=$('[id="exampleModal"]');
+        modal.find('#seleccionar-archivo').on('click', function() {
+            modal.find('#inputImagen').click();
         });
-        inputColorFuente.on('input',function(){
-            
+        modal.find('#inputImagen').on('change',function(){
+            let archivos=this.files;
+            if(archivos){
+                modal.find('#imagenSeleccionada').attr('src',URL.createObjectURL(archivos[0]));
+                console.log($('#imagenSeleccionada').attr('src'));
+                modal.find('#archivo_seleccionado').html(`${archivos[0].name}`);
+            }
         });
     }
-    
     function displayDate(){
         const inputFechaFinalizacion=$('[id="inputFechaFinalizacion"]');
         inputFechaFinalizacion.on('change',function(){
@@ -795,23 +808,148 @@ div.modal-project-options p:last-of-type {
         });
 
     }
-    displayDate();
+    function displayColor(){
+        const modal=$('[id="exampleModal"]');
+        const inputColor=$('[id="inputColor"]');
+        const inputColorFuente=$('[id="inputColorFuente"]');
+        inputColor.on('input',function(){
+            const colorElegido=$(this).val();
+            const projectBox=modal.find('.project-box');
+            const inputColorProyectoFondo=modal.find('#projectBackgroundColor');
+            projectBox.css('background-color',colorElegido);
+            inputColorProyectoFondo.val(colorElegido);
 
+        });
+        inputColorFuente.on('input',function(){
+            const colorFuenteElegido=$(this).val();
+            const colorLabelFuente=modal.find('.color-label-fuente');
+            colorLabelFuente.css('background-color',colorFuenteElegido);
+            $(body).css('cursor','crosshair');
+            const btnAddParticipant=modal.find('.add-participant');
+            const projectBox=modal.find('.project-box');
+            btnAddParticipant.on('mouseenter', function() {
+                $(this).css('cursor', 'crosshair');
+            });
+            btnAddParticipant.on('mouseleave', function() {
+                $(this).css('cursor', '');
+            });
+            projectBox.on('mouseenter', function() {
+                $(this).css('cursor', 'crosshair');
+            });
+            projectBox.on('mouseleave', function() {
+                $(this).css('cursor', '');
+            });
+            const colorElegido=modal.find('#colorElegido');
+            colorElegido.val(colorFuenteElegido);
+        });
+    }
 
-
-        function displayInputValue(input) {
-            const $input = $(input);
-            const modal = $('[id="exampleModal"]'); 
-
-            if ($input.attr('id') == "inputTitulo") {
-                modal.find(".box-content-header").html($input.val());
-            }
-
-            if ($input.attr('id') == "inputDescripcion") {
-                modal.find(".box-content-subheader").html($input.val());
-            }
+    function changeColorFont(element){
+        const modal=$('[id="exampleModal"]');
+        const colorElegido=modal.find('#colorElegido').val();
+        const etiqueta=$(element);
+        if(etiqueta.attr('class')=="box-progress-bar"){
+            const progressBarBackground=modal.find('#progressBarBackground');
+            progressBarBackground.val(colorElegido);
+            etiqueta.children().first().css('background-color',colorElegido);
+        }else{
+            etiqueta.css('color',colorElegido);
+            saveColorFont();
         }
+    }
+    saveColorFont();
+
+    function saveColorFont(){
+        const modal=$('[id="exampleModal"]');
+        let colores=[];
+        const palabras= modal.find('[id="font"]');
+        palabras.each(function() {
+            let palabra=$(this);
+            let colorRGB=palabra.css('color');
+            let colorHEX;
+            if(colorRGB===null || colorRGB==null || colorRGB=='' ||colorRGB==' ') colorHEX="#000000";
+            else colorHEX=rgbStringToHex(colorRGB);
+            colores.push(colorHEX);
+        });
+        modal.find('#colorFonts').val(colores);
+    }
+    function mostrarDropdownContent(){
+        const modal=$('[id="exampleModal"]');
+        const btnDropdown=modal.find('.dropdown-button');
+        btnDropdown.on('click',function(){
+            const dropdownContent=modal.find('.dropdown-content');
+            dropdownContent.toggle();
+        });
+    }
+    mostrarDropdownContent();
+
+    function seleccionarUsuariosDisponibles(element){
+        const modal=$('[id="exampleModal"]');
+        const usuarioSeleccionado= $(element);
+        usuarioSeleccionado.removeAttr('onclick');
+        usuarioSeleccionado.append(`
+            <i class="fas fa-times" style="outline:2px solid none; margin-left:4px;" onclick="eliminarUsuariosElegidos(this)"></i>
+        `);
+        const valorUsuario = usuarioSeleccionado.data('value');
+        usuarioSeleccionado.append(`
+            <input type="hidden" name="usuario[]" value="${valorUsuario}">
+        `);
+        modal.find('#usuarios-elegidos').append(usuarioSeleccionado);
+        const imagenUsuario = usuarioSeleccionado.children().first().clone(false);
+        modal.find('.participants').append(imagenUsuario);
+    }
+
+    function eliminarUsuariosElegidos(element) {
+        const modal = $('[id="exampleModal"]');
+        const usuarioSeleccionado=$(element).parent();
+        const icono=usuarioSeleccionado.children().last();
+        icono.remove();
+        const valorUsuario=usuarioSeleccionado.attr('data-value');
+        let usuario=`
+            <div class="dropdown-option" data-value="${valorUsuario}" style="outline:2px solid none;" onclick="seleccionarUsuariosDisponibles(this)">
+                 ${usuarioSeleccionado.html()}
+           </div>            
+        `;        
+        usuarioSeleccionado.remove();
+        modal.find('#usuarios-disponibles').append(usuario);
+    }
+
+    function rgbToHex(r, g, b) {
+        return "#" +
+            r.toString(16).padStart(2, '0') +
+            g.toString(16).padStart(2, '0') +
+            b.toString(16).padStart(2, '0');
+    }
+
+    function rgbStringToHex(rgbString) {
+        let matches = rgbString.match(/rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/);
+        if (matches) {
+            let r = parseInt(matches[1]);
+            let g = parseInt(matches[2]);
+            let b = parseInt(matches[3]);
+            return rgbToHex(r, g, b);
+        }
+        return null;  
+    }
+
+
+
+
+    const modal=$('[id="exampleModal"]');
+    const input=modal.find('#inputColor');
+    const label=modal.find('.color-label');
+
+    input.on('input',function(){
+        label.css('background-color',$(this).val());
+    });
+
+
+    //Para al editar
+    //modal[1].find('#inputColor').css('margin-left','100px');
     
+
+    
+        
     // $('#exampleModal').each(function (e) {
     //     console.log("Modal:"+e);
 
@@ -819,27 +957,17 @@ div.modal-project-options p:last-of-type {
     //     // displayInputValue($('#inputDescripcion'));
     // });
 
-   
-
-
-
-
-
-
-
-
 
     document.querySelectorAll('.project-box').forEach(box => {
     box.addEventListener('mouseenter', () => {
         box.style.cursor = 'pointer';
-        box.style.outline = '2px solid none';
+
         box.style.transform = 'scale(1.01)';
         box.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
     });
 
     box.addEventListener('mouseleave', () => {
         box.style.cursor = '';
-        box.style.outline = '';
         box.style.transform = '';
         box.style.boxShadow = '';
     });
@@ -873,7 +1001,27 @@ div.modal-project-options p:last-of-type {
         
             
        
-        
+        function moverProyecto(){
+            const projectBox=$('#project-box');
+            projectBox.on('click', function() {
+                let posicionProjectBox = $(this).offset(); 
+                console.log('Posición X:', posicionProjectBox.left);
+                console.log('Posición Y:', posicionProjectBox.top);
+            });
+            projectBox.on('dragover', function() {
+                let posicionProjectBox = $(this).offset();
+                let posicionRaton={
+                    x:event.originalEvenet.pageX,
+                    y:event.originalEvenet.pageY
+                }; 
+                const diferenciaX = posicionRaton.x - posicionProjectBox.left;
+                const diferenciaY = posicionRaton.y - posicionProjectBox.top;
+            });
+
+
+        }
+
+    moverProyecto();
 
     // function displayDate(){
     //     document.getElementById('inputFechaFinalizacion').addEventListener('change', function() {
@@ -1119,21 +1267,6 @@ function confirmarEliminado(projectId){
             //     // }
                 
             //  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>
