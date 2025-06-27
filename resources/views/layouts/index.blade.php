@@ -240,7 +240,8 @@
         </div>
         </div>
          --}}
-          <div class="project-box-wrapper">  
+          <div class="project-box-wrapper" style="outline:2px solid red;">  
+            
             
             @if($proyectosDisponibles->isNotEmpty())
                 @foreach($proyectosDisponibles as $proyecto)
@@ -999,29 +1000,74 @@ div.modal-project-options p:last-of-type {
         
     })
         
-            
-       
-        function moverProyecto(){
-            const projectBox=$('#project-box');
-            projectBox.on('click', function() {
-                let posicionProjectBox = $(this).offset(); 
-                console.log('Posición X:', posicionProjectBox.left);
-                console.log('Posición Y:', posicionProjectBox.top);
-            });
-            projectBox.on('dragover', function() {
-                let posicionProjectBox = $(this).offset();
-                let posicionRaton={
-                    x:event.originalEvenet.pageX,
-                    y:event.originalEvenet.pageY
-                }; 
-                const diferenciaX = posicionRaton.x - posicionProjectBox.left;
-                const diferenciaY = posicionRaton.y - posicionProjectBox.top;
-            });
+    
+    // const plantillaProjectBox=$('<div class="project-box"></div>');
+    // const plantillaProjectBox2=$('<div class="project-box"></div>');
+    // const plantillaProjectBox3=$('<div class="project-box"></div>');
+    // $('.project-box-wrapper').prepend(plantillaProjectBox); 
+    // $('.project-box-wrapper').prepend(plantillaProjectBox2);
+    // $('.project-box-wrapper').prepend(plantillaProjectBox3);    
 
+        function arrastrarProyecto(){
+            const projectsBoxes=$('.project-box');
+            projectsBoxes.each(function(index,element) {
+                $projectBox=$(this);
+                $projectBox.on('mousedown', function () {
+                    $project=$(this);
+                    createPlaceholder($project);
+                    $project.css('position','absolute');
+                    $project.css('z-index','1000');
+                    $('body').append($project);
+
+                    
+                    moveAt(event.pageX,event.pageY);
+                   
+
+                    $(document).on('mousemove', onMouseMove);
+
+                    $(document).one('mouseup', function () {
+                        $(document).off('mousemove', onMouseMove);
+                    });
+                    event.preventDefault();
+                }); 
+            });
 
         }
+        function moveAt(pageX,pageY){
+            const projectX=$project.outerWidth();
+            const diferenciaX=pageX-projectX;
 
-    moverProyecto();
+            const projectY=$project.outerHeight();
+            const diferenciaY=pageY-projectY;
+            $project.css('left',(projectX+diferenciaX)-200);
+            $project.css('top',(projectY+diferenciaY)-40);
+        }
+        function onMouseMove(event){
+            moveAt(event.pageX,event.pageY);
+        }
+
+        function replaceProjectWithProject(movingProject,targetProject){
+            const movingSize={
+                x:movingProject.outerWidth(),
+                y:movingProject.outerHeight()
+            };
+            const targetSize={
+                x:targetProject.outerWidth(),
+                y:targetProject.outerHeight()
+            };
+            const diferenciaX=targetSize.x-movingSize.x;
+
+            if(diferenciaX>=100) movingProject.replaceWith(targetProject);
+        }
+
+    arrastrarProyecto();
+
+    function createPlaceholder(project){
+        const placeHolder=$('<div class="project-box" style="background:#f0f0f0"> </div>');
+        project.replaceWith(placeHolder);
+    }
+
+    
 
     // function displayDate(){
     //     document.getElementById('inputFechaFinalizacion').addEventListener('change', function() {

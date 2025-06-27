@@ -48,12 +48,9 @@
                         <p>Dias Restantes</p>
                     </div>
                     </div>
-
                 </div>
 
-       
-          
-       
+
         <div class="contenido">
             <form action="{{route('project.create')}}"  method="POST" enctype='multipart/form-data'>
                 @csrf
