@@ -241,17 +241,19 @@
         </div>
          --}}
           <div class="project-box-wrapper" style="outline:2px solid red;">  
-            
+            @php
+                $x=0;
+            @endphp
             
             @if($proyectosDisponibles->isNotEmpty())
                 @foreach($proyectosDisponibles as $proyecto)
-
+                    
                     @php
                         $colores = $proyecto->color_font;
                         $color = explode(",", $colores);
                     @endphp
-                    
-                    <div class="project-box" style="background-color:{{$proyecto->color_project}}" id="project-box">
+                    @if($x<3)
+                    <div class="project-box" style="background-color:{{$proyecto->color_project}}" onmousedown="arrastrarProyecto(this)">
                         <div class="project-box-header">
                             @php
                                 $mesesCastellano = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
@@ -346,6 +348,10 @@
                         </div>
 
                     </div>
+                    @php
+                    $x++;
+                @endphp
+                @endif
                 @endforeach
             @endif
 
@@ -1008,32 +1014,146 @@ div.modal-project-options p:last-of-type {
     // $('.project-box-wrapper').prepend(plantillaProjectBox2);
     // $('.project-box-wrapper').prepend(plantillaProjectBox3);    
 
-        function arrastrarProyecto(){
-            const projectsBoxes=$('.project-box');
-            projectsBoxes.each(function(index,element) {
-                $projectBox=$(this);
-                $projectBox.on('mousedown', function () {
-                    $project=$(this);
-                    createPlaceholder($project);
-                    $project.css('position','absolute');
-                    $project.css('z-index','1000');
-                    $('body').append($project);
 
-                    
-                    moveAt(event.pageX,event.pageY);
-                   
 
-                    $(document).on('mousemove', onMouseMove);
+    function arrastrarProyecto(project){
+        $project=$(project);
+        const $projectPos={
+            x:$project.offset().left,
+            y:$project.offset().top
+        };
+        //createPlaceholder($project);
+        $project.css('position','absolute');
+        $project.css('z-index','1000');
 
-                    $(document).one('mouseup', function () {
-                        $(document).off('mousemove', onMouseMove);
-                    });
-                    event.preventDefault();
-                }); 
-            });
+        $wrapper=$('.project-box-wrapper');
+        const $wrapperPos={
+            x:$wrapper.offset().left,
+            y:$wrapper.offset().top
+        };
+        $wrapper.append($project);
+        $mouse=event;
+        const $mousePos={
+            x:$mouse.pageX,
+            y:$mouse.pageY
+        };
+        
 
-        }
-        function moveAt(pageX,pageY){
+        moveProjectAtMouse($mousePos.x,$mousePos.y);
+
+      
+        $(document).on('mousemove', onMouseMove);
+        $(document).on('mousemove', function(event){
+            
+        });
+        $(document).on('mouseup', function () {
+            sustituirProyecto($project);
+            $(document).off('mousemove', onMouseMove);
+        });
+        $(document).on('mousedown', function () {
+            $(document).on('mousemove', onMouseMove);
+        });
+        event.preventDefault();  
+        
+    }
+
+
+    function eliminarProyectos(){
+        const $proyectos=$('.project-box-wrapper .project-box');
+        $proyectos.remove();
+    }
+
+    let proyectosArray=[];
+    function recolectarProyectos(){
+        const $proyectos=$('.project-box-wrapper .project-box');
+        
+        $proyectos.each(function (index) {
+            const $targetProject=$(this);
+            proyectosArray.push($targetProject);
+        });
+        proyectosArray.forEach(proyecto => {
+            console.log(proyecto);
+            
+        });
+    }
+    function cargarProyectos(){
+        proyectosArray.forEach(proyecto => {
+            $('.project-box-wrapper').append(proyecto);    
+        });
+    }
+    function replaceWithProjectArray($movingProject,$targetProject){
+        const $EJEMPLO=$($movingProject);
+       $.each(proyectosArray, function (indexInArray, valueOfElement) { 
+       
+        console.log($EJEMPLO);
+        console.log(valueOfElement);
+        if($EJEMPLO==valueOfElement) console.log("Son igaules");
+        
+       
+         
+       });
+        
+        // proyectosArray[2]=$targetProject;
+        // proyectosArray[1]=$movingProject;
+        // proyectosArray.forEach(proyecto => {
+        //     console.log(proyecto); 
+        // });
+        // eliminarProyectos();
+        // cargarProyectos();
+    }
+
+    recolectarProyectos();
+   
+    replaceWithProjectArray($('.project-box-wrapper .project-box')[0],null);
+    
+    // function sustituirProyecto($movingProject) {
+    //     const $proyectos=$('.project-box-wrapper .project-box');
+    //     let proyectosArray=[];
+    //     $proyectos.each(function (index) {
+    //         const $targetProject=$(this);
+    //         proyectosArray.push($targetProject);
+    //     });
+    //     proyectosArray.forEach(proyecto => {
+    //         console.log(proyecto);
+            
+    //     });
+        
+    // }
+
+
+
+
+
+
+
+    // function sustituirProyecto($movingProject){
+    //     const $proyectos=$('.project-box-wrapper .project-box');
+    //     let sustituido=false;
+    //     $proyectos.each(function (index) {
+    //         const $targetProject=$(this);
+    //         const $targetProjectPosX=$targetProject.offset().left;
+    //         const $movingProjectPosX=$movingProject.offset().left;
+            
+    //         if($targetProjectPosX-80>$movingProjectPosX && $targetProject.attr('class')!=='project-box holder' && !sustituido) {
+    //             const $targetProjectClone=$targetProject.clone(true);
+    //             const $movingProjectClone=$movingProject.clone(true);
+    //             $targetProject.html(`${$movingProjectClone.html()}`);
+    //             $targetProject.css('background-color',$movingProjectClone.css('background-color'));
+    //             $targetProject.css('outline','4px solid red');
+    //             $movingProject.html(`${$targetProjectClone.html()}`);
+    //             $movingProject.css('background-color',$targetProjectClone.css('background-color'));
+    //             $movingProject.css('outline','4px solid blue');
+    //             // $('.project-box-wrapper').append( `<div class="project-box" style="background-color:${$movingProject.css('background-color')}">
+    //             //                                         ${$movingProject.html()}
+    //             //                                     </div> `);
+    //             // $movingProject.remove();
+    //             sustituido=true;
+    //         }
+    //     });
+    // }
+
+        
+        function moveProjectAtMouse(pageX,pageY){
             const projectX=$project.outerWidth();
             const diferenciaX=pageX-projectX;
 
@@ -1043,27 +1163,26 @@ div.modal-project-options p:last-of-type {
             $project.css('top',(projectY+diferenciaY)-40);
         }
         function onMouseMove(event){
-            moveAt(event.pageX,event.pageY);
+            moveProjectAtMouse(event.pageX,event.pageY);
         }
 
-        function replaceProjectWithProject(movingProject,targetProject){
-            const movingSize={
-                x:movingProject.outerWidth(),
-                y:movingProject.outerHeight()
-            };
-            const targetSize={
-                x:targetProject.outerWidth(),
-                y:targetProject.outerHeight()
-            };
-            const diferenciaX=targetSize.x-movingSize.x;
+        // function replaceProjectWithProject(movingProject,targetProject){
+        //     const movingSize={
+        //         x:movingProject.outerWidth(),
+        //         y:movingProject.outerHeight()
+        //     };
+        //     const targetSize={
+        //         x:targetProject.outerWidth(),
+        //         y:targetProject.outerHeight()
+        //     };
+        //     const diferenciaX=targetSize.x-movingSize.x;
 
-            if(diferenciaX>=100) movingProject.replaceWith(targetProject);
-        }
+        //     if(diferenciaX>=100) movingProject.replaceWith(targetProject);
+        // }
 
-    arrastrarProyecto();
 
     function createPlaceholder(project){
-        const placeHolder=$('<div class="project-box" style="background:#f0f0f0"> </div>');
+        const placeHolder=$('<div class="project-box holder" style="background:#f0f0f0" onmousedown="arrastrarProyecto(this)"> </div>');
         project.replaceWith(placeHolder);
     }
 
