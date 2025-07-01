@@ -252,8 +252,8 @@
                         $colores = $proyecto->color_font;
                         $color = explode(",", $colores);
                     @endphp
-                    @if($x<3)
-                    <div class="project-box" style="background-color:{{$proyecto->color_project}}" onmousedown="arrastrarProyecto(this)">
+                    {{-- @if($x<2) --}}
+                    <div class="project-box" style="background-color:{{$proyecto->color_project}}" onmousedown="arrastrarProyecto(this)" id="">
                         <div class="project-box-header">
                             @php
                                 $mesesCastellano = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
@@ -351,7 +351,7 @@
                     @php
                     $x++;
                 @endphp
-                @endif
+                {{-- @endif --}}
                 @endforeach
             @endif
 
@@ -1016,47 +1016,8 @@ div.modal-project-options p:last-of-type {
 
 
 
-    function arrastrarProyecto(project){
-        $project=$(project);
-        const $projectPos={
-            x:$project.offset().left,
-            y:$project.offset().top
-        };
-        //createPlaceholder($project);
-        $project.css('position','absolute');
-        $project.css('z-index','1000');
 
-        $wrapper=$('.project-box-wrapper');
-        const $wrapperPos={
-            x:$wrapper.offset().left,
-            y:$wrapper.offset().top
-        };
-        $wrapper.append($project);
-        $mouse=event;
-        const $mousePos={
-            x:$mouse.pageX,
-            y:$mouse.pageY
-        };
-        
-
-        moveProjectAtMouse($mousePos.x,$mousePos.y);
-
-      
-        $(document).on('mousemove', onMouseMove);
-        $(document).on('mousemove', function(event){
-            
-        });
-        $(document).on('mouseup', function () {
-            sustituirProyecto($project);
-            $(document).off('mousemove', onMouseMove);
-        });
-        $(document).on('mousedown', function () {
-            $(document).on('mousemove', onMouseMove);
-        });
-        event.preventDefault();  
-        
-    }
-
+    
 
     function eliminarProyectos(){
         const $proyectos=$('.project-box-wrapper .project-box');
@@ -1071,40 +1032,79 @@ div.modal-project-options p:last-of-type {
             const $targetProject=$(this);
             proyectosArray.push($targetProject);
         });
-        proyectosArray.forEach(proyecto => {
-            console.log(proyecto);
-            
-        });
+        
     }
+    recolectarProyectos();
     function cargarProyectos(){
         proyectosArray.forEach(proyecto => {
             $('.project-box-wrapper').append(proyecto);    
         });
     }
-    function replaceWithProjectArray($movingProject,$targetProject){
-        const $EJEMPLO=$($movingProject);
-       $.each(proyectosArray, function (indexInArray, valueOfElement) { 
-       
-        console.log($EJEMPLO);
-        console.log(valueOfElement);
-        if($EJEMPLO==valueOfElement) console.log("Son igaules");
+    function recargarProyectos(){
+        eliminarProyectos();
+        cargarProyectos();
+    }
+    function replaceWithProject(movingProject,targetProject){
+        const $movingProject=movingProject;
+        const $targetProject=targetProject;
+
+        const indexMovingProject=proyectosArray.findIndex(p=>p.is($movingProject));
+        const indexTargetProject=proyectosArray.findIndex(p=>p.is($targetProject));
+
+        proyectosArray[indexMovingProject]=$targetProject;
+        proyectosArray[indexTargetProject]=$movingProject;
         
-       
-         
-       });
+        recargarProyectos();
         
-        // proyectosArray[2]=$targetProject;
-        // proyectosArray[1]=$movingProject;
-        // proyectosArray.forEach(proyecto => {
-        //     console.log(proyecto); 
-        // });
-        // eliminarProyectos();
-        // cargarProyectos();
     }
 
-    recolectarProyectos();
+    
+
+    const proyectos=$('.project-box-wrapper .project-box');
+    
+    
+    function arrastrarProyecto(project){
+        $movingProject=$(project);
+        $movingProject.css('position','absolute');
+        $movingProject.css('z-index',1);
+        $wrapper=$('.project-box-wrapper');
+        $wrapper.append($movingProject);
+
+        $mouse=event;
+        const $mousePos={
+            x:$mouse.pageX,
+            y:$mouse.pageY
+        };
+
+        moveProjectAtMouse($mousePos.x,$mousePos.y);
+        $movingProject.on('mousemove', onMouseMove);
+        $movingProject.on('mousemove', function(){
+            // const $targetProject=findNearestProject($movingProject);
+            // $targetProject.css('outline','8px solid black');
+        });
+        $movingProject.on('mouseup', function () {
+            const $targetProject=findNearestProject($movingProject);
+            $movingProject.css('position',''); 
+            if($targetProject!=null) replaceWithProject($movingProject,$targetProject);
+            $movingProject.off('mousemove', onMouseMove);
+        });
+        event.preventDefault();  
+        
+    }
+
+
+    function findNearestProject($movingProject){
+        let encontrado=false;
+        for(let proyecto of proyectosArray){
+            const $targetProject=proyecto;
+            const $targetProjectPosX=$targetProject.offset().left;
+            const $movingProjectPosX=$movingProject.offset().left;
+            if($targetProjectPosX-10>$movingProjectPosX && !encontrado) return $targetProject;
+        }
+        return null;
+    }
    
-    replaceWithProjectArray($('.project-box-wrapper .project-box')[0],null);
+    //replaceWithProjectArray(proyectos[0],proyectos[1]);
     
     // function sustituirProyecto($movingProject) {
     //     const $proyectos=$('.project-box-wrapper .project-box');
@@ -1154,13 +1154,13 @@ div.modal-project-options p:last-of-type {
 
         
         function moveProjectAtMouse(pageX,pageY){
-            const projectX=$project.outerWidth();
+            const projectX=$movingProject.outerWidth();
             const diferenciaX=pageX-projectX;
 
-            const projectY=$project.outerHeight();
+            const projectY=$movingProject.outerHeight();
             const diferenciaY=pageY-projectY;
-            $project.css('left',(projectX+diferenciaX)-200);
-            $project.css('top',(projectY+diferenciaY)-40);
+            $movingProject.css('left',(projectX+diferenciaX)-200);
+            $movingProject.css('top',(projectY+diferenciaY)-40);
         }
         function onMouseMove(event){
             moveProjectAtMouse(event.pageX,event.pageY);
