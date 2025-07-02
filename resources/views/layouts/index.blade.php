@@ -240,7 +240,7 @@
         </div>
         </div>
          --}}
-          <div class="project-box-wrapper" style="outline:2px solid red;">  
+          <div class="project-box-wrapper" style="">  
             @php
                 $x=0;
             @endphp
@@ -275,9 +275,9 @@
                                     <circle cx="12" cy="19" r="1" /></svg>
                                 </button>
                                 <div class="modal-project-options" style="display:none;">
-                    <p onclick="editarProyecto({{$proyecto}},{{$proyecto->users}})">Editar</p>
+                    <p onclick="editarProyecto({{$proyecto}},{{$proyecto->users}})" class="editar">Editar</p>
                     <hr>
-                    <p onclick="confirmarEliminado({{$proyecto->id}})">Eliminar</p>
+                    <p onclick="confirmarEliminado({{$proyecto->id}})" class="eliminar">Eliminar</p>
                     <div class="triangle" style="
                         position: absolute;
                         z-index:1;
@@ -330,6 +330,7 @@
                             </svg>
                             </button>
                         </div>
+                        
                         <div class="days-left" id="days-left"    >
                             @php
                                 $fechaActual=date('Y-m-d');
@@ -965,46 +966,50 @@ div.modal-project-options p:last-of-type {
     // });
 
 
-    document.querySelectorAll('.project-box').forEach(box => {
-    box.addEventListener('mouseenter', () => {
-        box.style.cursor = 'pointer';
+    cargarMetodosProyectos();
 
-        box.style.transform = 'scale(1.01)';
-        box.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
-    });
+    function cargarMetodosProyectos(){
+        document.querySelectorAll('.project-box').forEach(box => {
+        box.addEventListener('mouseenter', () => {
+            box.style.cursor = 'pointer';
 
-    box.addEventListener('mouseleave', () => {
-        box.style.cursor = '';
-        box.style.transform = '';
-        box.style.boxShadow = '';
-    });
-    });
+            box.style.transform = 'scale(1.01)';
+            box.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+        });
+
+        box.addEventListener('mouseleave', () => {
+            box.style.cursor = '';
+            box.style.transform = '';
+            box.style.boxShadow = '';
+        });
+        });
 
 
 
-    document.querySelectorAll('.modal-project-options p').forEach(p => {
-        p.addEventListener('mouseenter', () => {
-            p.style.background='#dfdfdf';
-            document.querySelectorAll('.project-box').forEach(box => {
-                box.style.transform = 'scale(1.00)';
-                box.style.boxShadow='0px 0px 0px 0px';
+        document.querySelectorAll('.modal-project-options p').forEach(p => {
+            p.addEventListener('mouseenter', () => {
+                p.style.background='#dfdfdf';
+                document.querySelectorAll('.project-box').forEach(box => {
+                    box.style.transform = 'scale(1.00)';
+                    box.style.boxShadow='0px 0px 0px 0px';
+                });
+                
             });
-            
-        });
 
-        p.addEventListener('mouseleave', () => {
-            p.style.background='';
+            p.addEventListener('mouseleave', () => {
+                p.style.background='';
+            });
         });
-    });
-     $('.project-btn-more').on('click', function(e) {
-            const projectBox = $(this).closest('.project-box');
-            const modal = projectBox.find('.modal-project-options');
-            modal.fadeToggle(200);
-     });
-    $(document).on("click", function(event){
-        if(event.target.className!='[object SVGAnimatedString]')$('.modal-project-options').fadeOut(200);
-        
-    })
+        $('.project-btn-more').on('click', function(e) {
+                const projectBox = $(this).closest('.project-box');
+                const modal = projectBox.find('.modal-project-options');
+                modal.fadeToggle(200);
+        });
+        $(document).on("click", function(event){
+            if(event.target.className!='[object SVGAnimatedString]')$('.modal-project-options').fadeOut(200);
+            
+        })
+    }
         
     
     // const plantillaProjectBox=$('<div class="project-box"></div>');
@@ -1064,42 +1069,64 @@ div.modal-project-options p:last-of-type {
     
     
     function arrastrarProyecto(project){
-        $movingProject=$(project);
-        $movingProject.css('position','absolute');
-        $movingProject.css('z-index',1);
-        $wrapper=$('.project-box-wrapper');
-        $wrapper.append($movingProject);
+        if(event.target.className!='eliminar' && event.target.className!='editar' && event.target.className!='[object SVGAnimatedString]' && event.target.className!='days-left editar' && event.target.className!='days-left ver' && event.target.className!='add-participant'){
+            $movingProject=$(project);
+            $movingProject.css('position','absolute');
+            $movingProject.css('z-index',1);
+            $wrapper=$('.project-box-wrapper');
+            $wrapper.append($movingProject);
 
-        $mouse=event;
-        const $mousePos={
-            x:$mouse.pageX,
-            y:$mouse.pageY
-        };
+            $mouse=event;
+            const $mousePos={
+                x:$mouse.pageX,
+                y:$mouse.pageY
+            };
 
-        moveProjectAtMouse($mousePos.x,$mousePos.y);
-        $movingProject.on('mousemove', onMouseMove);
-        $movingProject.on('mousemove', function(){
-            // const $targetProject=findNearestProject($movingProject);
-            // $targetProject.css('outline','8px solid black');
-        });
-        $movingProject.on('mouseup', function () {
-            const $targetProject=findNearestProject($movingProject);
-            $movingProject.css('position',''); 
-            if($targetProject!=null) replaceWithProject($movingProject,$targetProject);
-            $movingProject.off('mousemove', onMouseMove);
-        });
-        event.preventDefault();  
+            moveProjectAtMouse($mousePos.x,$mousePos.y);
+            $movingProject.on('mousemove', onMouseMove);
+            $(document).on('mousemove', onMouseMove);
+            $movingProject.on('mouseup', function (event) {
+                const $mouseMovingProjectPos={
+                    x:event.pageX,
+                    y:event.pageY
+                };
+                const $targetProject=findNearestProject($mouseMovingProjectPos,$(this));
+                $movingProject.css('position',''); 
+                if($targetProject!=null) replaceWithProject($movingProject,$targetProject);
+                $movingProject.off('mousemove', onMouseMove);
+                cargarMetodosProyectos();
+            });
+            
+            event.preventDefault();  
+        }
+
         
     }
 
 
-    function findNearestProject($movingProject){
-        let encontrado=false;
+    function findNearestProject($mousePos,$movingProject){
         for(let proyecto of proyectosArray){
             const $targetProject=proyecto;
             const $targetProjectPosX=$targetProject.offset().left;
-            const $movingProjectPosX=$movingProject.offset().left;
-            if($targetProjectPosX-10>$movingProjectPosX && !encontrado) return $targetProject;
+            const $targetProjectPosY=$targetProject.offset().top;
+            // const $movingProjectPosX=$movingProject.offset().left;
+            // const $movingProjectPosY=$movingProject.offset().top;
+            
+            const $targetProjectArea={
+                x:$targetProjectPosX+$targetProject.width(),
+                y:$targetProjectPosY+$targetProject.height()
+            };
+            // const $movingProjectArea={
+            //     x:$movingProjectPosX+$movingProject.width(),
+            //     y:$movingProjectPosY+$movingProject.height()
+            // };
+            //if(Math.abs($movingProjectPosX)>Math.abs($targetProjectPosX) && Math.abs($movingProjectPosX)< Math.abs($targetProjectArea.x)) return $targetProject;
+            if($mousePos.x>$targetProjectPosX && $mousePos.x<$targetProjectArea.x) {
+                console.log("Posicion X del mouse: "+$mousePos.x);
+                console.log("Posicion x del target: "+$targetProjectPosX);
+                console.log("Anchura total del target: "+$targetProjectArea.x);
+                return $targetProject;
+            }
         }
         return null;
     }
