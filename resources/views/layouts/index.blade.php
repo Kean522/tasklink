@@ -253,7 +253,7 @@
                         $color = explode(",", $colores);
                     @endphp
                     {{-- @if($x<2) --}}
-                    <div class="project-box" style="background-color:{{$proyecto->color_project}}" onmousedown="arrastrarProyecto(this)" id="">
+                    <div id="project-{{ $proyecto->id }}" class="project-box" style="background-color:{{$proyecto->color_project}}" onmousedown="arrastrarProyecto(this)" id="" onmouseup="mouseUpProject(this)" >
                         <div class="project-box-header">
                             @php
                                 $mesesCastellano = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
@@ -305,7 +305,7 @@
                             <div class="days-left editar" style="color:{{$color[5]}}">
                             <p>Editar</p> 
                             </div>
-                            <div class="days-left ver" style="color:{{$color[6]}}">
+                            <div class="days-left ver" style="color:{{$color[6]}}" >
                                 <p>Ver</p>
                             </div>
                         </div>
@@ -1045,8 +1045,12 @@ div.modal-project-options p:last-of-type {
             $('.project-box-wrapper').append(proyecto);    
         });
     }
+   
     function recargarProyectos(){
         eliminarProyectos();
+        proyectosArray.forEach(proyecto => {
+            proyecto.remove();
+        });
         cargarProyectos();
     }
     function replaceWithProject(movingProject,targetProject){
@@ -1066,118 +1070,72 @@ div.modal-project-options p:last-of-type {
     
 
     const proyectos=$('.project-box-wrapper .project-box');
+
+    
     
     
     function arrastrarProyecto(project){
-        if(event.target.className!='eliminar' && event.target.className!='editar' && event.target.className!='[object SVGAnimatedString]' && event.target.className!='days-left editar' && event.target.className!='days-left ver' && event.target.className!='add-participant'){
-            $movingProject=$(project);
-            $movingProject.css('position','absolute');
-            $movingProject.css('z-index',1);
-            $wrapper=$('.project-box-wrapper');
-            $wrapper.append($movingProject);
+        const targetClassName=event.target.className;
+        const excludedClasses=[
+                                'eliminar','editar','[object SVGAnimatedString]',
+                                'days-left editar','days-left editar','days-left editar',
+                                'add-participant'
+                            ];
 
-            $mouse=event;
-            const $mousePos={
-                x:$mouse.pageX,
-                y:$mouse.pageY
-            };
+        //if(!excludedClasses.includes(targetClassName) ) return;
 
-            moveProjectAtMouse($mousePos.x,$mousePos.y);
-            $movingProject.on('mousemove', onMouseMove);
-            $(document).on('mousemove', onMouseMove);
-            $movingProject.on('mouseup', function (event) {
-                const $mouseMovingProjectPos={
-                    x:event.pageX,
-                    y:event.pageY
-                };
-                const $targetProject=findNearestProject($mouseMovingProjectPos,$(this));
-                $movingProject.css('position',''); 
-                if($targetProject!=null) replaceWithProject($movingProject,$targetProject);
-                $movingProject.off('mousemove', onMouseMove);
-                cargarMetodosProyectos();
-            });
-            
-            event.preventDefault();  
-        }
-
+        $movingProject=$(project);
+        createPlaceholder($movingProject);
         
+        $movingProject.css({
+            'position': 'absolute',
+            'z-index': 1
+        });
+        $wrapper=$('.project-box-wrapper');
+        $wrapper.append($movingProject);
+
+        const $mousePos={
+            x:event.pageX,
+            y:event.pageY
+        };
+        moveProjectAtMouse($mousePos.x,$mousePos.y);
+        $movingProject.on('mousemove', onMouseMove);
+        $(document).on('mousemove', onMouseMove);
+        event.preventDefault();          
     }
 
+    function mouseUpProject(project){
+        const $projectMovedUp=project; //project.id
+       
+        const $mouseMovingProjectPos={
+            x:event.pageX,
+            y:event.pageY
+        };
+        const $targetProject=findNearestProject($mouseMovingProjectPos,$projectMovedUp);
+        $movingProject.css('position',''); 
+        if($targetProject!=null) replaceWithProject($movingProject,$targetProject);
+        $movingProject.off('mousemove', onMouseMove);
+        cargarMetodosProyectos();
+    }
 
     function findNearestProject($mousePos,$movingProject){
+        
         for(let proyecto of proyectosArray){
             const $targetProject=proyecto;
-            const $targetProjectPosX=$targetProject.offset().left;
-            const $targetProjectPosY=$targetProject.offset().top;
-            // const $movingProjectPosX=$movingProject.offset().left;
-            // const $movingProjectPosY=$movingProject.offset().top;
-            
-            const $targetProjectArea={
-                x:$targetProjectPosX+$targetProject.width(),
-                y:$targetProjectPosY+$targetProject.height()
+            const targetProjectPosX=$targetProject.offset().left;
+            const targetProjectPosY=$targetProject.offset().top;            
+            const targetProjectArea={
+                x:targetProjectPosX+$targetProject.width(),
+                y:targetProjectPosY+$targetProject.height()
             };
-            // const $movingProjectArea={
-            //     x:$movingProjectPosX+$movingProject.width(),
-            //     y:$movingProjectPosY+$movingProject.height()
-            // };
-            //if(Math.abs($movingProjectPosX)>Math.abs($targetProjectPosX) && Math.abs($movingProjectPosX)< Math.abs($targetProjectArea.x)) return $targetProject;
-            if($mousePos.x>$targetProjectPosX && $mousePos.x<$targetProjectArea.x) {
-                console.log("Posicion X del mouse: "+$mousePos.x);
-                console.log("Posicion x del target: "+$targetProjectPosX);
-                console.log("Anchura total del target: "+$targetProjectArea.x);
+
+            if($mousePos.x>targetProjectPosX && $mousePos.x<targetProjectArea.x && $targetProject[0].attributes.id.value !== $movingProject.id){
                 return $targetProject;
-            }
+            } 
         }
         return null;
     }
    
-    //replaceWithProjectArray(proyectos[0],proyectos[1]);
-    
-    // function sustituirProyecto($movingProject) {
-    //     const $proyectos=$('.project-box-wrapper .project-box');
-    //     let proyectosArray=[];
-    //     $proyectos.each(function (index) {
-    //         const $targetProject=$(this);
-    //         proyectosArray.push($targetProject);
-    //     });
-    //     proyectosArray.forEach(proyecto => {
-    //         console.log(proyecto);
-            
-    //     });
-        
-    // }
-
-
-
-
-
-
-
-    // function sustituirProyecto($movingProject){
-    //     const $proyectos=$('.project-box-wrapper .project-box');
-    //     let sustituido=false;
-    //     $proyectos.each(function (index) {
-    //         const $targetProject=$(this);
-    //         const $targetProjectPosX=$targetProject.offset().left;
-    //         const $movingProjectPosX=$movingProject.offset().left;
-            
-    //         if($targetProjectPosX-80>$movingProjectPosX && $targetProject.attr('class')!=='project-box holder' && !sustituido) {
-    //             const $targetProjectClone=$targetProject.clone(true);
-    //             const $movingProjectClone=$movingProject.clone(true);
-    //             $targetProject.html(`${$movingProjectClone.html()}`);
-    //             $targetProject.css('background-color',$movingProjectClone.css('background-color'));
-    //             $targetProject.css('outline','4px solid red');
-    //             $movingProject.html(`${$targetProjectClone.html()}`);
-    //             $movingProject.css('background-color',$targetProjectClone.css('background-color'));
-    //             $movingProject.css('outline','4px solid blue');
-    //             // $('.project-box-wrapper').append( `<div class="project-box" style="background-color:${$movingProject.css('background-color')}">
-    //             //                                         ${$movingProject.html()}
-    //             //                                     </div> `);
-    //             // $movingProject.remove();
-    //             sustituido=true;
-    //         }
-    //     });
-    // }
 
         
         function moveProjectAtMouse(pageX,pageY){
@@ -1193,24 +1151,14 @@ div.modal-project-options p:last-of-type {
             moveProjectAtMouse(event.pageX,event.pageY);
         }
 
-        // function replaceProjectWithProject(movingProject,targetProject){
-        //     const movingSize={
-        //         x:movingProject.outerWidth(),
-        //         y:movingProject.outerHeight()
-        //     };
-        //     const targetSize={
-        //         x:targetProject.outerWidth(),
-        //         y:targetProject.outerHeight()
-        //     };
-        //     const diferenciaX=targetSize.x-movingSize.x;
-
-        //     if(diferenciaX>=100) movingProject.replaceWith(targetProject);
-        // }
-
+      
 
     function createPlaceholder(project){
-        const placeHolder=$('<div class="project-box holder" style="background:#f0f0f0" onmousedown="arrastrarProyecto(this)"> </div>');
+        console.log(project.attr('id'));
+        const id=project.attr('id');
+        const placeHolder=$(`<div class="project-box holder" style="background:#f0f0f0" onmousedown="arrastrarProyecto(this)" id="${id}-holder"> </div>`);
         project.replaceWith(placeHolder);
+       proyectosArray.push(placeHolder);
     }
 
     

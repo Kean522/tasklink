@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/tarea/crear', [TareaController::class, 'create'])->name('tarea.create');
     Route::post('/proyecto/crear', [ProjectController::class, 'create'])->name('project.create');
     Route::post('/proyecto/eliminar', [ProjectController::class, 'delete'])->name('project.delete');
+    //Route::get('/proyecto/{projectId}/tasks', [TaskController::class, 'index'])->name('projects.tasks.index');
 });
 
 
