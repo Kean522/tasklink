@@ -64,3 +64,25 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+
+depencias :
+@tailwindcss/forms@0.5.10
+├── @tailwindcss/vite@4.1.7
+├── @ttskch/select2-bootstrap4-theme@1.5.2
+├── admin-lte@4.0.0-beta3
+├── alpinejs@3.14.9
+├── autoprefixer@10.4.21
+├── axios@1.9.0
+├── bootstrap@4.6.2
+├── date-fns@4.1.0
+├── jquery@3.7.1
+├── laravel-vite-plugin@1.2.0
+├── popper.js@1.16.1
+├── postcss@8.5.3
+├── select2@4.1.0-rc.0
+├── tailwindcss@3.4.17
+└── vite@5.4.19
+
